@@ -133,7 +133,19 @@
       "sendDescription": "Invia esattamente <b>{amount} {ticker}</b> all'indirizzo sottostante da un wallet self-custody.",
       "qrCodeAlt": "Codice QR",
       "expiresIn": "Scade tra",
-      "memoRequired": "Memo (obbligatorio)"
+      "memoRequired": "Memo (obbligatorio)",
+      "waitingForDeposit": "In attesa del tuo deposito…",
+      "openHistory": "Apri Cronologia",
+      "status": {
+        "depositReceived": {
+          "title": "Deposito ricevuto",
+          "description": "I tuoi {ticker} sono arrivati - non inviarli di nuovo. Segui lo stato dello swap nella Cronologia."
+        },
+        "expired": {
+          "title": "Finestra di deposito scaduta",
+          "description": "Non inviare fondi a questo indirizzo. Avvia un nuovo swap per ottenere nuovi dettagli di deposito."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo mancante",

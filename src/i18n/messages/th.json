@@ -133,7 +133,19 @@
       "sendDescription": "ส่ง <b>{amount} {ticker}</b> ตามจำนวนที่ระบุไว้อย่างแม่นยำไปยังที่อยู่ด้านล่างจากกระเป๋าเงินแบบ self-custody",
       "qrCodeAlt": "QR Code",
       "expiresIn": "หมดอายุใน",
-      "memoRequired": "Memo (จำเป็น)"
+      "memoRequired": "Memo (จำเป็น)",
+      "waitingForDeposit": "กำลังรอการฝากของคุณ…",
+      "openHistory": "เปิดประวัติ",
+      "status": {
+        "depositReceived": {
+          "title": "ได้รับการฝากแล้ว",
+          "description": "{ticker} ของคุณมาถึงแล้ว - โปรดอย่าส่งซ้ำ ติดตามสถานะการสวอปได้ในประวัติ"
+        },
+        "expired": {
+          "title": "หมดเวลาการฝากแล้ว",
+          "description": "อย่าส่งเงินไปยังที่อยู่นี้ เริ่มการสวอปใหม่เพื่อรับรายละเอียดการฝากชุดใหม่"
+        }
+      }
     },
     "error": {
       "memoMissing": "ไม่มี Memo",

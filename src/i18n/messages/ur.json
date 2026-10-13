@@ -133,7 +133,19 @@
       "sendDescription": "سیلف کسٹڈی والٹ سے نیچے دیے گئے پتے پر بالکل <b>{amount} {ticker}</b> بھیجیں۔",
       "qrCodeAlt": "QR Code",
       "expiresIn": "اس میں ختم ہوگا",
-      "memoRequired": "میمو (لازمی)"
+      "memoRequired": "میمو (لازمی)",
+      "waitingForDeposit": "آپ کے ڈپازٹ کا انتظار ہے…",
+      "openHistory": "ہسٹری کھولیں",
+      "status": {
+        "depositReceived": {
+          "title": "ڈپازٹ موصول ہو گیا",
+          "description": "آپ کا {ticker} پہنچ گیا ہے - اسے دوبارہ نہ بھیجیں۔ سویپ کی صورتحال ہسٹری میں دیکھیں۔"
+        },
+        "expired": {
+          "title": "ڈپازٹ کی مدت ختم ہو گئی",
+          "description": "اس ایڈریس پر رقم نہ بھیجیں۔ نئی ڈپازٹ تفصیلات کے لیے نیا سویپ شروع کریں۔"
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo موجود نہیں ہے",

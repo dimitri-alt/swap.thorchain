@@ -133,7 +133,19 @@
       "sendDescription": "Aşağıdaki adrese öz saklamalı bir cüzdandan tam olarak <b>{amount} {ticker}</b> gönder.",
       "qrCodeAlt": "QR Kodu",
       "expiresIn": "Sona erme",
-      "memoRequired": "Memo (zorunlu)"
+      "memoRequired": "Memo (zorunlu)",
+      "waitingForDeposit": "Yatırmanız bekleniyor…",
+      "openHistory": "Geçmişi Aç",
+      "status": {
+        "depositReceived": {
+          "title": "Yatırma alındı",
+          "description": "{ticker} varlığınız ulaştı - tekrar göndermeyin. Takas durumunu Geçmiş bölümünden takip edin."
+        },
+        "expired": {
+          "title": "Yatırma süresi doldu",
+          "description": "Bu adrese para göndermeyin. Yeni yatırma bilgileri için yeni bir takas başlatın."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo eksik",

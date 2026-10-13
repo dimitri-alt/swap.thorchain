@@ -32,6 +32,8 @@ export interface DepositChannel {
   // A memo the deposit must carry (a provider's deposit tag); none for a plain transfer.
   memo?: string
   provider?: ProviderName
+  // The history entry tracking this deposit, so the screen can follow its status.
+  txUid?: string
 }
 
 export const InstantSwapDialog = ({ provider, isOpen, onOpenChange }: InstantSwapDialogProps) => {
@@ -57,19 +59,21 @@ export const InstantSwapDialog = ({ provider, isOpen, onOpenChange }: InstantSwa
   if (!assetFrom || !assetTo) return null
 
   const createChannel = (quote: QuoteResponseRoute, qrCodeData: string, address: string, value: string, expiration?: number, memo?: string) => {
+    const uid = generateId()
     setChannel({
       qrCodeData,
       address,
       value,
       expiration,
       memo,
-      provider
+      provider,
+      txUid: uid
     })
 
     const sentAmount = new USwapNumber(value)
 
     setTransaction({
-      uid: generateId(),
+      uid,
       provider,
       chainId: getChainConfig(assetFrom.chain).chainId,
       timestamp: new Date(),
@@ -182,7 +186,7 @@ export const InstantSwapDialog = ({ provider, isOpen, onOpenChange }: InstantSwa
     <Credenza open={isOpen} onOpenChange={onOpenChange}>
       <CredenzaContent className="flex h-auto max-h-5/6 flex-col md:max-w-xl">
         {channel ? (
-          <InstantSwap assetFrom={assetFrom} assetTo={assetTo} channel={channel} />
+          <InstantSwap assetFrom={assetFrom} assetTo={assetTo} channel={channel} onClose={() => onOpenChange(false)} />
         ) : quote ? (
           <>
             <SwapConfirm quote={quote} priceImpact={priceImpact} />

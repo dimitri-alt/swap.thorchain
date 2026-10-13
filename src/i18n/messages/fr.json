@@ -133,7 +133,19 @@
       "sendDescription": "Envoyez exactement <b>{amount} {ticker}</b> à l'adresse ci-dessous depuis un portefeuille auto-hébergé.",
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expire dans",
-      "memoRequired": "Mémo (requis)"
+      "memoRequired": "Mémo (requis)",
+      "waitingForDeposit": "En attente de votre dépôt…",
+      "openHistory": "Ouvrir l'historique",
+      "status": {
+        "depositReceived": {
+          "title": "Dépôt reçu",
+          "description": "Vos {ticker} sont bien arrivés - ne les envoyez pas à nouveau. Suivez l'état du swap dans l'historique."
+        },
+        "expired": {
+          "title": "Délai de dépôt expiré",
+          "description": "N'envoyez pas de fonds à cette adresse. Lancez un nouveau swap pour obtenir de nouvelles informations de dépôt."
+        }
+      }
     },
     "error": {
       "memoMissing": "Le Memo est manquant",

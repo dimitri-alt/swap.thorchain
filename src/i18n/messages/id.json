@@ -133,7 +133,19 @@
       "sendDescription": "Kirim tepat <b>{amount} {ticker}</b> ke alamat di bawah ini dari dompet self-custody.",
       "qrCodeAlt": "Kode QR",
       "expiresIn": "Kedaluwarsa dalam",
-      "memoRequired": "Memo (wajib)"
+      "memoRequired": "Memo (wajib)",
+      "waitingForDeposit": "Menunggu deposit Anda…",
+      "openHistory": "Buka Riwayat",
+      "status": {
+        "depositReceived": {
+          "title": "Deposit diterima",
+          "description": "{ticker} Anda telah tiba - jangan kirim lagi. Pantau status swap di Riwayat."
+        },
+        "expired": {
+          "title": "Jendela deposit telah berakhir",
+          "description": "Jangan kirim dana ke alamat ini. Mulai swap baru untuk mendapatkan detail deposit yang baru."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo tidak ada",

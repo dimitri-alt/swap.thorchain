@@ -133,7 +133,19 @@
       "sendDescription": "Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.",
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expires in",
-      "memoRequired": "Memo (required)"
+      "memoRequired": "Memo (required)",
+      "waitingForDeposit": "Waiting for your deposit…",
+      "openHistory": "Open History",
+      "status": {
+        "depositReceived": {
+          "title": "Deposit received",
+          "description": "Your {ticker} has arrived - do not send it again. Follow the swap's status in History."
+        },
+        "expired": {
+          "title": "Deposit window expired",
+          "description": "Do not send funds to this address. Start a new swap to get fresh deposit details."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo is missing",

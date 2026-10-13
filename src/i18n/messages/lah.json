@@ -133,7 +133,19 @@
       "sendDescription": "سیلف کسٹڈی والٹ توں ٹھیک <b>{amount} {ticker}</b> تھلے دِتے پتے تے بھیجو۔",
       "qrCodeAlt": "QR کوڈ",
       "expiresIn": "ختم ہوݨ وچ",
-      "memoRequired": "میمو (لازمی)"
+      "memoRequired": "میمو (لازمی)",
+      "waitingForDeposit": "تواڈی جمع دی اڈیک پئی اے…",
+      "openHistory": "ہسٹری کھولو",
+      "status": {
+        "depositReceived": {
+          "title": "جمع مل گئی",
+          "description": "تواڈا {ticker} پہنچ گیا اے - ایہنوں دوبارہ نہ گھلو۔ ہسٹری وچ Swap دی حالت ویکھدے رہو۔"
+        },
+        "expired": {
+          "title": "جمع دا ویلا لنگھ گیا",
+          "description": "ایس ایڈریس تے پیسے نہ گھلو۔ نویاں جمع تفصیلاں لئی نواں Swap شروع کرو۔"
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo غائب اے",

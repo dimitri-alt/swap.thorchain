@@ -133,7 +133,19 @@
       "sendDescription": "Gửi chính xác <b>{amount} {ticker}</b> đến địa chỉ bên dưới từ một ví tự lưu ký.",
       "qrCodeAlt": "Mã QR",
       "expiresIn": "Hết hạn sau",
-      "memoRequired": "Memo (bắt buộc)"
+      "memoRequired": "Memo (bắt buộc)",
+      "waitingForDeposit": "Đang chờ khoản nạp của bạn…",
+      "openHistory": "Mở Lịch sử",
+      "status": {
+        "depositReceived": {
+          "title": "Đã nhận khoản nạp",
+          "description": "{ticker} của bạn đã đến - đừng gửi lại lần nữa. Theo dõi trạng thái giao dịch hoán đổi trong Lịch sử."
+        },
+        "expired": {
+          "title": "Đã hết thời hạn nạp",
+          "description": "Đừng gửi tiền đến địa chỉ này. Hãy bắt đầu một giao dịch hoán đổi mới để nhận thông tin nạp mới."
+        }
+      }
     },
     "error": {
       "memoMissing": "Thiếu Memo",

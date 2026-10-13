@@ -133,7 +133,19 @@
       "sendDescription": "دقیقاً <b>{amount} {ticker}</b> را از یک کیف پول خودنگهدار به آدرس زیر ارسال کنید.",
       "qrCodeAlt": "کد QR",
       "expiresIn": "انقضا در",
-      "memoRequired": "ممو (الزامی)"
+      "memoRequired": "ممو (الزامی)",
+      "waitingForDeposit": "در انتظار واریز شما…",
+      "openHistory": "باز کردن تاریخچه",
+      "status": {
+        "depositReceived": {
+          "title": "واریز دریافت شد",
+          "description": "{ticker} شما رسید - دوباره ارسال نکنید. وضعیت سواپ را در تاریخچه دنبال کنید."
+        },
+        "expired": {
+          "title": "مهلت واریز به پایان رسید",
+          "description": "به این آدرس وجهی ارسال نکنید. برای دریافت اطلاعات واریز جدید، یک سواپ تازه شروع کنید."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo موجود نیست",

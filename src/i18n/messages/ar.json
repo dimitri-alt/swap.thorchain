@@ -133,7 +133,19 @@
       "sendDescription": "أرسِل بالضبط <b>{amount} {ticker}</b> إلى العنوان أدناه من محفظة ذاتية الحفظ.",
       "qrCodeAlt": "رمز QR",
       "expiresIn": "ينتهي خلال",
-      "memoRequired": "المذكّرة (مطلوبة)"
+      "memoRequired": "المذكّرة (مطلوبة)",
+      "waitingForDeposit": "في انتظار إيداعك…",
+      "openHistory": "فتح السجل",
+      "status": {
+        "depositReceived": {
+          "title": "تم استلام الإيداع",
+          "description": "وصلت عملة {ticker} الخاصة بك - لا ترسلها مرة أخرى. تابع حالة التبادل في السجل."
+        },
+        "expired": {
+          "title": "انتهت مهلة الإيداع",
+          "description": "لا ترسل أي أموال إلى هذا العنوان. ابدأ عملية تبادل جديدة للحصول على تفاصيل إيداع جديدة."
+        }
+      }
     },
     "error": {
       "memoMissing": "الـ Memo مفقود",

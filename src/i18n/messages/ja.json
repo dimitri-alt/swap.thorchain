@@ -133,7 +133,19 @@
       "sendDescription": "セルフカストディウォレットから以下のアドレスへ正確に<b>{amount} {ticker}</b>を送信してください。",
       "qrCodeAlt": "QRコード",
       "expiresIn": "有効期限",
-      "memoRequired": "メモ（必須）"
+      "memoRequired": "メモ（必須）",
+      "waitingForDeposit": "入金を待っています…",
+      "openHistory": "履歴を開く",
+      "status": {
+        "depositReceived": {
+          "title": "入金を確認しました",
+          "description": "{ticker} が到着しました。再送信しないでください。スワップの状況は履歴でご確認ください。"
+        },
+        "expired": {
+          "title": "入金期限が切れました",
+          "description": "このアドレスに資金を送らないでください。新しいスワップを開始して、新しい入金情報を取得してください。"
+        }
+      }
     },
     "error": {
       "memoMissing": "Memoがありません",

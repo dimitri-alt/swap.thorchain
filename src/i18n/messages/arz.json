@@ -133,7 +133,19 @@
       "sendDescription": "ابعت بالظبط <b>{amount} {ticker}</b> للعنوان اللي تحت من محفظة بحفظ ذاتي.",
       "qrCodeAlt": "كود QR",
       "expiresIn": "ينتهي خلال",
-      "memoRequired": "الميمو (مطلوب)"
+      "memoRequired": "الميمو (مطلوب)",
+      "waitingForDeposit": "مستنيين الإيداع بتاعك…",
+      "openHistory": "افتح السجل",
+      "status": {
+        "depositReceived": {
+          "title": "وصل الإيداع",
+          "description": "الـ {ticker} بتاعك وصل - متبعتوش تاني. تابع حالة المبادلة من السجل."
+        },
+        "expired": {
+          "title": "مدة الإيداع خلصت",
+          "description": "متبعتش أي فلوس على العنوان ده. ابدأ مبادلة جديدة عشان تجيب بيانات إيداع جديدة."
+        }
+      }
     },
     "error": {
       "memoMissing": "الـ Memo ناقص",

@@ -133,7 +133,19 @@
       "sendDescription": "자기 수탁 지갑에서 아래 주소로 정확히 <b>{amount} {ticker}</b>를 보내세요.",
       "qrCodeAlt": "QR 코드",
       "expiresIn": "만료까지",
-      "memoRequired": "메모 (필수)"
+      "memoRequired": "메모 (필수)",
+      "waitingForDeposit": "입금을 기다리는 중…",
+      "openHistory": "내역 열기",
+      "status": {
+        "depositReceived": {
+          "title": "입금 확인됨",
+          "description": "{ticker}이(가) 도착했습니다 - 다시 보내지 마세요. 내역에서 스왑 상태를 확인하세요."
+        },
+        "expired": {
+          "title": "입금 가능 시간 만료",
+          "description": "이 주소로 자금을 보내지 마세요. 새 스왑을 시작하여 새로운 입금 정보를 받으세요."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo가 없습니다",

@@ -24,7 +24,7 @@ import { useSyncTransactions } from '@/hooks/use-sync-transactions'
 import { useAccounts, useSelectAccount } from '@/hooks/use-wallets'
 import { formatExpiration } from '@/lib/swap-helpers'
 import { cn, toCurrencyFixed, truncate } from '@/lib/utils'
-import { isTxPending, Transaction, useTransactions } from '@/store/transaction-store'
+import { hasDepositArrived, isTxPending, Transaction, useTransactions } from '@/store/transaction-store'
 
 interface HistoryDialogProps {
   isOpen: boolean
@@ -147,14 +147,15 @@ export const TransactionHistoryDialog = ({ isOpen, onOpenChange }: HistoryDialog
                   value: tx.amountFrom,
                   expiration: tx.expiration,
                   memo: tx.depositMemo,
-                  provider: tx.provider
+                  provider: tx.provider,
+                  txUid: tx.uid
                 }
 
                 openDialog(InstantSwapChannelDialog, { assetFrom: tx.assetFrom, assetTo: tx.assetTo, channel: channel })
               }
 
-              const showRQ =
-                tx.qrCodeData && !tx.hash && status !== 'expired' && status !== 'completed' && status !== 'refunded' && status !== 'failed'
+              // Once the deposit is in, the deposit details (and their countdown) have served their purpose.
+              const showRQ = tx.qrCodeData && !hasDepositArrived(tx) && status !== 'expired'
               const showLimitSwapActions = !!tx.limitSwapMemo && isTxPending(status) && (!!orderAccount(tx) || !!tx.qrCodeData)
 
               const explorerLinks = getExplorerLinks(tx)

@@ -133,7 +133,19 @@
       "sendDescription": "Envía exactamente <b>{amount} {ticker}</b> a la dirección de abajo desde una billetera de autocustodia.",
       "qrCodeAlt": "Código QR",
       "expiresIn": "Expira en",
-      "memoRequired": "Memo (obligatorio)"
+      "memoRequired": "Memo (obligatorio)",
+      "waitingForDeposit": "Esperando tu depósito…",
+      "openHistory": "Abrir historial",
+      "status": {
+        "depositReceived": {
+          "title": "Depósito recibido",
+          "description": "Tus {ticker} han llegado: no los envíes de nuevo. Sigue el estado del swap en el historial."
+        },
+        "expired": {
+          "title": "Plazo de depósito expirado",
+          "description": "No envíes fondos a esta dirección. Inicia un nuevo swap para obtener nuevos datos de depósito."
+        }
+      }
     },
     "error": {
       "memoMissing": "Falta el Memo",

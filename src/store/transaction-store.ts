@@ -128,9 +128,13 @@ export const useSetTransactionDetails = () => transactionStore(state => state.se
 export const useSetTransactionStatus = () => transactionStore(state => state.setTransactionStatus)
 export const useTransactions = () => transactionStore(sortedTransactions)
 export const useHasTransactions = () => transactionStore(state => state.transactions.length > 0)
+export const useTransaction = (uid?: string) => transactionStore(state => (uid ? state.transactions.find(tx => tx.uid === uid) : undefined))
 
 export const isTxPending = (status: string) => status === 'not_started' || status === 'swapping' || status === 'pending'
 export const isTxTerminal = (status: string) => status === 'completed' || status === 'failed' || status === 'expired' || status === 'refunded'
+// The tracker has seen the deposit into a channel: it has a hash, or the swap moved past waiting.
+const DEPOSIT_SEEN_STATUSES: TxStatus[] = ['pending', 'swapping', 'completed', 'failed', 'refunded']
+export const hasDepositArrived = (tx: Transaction) => !!tx.hash || DEPOSIT_SEEN_STATUSES.includes(tx.status)
 
 // Sends never get tracker details, so they are only polled while pending.
 const isTxSyncable = (tx: Transaction) => isTxPending(tx.status) || (tx.kind !== 'send' && !tx.details && !isTxTerminal(tx.status))

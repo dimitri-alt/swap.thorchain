@@ -133,7 +133,19 @@
       "sendDescription": "Envie exatamente <b>{amount} {ticker}</b> para o endereço abaixo a partir de uma carteira de autocustódia.",
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expira em",
-      "memoRequired": "Memo (obrigatório)"
+      "memoRequired": "Memo (obrigatório)",
+      "waitingForDeposit": "A aguardar o seu depósito…",
+      "openHistory": "Abrir Histórico",
+      "status": {
+        "depositReceived": {
+          "title": "Depósito recebido",
+          "description": "O seu {ticker} chegou — não o envie novamente. Acompanhe o estado da troca no Histórico."
+        },
+        "expired": {
+          "title": "Janela de depósito expirada",
+          "description": "Não envie fundos para este endereço. Inicie uma nova troca para obter novos dados de depósito."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo ausente",

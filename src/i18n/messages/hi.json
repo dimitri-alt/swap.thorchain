@@ -133,7 +133,19 @@
       "sendDescription": "नीचे दिए गए पते पर एक सेल्फ कस्टडी वॉलेट से ठीक <b>{amount} {ticker}</b> भेजें.",
       "qrCodeAlt": "QR कोड",
       "expiresIn": "समाप्त होगा",
-      "memoRequired": "मेमो (आवश्यक)"
+      "memoRequired": "मेमो (आवश्यक)",
+      "waitingForDeposit": "आपकी जमा राशि की प्रतीक्षा की जा रही है…",
+      "openHistory": "हिस्ट्री खोलें",
+      "status": {
+        "depositReceived": {
+          "title": "जमा प्राप्त हुई",
+          "description": "आपका {ticker} आ गया है - इसे दोबारा न भेजें। स्वैप की स्थिति हिस्ट्री में देखें।"
+        },
+        "expired": {
+          "title": "जमा की समय-सीमा समाप्त",
+          "description": "इस पते पर फंड न भेजें। नए जमा विवरण पाने के लिए नया स्वैप शुरू करें।"
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo अनुपस्थित है",

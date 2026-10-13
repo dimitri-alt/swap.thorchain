@@ -133,7 +133,19 @@
       "sendDescription": "Senden Sie genau <b>{amount} {ticker}</b> an die untenstehende Adresse von einer Self-Custody-Wallet.",
       "qrCodeAlt": "QR-Code",
       "expiresIn": "Läuft ab in",
-      "memoRequired": "Memo (erforderlich)"
+      "memoRequired": "Memo (erforderlich)",
+      "waitingForDeposit": "Warten auf deine Einzahlung…",
+      "openHistory": "Verlauf öffnen",
+      "status": {
+        "depositReceived": {
+          "title": "Einzahlung erhalten",
+          "description": "Dein {ticker} ist eingegangen – sende es nicht erneut. Verfolge den Status des Swaps im Verlauf."
+        },
+        "expired": {
+          "title": "Einzahlungsfenster abgelaufen",
+          "description": "Sende keine Mittel an diese Adresse. Starte einen neuen Swap, um aktuelle Einzahlungsdaten zu erhalten."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo fehlt",

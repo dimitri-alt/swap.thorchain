@@ -133,7 +133,19 @@
       "sendDescription": "Send exactly <b>{amount} {ticker}</b> to di address wey dey below from a self custody wallet.",
       "qrCodeAlt": "QR Code",
       "expiresIn": "E go expire in",
-      "memoRequired": "Memo (compulsory)"
+      "memoRequired": "Memo (compulsory)",
+      "waitingForDeposit": "Dey wait for your deposit…",
+      "openHistory": "Open History",
+      "status": {
+        "depositReceived": {
+          "title": "Deposit don land",
+          "description": "Your {ticker} don arrive - no send am again. Follow di swap status for History."
+        },
+        "expired": {
+          "title": "Deposit time don pass",
+          "description": "No send any money go dis address. Start new swap make you get fresh deposit details."
+        }
+      }
     },
     "error": {
       "memoMissing": "Memo no dey",
