@@ -24,7 +24,7 @@ import { useAccounts, useSelectedAccount } from '@/hooks/use-wallets'
 import { getQuotes } from '@/lib/api'
 import { resolveQuoteError } from '@/lib/errors'
 import { prepareQuoteForLimitSwap } from '@/lib/memo-helpers'
-import { isHoudiniProvider, isMayaProvider, isPrivateSend, isTaprootAddress } from '@/lib/swap-helpers'
+import { isHoudiniProvider, isMayaProvider, isTaprootAddress } from '@/lib/swap-helpers'
 import { cn, truncate } from '@/lib/utils'
 import { useIsLimitSwapPaused, useLimitSwapMaxAge } from '@/hooks/use-mimir'
 import { useIsLimitSwap, useLimitSwapBuyAmount, useLimitSwapExpiry } from '@/store/limit-swap-store'
@@ -69,16 +69,15 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
 
   if (!assetFrom || !assetTo) return null
 
-  // Without a wallet the user names the refund address - except for a private send, which (like
-  // Houdini's own Send tab) needs one only when every route on offer asks for it.
-  const depositOrder = !selectedAccount && (provider === 'NEAR' || provider === 'HOUDINI')
-  const isSend = isPrivateSend(provider === 'HOUDINI', assetFrom, assetTo)
-  const refundRequired = depositOrder && (!isSend || refundAsked)
+  // Houdini pays out from its partner exchanges' wallets, not THORChain's Router, so an EIP-7702 delegated
+  // address can receive it and the self-custody and LTC MWEB acknowledgements do not apply.
+  const isHoudini = isHoudiniProvider(provider)
+  // Without a wallet the user names the refund address - except for Houdini, which (like its own app)
+  // needs one only when every route on offer asks for it.
+  const depositOrder = !selectedAccount && (provider === 'NEAR' || isHoudini)
+  const refundRequired = depositOrder && (!isHoudini || refundAsked)
   const options = accounts.filter(a => a.network === assetTo.chain)
   const isMayachain = isMayaProvider(provider)
-  // Houdini pays out from its own exchange wallets, not THORChain's Router, so a contract or an
-  // EIP-7702 delegated address can receive it, and the self-custody and LTC MWEB acknowledgements do not apply.
-  const isHoudini = isHoudiniProvider(provider)
   const isTaprootDestination = isMayachain && assetTo.chain === Chain.Bitcoin && isTaprootAddress(destinationAddress)
 
   const destinationCheck = useValidAddress(destinationAddress, assetTo.chain)
@@ -94,8 +93,10 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
 
   // THORChain pays a native outbound through the Router's `to.send()`, so an address that runs code
   // on receipt - a contract, or an EOA that delegated itself away under EIP-7702 - cannot be paid.
-  const destinationCode = useAddressCode(destinationAddress, assetTo.chain, !isHoudini && destinationCheck.isValid && !destinationName.isResolving)
-  const isUnsupportedDestination = destinationCode.isDelegated || destinationCode.isContract
+  // Houdini rejects only a contract ("addressTo cannot be a token contract address").
+  const destinationCode = useAddressCode(destinationAddress, assetTo.chain, destinationCheck.isValid && !destinationName.isResolving)
+  const isDelegatedDestination = !isHoudini && destinationCode.isDelegated
+  const isUnsupportedDestination = isDelegatedDestination || destinationCode.isContract
 
   useEffect(() => {
     if (destinationName.address) setDestinationAddress(destinationName.address)
@@ -135,7 +136,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
       })
       .catch(error => {
         const resolved = error instanceof USwapError ? resolveQuoteError(error) : error
-        if (isSend && depositOrder && resolved?.message?.includes('refund address')) setRefundAsked(true)
+        if (isHoudini && depositOrder && resolved?.message?.includes('refund address')) setRefundAsked(true)
         setQuoteError(resolved)
       })
       .finally(() => setQuoting(false))
@@ -294,7 +295,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
                   options
                 )}
                 {isTaprootDestination && <div className="text-lucian text-xs font-semibold">{t('recipient.taprootNotSupported')}</div>}
-                {destinationCode.isDelegated && <div className="text-lucian text-xs font-semibold">{t('recipient.delegatedNotSupported')}</div>}
+                {isDelegatedDestination && <div className="text-lucian text-xs font-semibold">{t('recipient.delegatedNotSupported')}</div>}
                 {destinationCode.isContract && <div className="text-lucian text-xs font-semibold">{t('recipient.contractNotSupported')}</div>}
               </div>
             </div>

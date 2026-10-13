@@ -27,8 +27,9 @@ PRIVATE tab ──quote──▶ api.thorchain.org/v1/quote  providers: ["HOUDIN
 
 1. **Quote** — `useQuote` asks for `providers: [HOUDINI]` without streaming options. The dry route carries `meta.houdini.{quoteId, min, max, swapName,
    markup}`, and an amount outside the route's limits comes back as a quote error the form shows like any other.
-2. **Addresses** — `SwapRecipient` asks for the receiving address and, without a wallet, a refund address on the sell chain (Houdini refunds a failed
-   order there). With a wallet the source address is the refund address.
+2. **Addresses** — `SwapRecipient` asks for the receiving address only. Without a wallet no refund address is asked for up front (a failed order is
+   recovered through Houdini support, the order page); only when every route needs one does the aggregator answer "needs a refund address" and
+   the refund field appear for the retry. With a wallet the source address is the refund address.
 3. **Order** — the non-dry quote creates the Houdini order. `inboundAddress` is the deposit address, `sellAmount` is the exact amount the order expects
    (Houdini restates it with the venue's rounding), `expiration` is when the unfunded order lapses (~30 minutes), `meta.houdini.houdiniId` is the order
    id. Without a wallet the route also carries `qrCodeDataURL`; `InstantSwapDialog` shows it exactly like a memoless deposit. With a wallet
