@@ -18,6 +18,7 @@ import { Contract } from 'ethers'
 import { useAssetFrom } from '@/hooks/use-swap'
 import { useWallets } from '@/hooks/use-wallets'
 import { getAssetBalance, getThorBankBalances } from '@/lib/api'
+import { thorBalanceKey } from '@/lib/swap-helpers'
 import { getUSwap } from '@/lib/wallets'
 
 type UseBalance = {
@@ -56,7 +57,15 @@ export const useBalance = (): UseBalance => {
 
       let value = AssetValue.from({ chain: assetFrom.chain, value: 0 })
 
+      // THORChain coins go by several names for one denom ("THOR.x/ruji" from the node and bank,
+      // "THOR.RUJI" in the token list), so compare them by the same key the wallet sidebar uses.
+      const thorKey = assetFrom.chain === Chain.THORChain
+        ? thorBalanceKey({ chain: Chain.THORChain, symbol: assetFrom.identifier.toUpperCase().startsWith('THOR.') ? assetFrom.identifier.slice(5) : assetFrom.identifier })
+        : undefined
+
       const finder = (b: AssetValue) => {
+        if (thorKey) return thorBalanceKey(b) === thorKey
+
         const symbolPart = b.isSynthetic || b.isTradeAsset ? b.ticker : b.symbol
         // Secured Assets are addressed as bare "<CHAIN>-<SYMBOL>" without a chain prefix.
         const id = b.isSecuredAsset ? b.symbol : `${b.chain}.${symbolPart}`
@@ -78,13 +87,13 @@ export const useBalance = (): UseBalance => {
 
         if (balance) value = balance
 
-        // Secured Asset balances come from the THORChain bank module. If the wallet wrapper
-        // didn't surface it (some connectors strip non-RUNE denoms), fall back to a direct
-        // bank query so the user sees their balance.
-        if (!balance && assetFrom.chain === Chain.THORChain && assetFrom.isSecuredAsset) {
+        // Secured Assets and factory tokens (RUJI, sTCY, …) live in the THORChain bank module. If the
+        // wallet wrapper didn't surface them (some connectors strip non-RUNE denoms), fall back to a
+        // direct bank query — the same source the wallet sidebar reads.
+        if (!balance && assetFrom.chain === Chain.THORChain) {
           const bankBalances = await getThorBankBalances(wallet.address)
-          const securedBalance = bankBalances.find(finder)
-          if (securedBalance) value = securedBalance
+          const bankBalance = bankBalances.find(finder)
+          if (bankBalance) value = bankBalance
         }
       }
 
