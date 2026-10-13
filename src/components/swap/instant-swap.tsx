@@ -9,6 +9,7 @@ import { chainLabel } from '@/components/connect-wallet/config'
 import { Asset } from '@/components/swap/asset'
 import { DepositChannel } from '@/components/swap/instant-swap-dialog'
 import { SwapAddressWarning } from '@/components/swap/swap-address-warning'
+import { isHoudiniProvider } from '@/lib/swap-helpers'
 import { cn } from '@/lib/utils'
 
 interface SwapMemolessChannelProps {
@@ -22,8 +23,10 @@ export const InstantSwap = ({ assetFrom, assetTo, channel }: SwapMemolessChannel
   const [warningChecked, setWarningChecked] = useState(false)
   const [warningCheckedLTC, setWarningCheckedLTC] = useState(false)
 
-  const isLTC = assetFrom.ticker === 'LTC' || assetTo.ticker === 'LTC'
-  const isBlurred = !warningChecked || (isLTC && !warningCheckedLTC)
+  // Houdini's deposit address takes any sender, so the exact-amount / self-custody and LTC MWEB acknowledgements are skipped.
+  const isHoudini = isHoudiniProvider(channel.provider)
+  const isLTC = !isHoudini && (assetFrom.ticker === 'LTC' || assetTo.ticker === 'LTC')
+  const isBlurred = (!isHoudini && !warningChecked) || (isLTC && !warningCheckedLTC)
 
   return (
     <>
@@ -40,12 +43,14 @@ export const InstantSwap = ({ assetFrom, assetTo, channel }: SwapMemolessChannel
 
       <ScrollArea className="flex min-h-0 flex-1 px-4 md:px-8" classNameViewport="flex-1 h-auto">
         <div className="flex flex-col gap-4 pb-8">
-          <SwapAddressWarning
-            checked={warningChecked}
-            onCheckedChange={setWarningChecked}
-            text={t('warning.sendExact')}
-            textAccent={t('warning.lossOfFunds')}
-          />
+          {!isHoudini && (
+            <SwapAddressWarning
+              checked={warningChecked}
+              onCheckedChange={setWarningChecked}
+              text={t('warning.sendExact')}
+              textAccent={t('warning.lossOfFunds')}
+            />
+          )}
 
           {isLTC && (
             <SwapAddressWarning
@@ -83,7 +88,13 @@ export const InstantSwap = ({ assetFrom, assetTo, channel }: SwapMemolessChannel
             )}
 
             <div className="size-50 overflow-hidden rounded-4xl bg-white p-3">
-              <Image src={channel.qrCodeData} alt={t('instant.qrCodeAlt')} className={cn('h-full w-full', { 'blur-sm': isBlurred })} width={200} height={200} />
+              <Image
+                src={channel.qrCodeData}
+                alt={t('instant.qrCodeAlt')}
+                className={cn('h-full w-full', { 'blur-sm': isBlurred })}
+                width={200}
+                height={200}
+              />
             </div>
 
             {channel.expiration && (

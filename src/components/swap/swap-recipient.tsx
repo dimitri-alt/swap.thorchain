@@ -24,7 +24,7 @@ import { useAccounts, useSelectedAccount } from '@/hooks/use-wallets'
 import { getQuotes } from '@/lib/api'
 import { resolveQuoteError } from '@/lib/errors'
 import { prepareQuoteForLimitSwap } from '@/lib/memo-helpers'
-import { isMayaProvider, isPrivateSend, isTaprootAddress } from '@/lib/swap-helpers'
+import { isHoudiniProvider, isMayaProvider, isPrivateSend, isTaprootAddress } from '@/lib/swap-helpers'
 import { cn, truncate } from '@/lib/utils'
 import { useIsLimitSwapPaused, useLimitSwapMaxAge } from '@/hooks/use-mimir'
 import { useIsLimitSwap, useLimitSwapBuyAmount, useLimitSwapExpiry } from '@/store/limit-swap-store'
@@ -76,6 +76,9 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
   const refundRequired = depositOrder && (!isSend || refundAsked)
   const options = accounts.filter(a => a.network === assetTo.chain)
   const isMayachain = isMayaProvider(provider)
+  // Houdini pays out from its own exchange wallets, not THORChain's Router, so a contract or an
+  // EIP-7702 delegated address can receive it, and the self-custody and LTC MWEB acknowledgements do not apply.
+  const isHoudini = isHoudiniProvider(provider)
   const isTaprootDestination = isMayachain && assetTo.chain === Chain.Bitcoin && isTaprootAddress(destinationAddress)
 
   const destinationCheck = useValidAddress(destinationAddress, assetTo.chain)
@@ -91,7 +94,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
 
   // THORChain pays a native outbound through the Router's `to.send()`, so an address that runs code
   // on receipt - a contract, or an EOA that delegated itself away under EIP-7702 - cannot be paid.
-  const destinationCode = useAddressCode(destinationAddress, assetTo.chain, destinationCheck.isValid && !destinationName.isResolving)
+  const destinationCode = useAddressCode(destinationAddress, assetTo.chain, !isHoudini && destinationCheck.isValid && !destinationName.isResolving)
   const isUnsupportedDestination = destinationCode.isDelegated || destinationCode.isContract
 
   useEffect(() => {
@@ -138,7 +141,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
       .finally(() => setQuoting(false))
   }
 
-  const isLTC = assetFrom.ticker === 'LTC' || assetTo.ticker === 'LTC'
+  const isLTC = !isHoudini && (assetFrom.ticker === 'LTC' || assetTo.ticker === 'LTC')
   const buttonEnabled =
     destinationCheck.isValid &&
     destinationAddress.length &&
@@ -255,7 +258,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
       size="large"
       className="w-full"
       onClick={fetchQuote}
-      disabled={!buttonEnabled || !warningChecked || (isLTC && !warningCheckedLTC)}
+      disabled={!buttonEnabled || (!isHoudini && !warningChecked) || (isLTC && !warningCheckedLTC)}
     >
       {quoting && <LoaderCircle size={20} className="animate-spin" />}
       <span>{quoting ? t('recipient.preparingSwap') : t('recipient.next')}</span>
@@ -296,12 +299,14 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
               </div>
             </div>
 
-            <SwapAddressWarning
-              checked={warningChecked}
-              onCheckedChange={setWarningChecked}
-              text={t('warning.selfCustody')}
-              textAccent={t('warning.lossOfFunds')}
-            />
+            {!isHoudini && (
+              <SwapAddressWarning
+                checked={warningChecked}
+                onCheckedChange={setWarningChecked}
+                text={t('warning.selfCustody')}
+                textAccent={t('warning.lossOfFunds')}
+              />
+            )}
 
             {isLTC && (
               <SwapAddressWarning

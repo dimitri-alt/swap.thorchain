@@ -31,6 +31,7 @@ export interface DepositChannel {
   expiration?: number
   // A memo the deposit must carry (a provider's deposit tag); none for a plain transfer.
   memo?: string
+  provider?: ProviderName
 }
 
 export const InstantSwapDialog = ({ provider, isOpen, onOpenChange }: InstantSwapDialogProps) => {
@@ -61,7 +62,8 @@ export const InstantSwapDialog = ({ provider, isOpen, onOpenChange }: InstantSwa
       address,
       value,
       expiration,
-      memo
+      memo,
+      provider
     })
 
     const sentAmount = new USwapNumber(value)

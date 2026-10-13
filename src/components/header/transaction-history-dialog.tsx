@@ -146,7 +146,8 @@ export const TransactionHistoryDialog = ({ isOpen, onOpenChange }: HistoryDialog
                   address: tx.addressDeposit,
                   value: tx.amountFrom,
                   expiration: tx.expiration,
-                  memo: tx.depositMemo
+                  memo: tx.depositMemo,
+                  provider: tx.provider
                 }
 
                 openDialog(InstantSwapChannelDialog, { assetFrom: tx.assetFrom, assetTo: tx.assetTo, channel: channel })
