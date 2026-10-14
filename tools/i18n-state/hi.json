@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "मैं समझता हूं कि मुझे एक सेल्फ-कस्टडी वॉलेट का उपयोग करना होगा. मैं समझता हूं कि स्मार्ट कॉन्ट्रैक्ट वॉलेट, एक्सचेंज पते, प्रत्यायोजित पते, या EIP 7702 वॉलेट का उपयोग करने पर"],
   "swap.instant.sendTitle": ["Send {asset}", "{asset} भेजें"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "नीचे दिए गए पते पर एक सेल्फ कस्टडी वॉलेट से ठीक <b>{amount} {ticker}</b> भेजें."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "नीचे दिए गए पते पर <b>{amount} {ticker}</b> भेजें।"],
   "swap.instant.qrCodeAlt": ["QR Code", "QR कोड"],
   "swap.instant.expiresIn": ["Expires in", "समाप्त होगा"],
   "swap.instant.memoRequired": ["Memo (required)", "मेमो (आवश्यक)"],

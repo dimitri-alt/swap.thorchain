@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Gửi {asset}",
       "sendDescription": "Gửi chính xác <b>{amount} {ticker}</b> đến địa chỉ bên dưới từ một ví tự lưu ký.",
+      "sendDescriptionHoudini": "Gửi <b>{amount} {ticker}</b> đến địa chỉ bên dưới.",
       "qrCodeAlt": "Mã QR",
       "expiresIn": "Hết hạn sau",
       "memoRequired": "Memo (bắt buộc)",

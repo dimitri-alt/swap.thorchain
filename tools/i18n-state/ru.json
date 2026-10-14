@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "Я понимаю, что должен использовать некастодиальный кошелёк. Я понимаю, что использование Smart Contract кошелька, биржевого адреса, делегированного адреса или кошелька EIP 7702 приведёт к"],
   "swap.instant.sendTitle": ["Send {asset}", "Отправить {asset}"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "Отправьте ровно <b>{amount} {ticker}</b> на адрес ниже из некастодиального кошелька."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "Отправьте <b>{amount} {ticker}</b> на адрес ниже."],
   "swap.instant.qrCodeAlt": ["QR Code", "QR-код"],
   "swap.instant.expiresIn": ["Expires in", "Истекает через"],
   "swap.instant.memoRequired": ["Memo (required)", "Мемо (обязательно)"],

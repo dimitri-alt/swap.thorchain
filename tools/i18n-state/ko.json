@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "자기 수탁 지갑을 사용해야 함을 이해합니다. Smart Contract 지갑, 거래소 주소, 위임 주소 또는 EIP 7702 지갑을 사용하면"],
   "swap.instant.sendTitle": ["Send {asset}", "{asset} 보내기"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "자기 수탁 지갑에서 아래 주소로 정확히 <b>{amount} {ticker}</b>를 보내세요."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "아래 주소로 <b>{amount} {ticker}</b>을(를) 보내세요."],
   "swap.instant.qrCodeAlt": ["QR Code", "QR 코드"],
   "swap.instant.expiresIn": ["Expires in", "만료까지"],
   "swap.instant.memoRequired": ["Memo (required)", "메모 (필수)"],

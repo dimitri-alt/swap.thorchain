@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Kirim {asset}",
       "sendDescription": "Kirim tepat <b>{amount} {ticker}</b> ke alamat di bawah ini dari dompet self-custody.",
+      "sendDescriptionHoudini": "Kirim <b>{amount} {ticker}</b> ke alamat di bawah ini.",
       "qrCodeAlt": "Kode QR",
       "expiresIn": "Kedaluwarsa dalam",
       "memoRequired": "Memo (wajib)",

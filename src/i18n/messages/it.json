@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Invia {asset}",
       "sendDescription": "Invia esattamente <b>{amount} {ticker}</b> all'indirizzo sottostante da un wallet self-custody.",
+      "sendDescriptionHoudini": "Invia <b>{amount} {ticker}</b> all'indirizzo qui sotto.",
       "qrCodeAlt": "Codice QR",
       "expiresIn": "Scade tra",
       "memoRequired": "Memo (obbligatorio)",

@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "ᛊᛖᚾᛞ {asset}",
       "sendDescription": "ᛊᛖᚾᛞ ᛖᚲᛊᚨᚲᛏᛚᛁ <b>{amount} {ticker}</b> ᛏᛟ ᚦᛖ ᚨᛞᛞᚱᛖᛊᛊ ᛒᛖᛚᛟᚹ ᚠᚱᛟᛗ ᚨ ᛊᛖᛚᚠ ᚲᚢᛊᛏᛟᛞᛁ ᚹᚨᛚᛚᛖᛏ.",
+      "sendDescriptionHoudini": "ᛊᛖᚾᛞ <b>{amount} {ticker}</b> ᛏᛟ ᚦᛖ ᚨᛞᛞᚱᛖᛊᛊ ᛒᛖᛚᛟᚹ.",
       "qrCodeAlt": "ᚲᚱ ᚲᛟᛞᛖ",
       "expiresIn": "ᛖᚲᛊᛈᛁᚱᛖᛊ ᛁᚾ",
       "memoRequired": "ᛗᛖᛗᛟ (ᚱᛖᚲᚢᛁᚱᛖᛞ)",

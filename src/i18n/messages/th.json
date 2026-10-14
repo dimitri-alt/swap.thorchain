@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "ส่ง {asset}",
       "sendDescription": "ส่ง <b>{amount} {ticker}</b> ตามจำนวนที่ระบุไว้อย่างแม่นยำไปยังที่อยู่ด้านล่างจากกระเป๋าเงินแบบ self-custody",
+      "sendDescriptionHoudini": "ส่ง <b>{amount} {ticker}</b> ไปยังที่อยู่ด้านล่างนี้",
       "qrCodeAlt": "QR Code",
       "expiresIn": "หมดอายุใน",
       "memoRequired": "Memo (จำเป็น)",

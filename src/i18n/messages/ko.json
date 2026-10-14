@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "{asset} 보내기",
       "sendDescription": "자기 수탁 지갑에서 아래 주소로 정확히 <b>{amount} {ticker}</b>를 보내세요.",
+      "sendDescriptionHoudini": "아래 주소로 <b>{amount} {ticker}</b>을(를) 보내세요.",
       "qrCodeAlt": "QR 코드",
       "expiresIn": "만료까지",
       "memoRequired": "메모 (필수)",

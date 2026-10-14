@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "أنا فاهم إني لازم أستخدم محفظة بحفظ ذاتي. وأنا فاهم إن استخدام محفظة Smart Contract أو عنوان منصة أو عنوان مفوّض أو محفظة EIP 7702 هيأدي لـ"],
   "swap.instant.sendTitle": ["Send {asset}", "إرسال {asset}"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "ابعت بالظبط <b>{amount} {ticker}</b> للعنوان اللي تحت من محفظة بحفظ ذاتي."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "ابعت <b>{amount} {ticker}</b> على العنوان اللي تحت."],
   "swap.instant.qrCodeAlt": ["QR Code", "كود QR"],
   "swap.instant.expiresIn": ["Expires in", "ينتهي خلال"],
   "swap.instant.memoRequired": ["Memo (required)", "الميمو (مطلوب)"],

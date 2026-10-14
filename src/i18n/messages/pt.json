@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Enviar {asset}",
       "sendDescription": "Envie exatamente <b>{amount} {ticker}</b> para o endereço abaixo a partir de uma carteira de autocustódia.",
+      "sendDescriptionHoudini": "Envie <b>{amount} {ticker}</b> para o endereço abaixo.",
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expira em",
       "memoRequired": "Memo (obrigatório)",

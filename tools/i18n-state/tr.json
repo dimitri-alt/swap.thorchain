@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "Bir öz saklamalı cüzdan kullanmam gerektiğini anlıyorum. Bir Smart Contract cüzdanı, borsa adresi, yetkilendirilmiş adres veya EIP 7702 cüzdanı kullanmak"],
   "swap.instant.sendTitle": ["Send {asset}", "{asset} Gönder"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "Aşağıdaki adrese öz saklamalı bir cüzdandan tam olarak <b>{amount} {ticker}</b> gönder."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "Aşağıdaki adrese <b>{amount} {ticker}</b> gönderin."],
   "swap.instant.qrCodeAlt": ["QR Code", "QR Kodu"],
   "swap.instant.expiresIn": ["Expires in", "Sona erme"],
   "swap.instant.memoRequired": ["Memo (required)", "Memo (zorunlu)"],

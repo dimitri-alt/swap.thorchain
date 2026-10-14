@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Send {asset}",
       "sendDescription": "Send exactly <b>{amount} {ticker}</b> to di address wey dey below from a self custody wallet.",
+      "sendDescriptionHoudini": "Send <b>{amount} {ticker}</b> go di address wey dey below.",
       "qrCodeAlt": "QR Code",
       "expiresIn": "E go expire in",
       "memoRequired": "Memo (compulsory)",

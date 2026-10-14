@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "ฉันเข้าใจว่าฉันต้องใช้กระเป๋าเงินแบบ self-custody ฉันเข้าใจว่าการใช้กระเป๋าเงิน smart contract ที่อยู่ของ exchange ที่อยู่ที่มอบหมาย หรือกระเป๋าเงิน EIP 7702 จะส่งผลให้"],
   "swap.instant.sendTitle": ["Send {asset}", "ส่ง {asset}"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "ส่ง <b>{amount} {ticker}</b> ตามจำนวนที่ระบุไว้อย่างแม่นยำไปยังที่อยู่ด้านล่างจากกระเป๋าเงินแบบ self-custody"],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "ส่ง <b>{amount} {ticker}</b> ไปยังที่อยู่ด้านล่างนี้"],
   "swap.instant.qrCodeAlt": ["QR Code", "QR Code"],
   "swap.instant.expiresIn": ["Expires in", "หมดอายุใน"],
   "swap.instant.memoRequired": ["Memo (required)", "Memo (จำเป็น)"],

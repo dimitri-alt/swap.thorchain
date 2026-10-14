@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Отправить {asset}",
       "sendDescription": "Отправьте ровно <b>{amount} {ticker}</b> на адрес ниже из некастодиального кошелька.",
+      "sendDescriptionHoudini": "Отправьте <b>{amount} {ticker}</b> на адрес ниже.",
       "qrCodeAlt": "QR-код",
       "expiresIn": "Истекает через",
       "memoRequired": "Мемо (обязательно)",

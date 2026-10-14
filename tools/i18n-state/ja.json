@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "セルフカストディウォレットを使用する必要があることを理解しています。スマートコントラクトウォレット、取引所アドレス、委任されたアドレス、またはEIP 7702ウォレットを使用すると、次の結果になることを理解しています:"],
   "swap.instant.sendTitle": ["Send {asset}", "{asset} を送信"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "セルフカストディウォレットから以下のアドレスへ正確に<b>{amount} {ticker}</b>を送信してください。"],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "以下のアドレスに <b>{amount} {ticker}</b> を送金してください。"],
   "swap.instant.qrCodeAlt": ["QR Code", "QRコード"],
   "swap.instant.expiresIn": ["Expires in", "有効期限"],
   "swap.instant.memoRequired": ["Memo (required)", "メモ（必須）"],

@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "{asset} を送信",
       "sendDescription": "セルフカストディウォレットから以下のアドレスへ正確に<b>{amount} {ticker}</b>を送信してください。",
+      "sendDescriptionHoudini": "以下のアドレスに <b>{amount} {ticker}</b> を送金してください。",
       "qrCodeAlt": "QRコード",
       "expiresIn": "有効期限",
       "memoRequired": "メモ（必須）",

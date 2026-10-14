@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "میں سمجھدا واں کہ مینوں سیلف کسٹڈی والٹ ورتݨا ضروری اے۔ میں سمجھدا واں کہ smart contract والٹ، ایکسچینج پتے، delegated پتے، یا EIP 7702 والٹ ورتݨ نال"],
   "swap.instant.sendTitle": ["Send {asset}", "{asset} بھیجو"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "سیلف کسٹڈی والٹ توں ٹھیک <b>{amount} {ticker}</b> تھلے دِتے پتے تے بھیجو۔"],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "<b>{amount} {ticker}</b> ہیٹھاں دِتے پتے تے گھلو۔"],
   "swap.instant.qrCodeAlt": ["QR Code", "QR کوڈ"],
   "swap.instant.expiresIn": ["Expires in", "ختم ہوݨ وچ"],
   "swap.instant.memoRequired": ["Memo (required)", "میمو (لازمی)"],

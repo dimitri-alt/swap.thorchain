@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "ᛁ ᚢᚾᛞᛖᚱᛊᛏᚨᚾᛞ ᚦᚨᛏ ᛁ ᛗᚢᛊᛏ ᚢᛊᛖ ᚨ ᛊᛖᛚᚠ-ᚲᚢᛊᛏᛟᛞᛁ ᚹᚨᛚᛚᛖᛏ. ᛁ ᚢᚾᛞᛖᚱᛊᛏᚨᚾᛞ ᚦᚨᛏ ᚢᛊᛁᛜ ᚨ ᛊᛗᚨᚱᛏ ᚲᛟᚾᛏᚱᚨᚲᛏ ᚹᚨᛚᛚᛖᛏ, ᛖᚲᛊᚲᚺᚨᛜᛖ ᚨᛞᛞᚱᛖᛊᛊ, ᛞᛖᛚᛖᚷᚨᛏᛖᛞ ᚨᛞᛞᚱᛖᛊᛊ, ᛟᚱ ᚨᚾ ᛖᛁᛈ 7702 ᚹᚨᛚᛚᛖᛏ, ᚹᛁᛚᛚ ᚱᛖᛊᚢᛚᛏ ᛁᚾ"],
   "swap.instant.sendTitle": ["Send {asset}", "ᛊᛖᚾᛞ {asset}"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "ᛊᛖᚾᛞ ᛖᚲᛊᚨᚲᛏᛚᛁ <b>{amount} {ticker}</b> ᛏᛟ ᚦᛖ ᚨᛞᛞᚱᛖᛊᛊ ᛒᛖᛚᛟᚹ ᚠᚱᛟᛗ ᚨ ᛊᛖᛚᚠ ᚲᚢᛊᛏᛟᛞᛁ ᚹᚨᛚᛚᛖᛏ."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "ᛊᛖᚾᛞ <b>{amount} {ticker}</b> ᛏᛟ ᚦᛖ ᚨᛞᛞᚱᛖᛊᛊ ᛒᛖᛚᛟᚹ."],
   "swap.instant.qrCodeAlt": ["QR Code", "ᚲᚱ ᚲᛟᛞᛖ"],
   "swap.instant.expiresIn": ["Expires in", "ᛖᚲᛊᛈᛁᚱᛖᛊ ᛁᚾ"],
   "swap.instant.memoRequired": ["Memo (required)", "ᛗᛖᛗᛟ (ᚱᛖᚲᚢᛁᚱᛖᛞ)"],

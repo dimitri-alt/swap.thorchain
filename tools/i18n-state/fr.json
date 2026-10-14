@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "Je comprends que je dois utiliser un portefeuille auto-hébergé. Je comprends que l'utilisation d'un portefeuille de smart contract, d'une adresse d'exchange, d'une adresse déléguée ou d'un portefeuille EIP 7702 entraînera une"],
   "swap.instant.sendTitle": ["Send {asset}", "Envoyer {asset}"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "Envoyez exactement <b>{amount} {ticker}</b> à l'adresse ci-dessous depuis un portefeuille auto-hébergé."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "Envoyez <b>{amount} {ticker}</b> à l'adresse ci-dessous."],
   "swap.instant.qrCodeAlt": ["QR Code", "QR Code"],
   "swap.instant.expiresIn": ["Expires in", "Expire dans"],
   "swap.instant.memoRequired": ["Memo (required)", "Mémo (requis)"],

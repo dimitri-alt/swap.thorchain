@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Enviar {asset}",
       "sendDescription": "Envía exactamente <b>{amount} {ticker}</b> a la dirección de abajo desde una billetera de autocustodia.",
+      "sendDescriptionHoudini": "Envía <b>{amount} {ticker}</b> a la dirección de abajo.",
       "qrCodeAlt": "Código QR",
       "expiresIn": "Expira en",
       "memoRequired": "Memo (obligatorio)",

@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "{asset} بھیجو",
       "sendDescription": "سیلف کسٹڈی والٹ توں ٹھیک <b>{amount} {ticker}</b> تھلے دِتے پتے تے بھیجو۔",
+      "sendDescriptionHoudini": "<b>{amount} {ticker}</b> ہیٹھاں دِتے پتے تے گھلو۔",
       "qrCodeAlt": "QR کوڈ",
       "expiresIn": "ختم ہوݨ وچ",
       "memoRequired": "میمو (لازمی)",

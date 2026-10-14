@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "發送{asset}",
       "sendDescription": "請從自託管錢包向下方地址精確發送<b>{amount} {ticker}</b>。",
+      "sendDescriptionHoudini": "將 <b>{amount} {ticker}</b> 傳送至下方地址。",
       "qrCodeAlt": "二維碼",
       "expiresIn": "剩餘時間",
       "memoRequired": "Memo（必填）",

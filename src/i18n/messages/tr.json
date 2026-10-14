@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "{asset} Gönder",
       "sendDescription": "Aşağıdaki adrese öz saklamalı bir cüzdandan tam olarak <b>{amount} {ticker}</b> gönder.",
+      "sendDescriptionHoudini": "Aşağıdaki adrese <b>{amount} {ticker}</b> gönderin.",
       "qrCodeAlt": "QR Kodu",
       "expiresIn": "Sona erme",
       "memoRequired": "Memo (zorunlu)",

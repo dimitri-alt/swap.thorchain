@@ -107,6 +107,7 @@
   "swap.warning.selfCustody": ["I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in", "Tôi hiểu rằng tôi phải sử dụng ví tự lưu ký. Tôi hiểu rằng việc sử dụng ví hợp đồng thông minh, địa chỉ sàn giao dịch, địa chỉ được ủy quyền hoặc ví EIP 7702 sẽ dẫn đến"],
   "swap.instant.sendTitle": ["Send {asset}", "Gửi {asset}"],
   "swap.instant.sendDescription": ["Send exactly <b>{amount} {ticker}</b> to the address below from a self custody wallet.", "Gửi chính xác <b>{amount} {ticker}</b> đến địa chỉ bên dưới từ một ví tự lưu ký."],
+  "swap.instant.sendDescriptionHoudini": ["Send <b>{amount} {ticker}</b> to the address below.", "Gửi <b>{amount} {ticker}</b> đến địa chỉ bên dưới."],
   "swap.instant.qrCodeAlt": ["QR Code", "Mã QR"],
   "swap.instant.expiresIn": ["Expires in", "Hết hạn sau"],
   "swap.instant.memoRequired": ["Memo (required)", "Memo (bắt buộc)"],

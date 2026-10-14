@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "{asset} بھیجیں",
       "sendDescription": "سیلف کسٹڈی والٹ سے نیچے دیے گئے پتے پر بالکل <b>{amount} {ticker}</b> بھیجیں۔",
+      "sendDescriptionHoudini": "<b>{amount} {ticker}</b> نیچے دیے گئے ایڈریس پر بھیجیں۔",
       "qrCodeAlt": "QR Code",
       "expiresIn": "اس میں ختم ہوگا",
       "memoRequired": "میمو (لازمی)",

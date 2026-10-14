@@ -66,7 +66,8 @@ export const InstantSwap = ({ assetFrom, assetTo, channel, onClose }: InstantSwa
         <CredenzaTitle>{t('instant.sendTitle', { asset: assetFrom.name || assetFrom.ticker })}</CredenzaTitle>
         <CredenzaDescription>
           {!showStatus &&
-            t.rich('instant.sendDescription', {
+            // Houdini settles whatever arrives at a floating rate, so neither the exact amount nor the wallet matters.
+            t.rich(isHoudiniProvider(channel.provider) ? 'instant.sendDescriptionHoudini' : 'instant.sendDescription', {
               amount: channel.value,
               ticker: assetFrom.ticker,
               b: chunks => <b>{chunks}</b>

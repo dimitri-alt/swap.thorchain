@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "{asset} भेजें",
       "sendDescription": "नीचे दिए गए पते पर एक सेल्फ कस्टडी वॉलेट से ठीक <b>{amount} {ticker}</b> भेजें.",
+      "sendDescriptionHoudini": "नीचे दिए गए पते पर <b>{amount} {ticker}</b> भेजें।",
       "qrCodeAlt": "QR कोड",
       "expiresIn": "समाप्त होगा",
       "memoRequired": "मेमो (आवश्यक)",

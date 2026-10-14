@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "ارسال {asset}",
       "sendDescription": "دقیقاً <b>{amount} {ticker}</b> را از یک کیف پول خودنگهدار به آدرس زیر ارسال کنید.",
+      "sendDescriptionHoudini": "<b>{amount} {ticker}</b> را به آدرس زیر ارسال کنید.",
       "qrCodeAlt": "کد QR",
       "expiresIn": "انقضا در",
       "memoRequired": "ممو (الزامی)",

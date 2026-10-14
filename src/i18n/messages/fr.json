@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "Envoyer {asset}",
       "sendDescription": "Envoyez exactement <b>{amount} {ticker}</b> à l'adresse ci-dessous depuis un portefeuille auto-hébergé.",
+      "sendDescriptionHoudini": "Envoyez <b>{amount} {ticker}</b> à l'adresse ci-dessous.",
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expire dans",
       "memoRequired": "Mémo (requis)",

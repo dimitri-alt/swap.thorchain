@@ -133,6 +133,7 @@
     "instant": {
       "sendTitle": "إرسال {asset}",
       "sendDescription": "ابعت بالظبط <b>{amount} {ticker}</b> للعنوان اللي تحت من محفظة بحفظ ذاتي.",
+      "sendDescriptionHoudini": "ابعت <b>{amount} {ticker}</b> على العنوان اللي تحت.",
       "qrCodeAlt": "كود QR",
       "expiresIn": "ينتهي خلال",
       "memoRequired": "الميمو (مطلوب)",
