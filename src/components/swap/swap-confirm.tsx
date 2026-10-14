@@ -21,7 +21,7 @@ import { cn, toCurrencyFixed, truncate } from '@/lib/utils'
 import { useIsLimitSwap, useLimitSwapBuyAmount } from '@/store/limit-swap-store'
 
 interface SwapConfirmProps {
-  quote: QuoteResponseRoute & { refundAddress?: string }
+  quote: QuoteResponseRoute & { refundAddress?: string; destinationMemo?: string }
   priceImpact?: USwapNumber
 }
 
@@ -158,6 +158,16 @@ export const SwapConfirm = ({ quote, priceImpact }: SwapConfirmProps) => {
                   <div className="flex items-center gap-2">
                     <span className="text-txt-high-contrast font-semibold">{truncate(quote.destinationAddress)}</span>
                     <CopyButton text={quote.destinationAddress} />
+                  </div>
+                </div>
+              )}
+
+              {quote.destinationMemo && (
+                <div className="text-txt-label-small flex justify-between text-sm">
+                  <span>{t('confirm.destinationMemo')}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-txt-high-contrast font-semibold break-all">{quote.destinationMemo}</span>
+                    <CopyButton text={quote.destinationMemo} />
                   </div>
                 </div>
               )}

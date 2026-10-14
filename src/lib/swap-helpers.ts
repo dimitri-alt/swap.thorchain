@@ -155,6 +155,19 @@ export const isHoudiniProvider = (provider?: string) => provider === 'HOUDINI'
 export const isPrivateSend = (isPrivateSwap: boolean, from?: { identifier: string }, to?: { identifier: string }) =>
   isPrivateSwap && !!from && from.identifier === to?.identifier
 
+// Chains Houdini marks `memoNeeded` (its GET /chains) whose assets the aggregator lists: a payout there
+// can carry a memo, destination tag or comment, which an exchange deposit address needs to credit the
+// right account. XRP's is a numeric destination tag. The other `memoNeeded` chains (Stellar, Hedera,
+// Celestia, …) are skipped by the aggregator's Houdini token sync, so they never reach the app.
+const HOUDINI_MEMO_CHAINS: Chain[] = [Chain.Cosmos, Chain.Ripple, Chain.THORChain, Chain.Ton]
+const MAX_DESTINATION_TAG = 4_294_967_295
+
+export const houdiniMemoKind = (chain: Chain): 'tag' | 'memo' | undefined =>
+  !HOUDINI_MEMO_CHAINS.includes(chain) ? undefined : chain === Chain.Ripple ? 'tag' : 'memo'
+
+export const isValidDestinationMemo = (kind: 'tag' | 'memo', memo: string) =>
+  kind === 'tag' ? memo.length <= 10 && [...memo].every(c => c >= '0' && c <= '9') && Number(memo) <= MAX_DESTINATION_TAG : memo.length <= 64
+
 // Maya Protocol cannot observe or refund Taproot (bech32m) transactions.
 export const isTaprootAddress = (address: string) => address.toLowerCase().startsWith('bc1p')
 

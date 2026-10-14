@@ -43,9 +43,12 @@ PRIVATE tab ──quote──▶ api.thorchain.org/v1/quote  providers: ["HOUDIN
   payout and slippage tolerance; price impact stays, as the USD cost of the route. A more-than-2% cost still needs the acknowledgement checkbox, with
   private-specific wording.
 - **No halts.** Mimir halts stop THORChain and Maya, not Houdini; the halt banner and the greyed-out assets only apply on the other tabs.
-- **No XRP sells, self-custody destinations.** A CEX deposit on XRP is identified by a destination tag and the SDK's XRP toolbox only carries
-  free-text memos, so the aggregator refuses XRP as the sell asset. Buying XRP privately works, but only to a self-custody address: no destination
-  tag/memo is sent with the order, so an exchange-hosted receiving address on a memo chain would be paid untagged.
+- **No XRP sells; a memo for exchange destinations.** A CEX deposit on XRP is identified by a destination tag and the SDK's XRP toolbox only
+  carries free-text memos, so the aggregator refuses XRP as the sell asset. Buying works to any address: when the buy chain is one Houdini marks
+  `memoNeeded` (Cosmos, XRP, THORChain, TON — `houdiniMemoKind` in `src/lib/swap-helpers.ts`), `SwapRecipient` offers one optional
+  _Memo/Tag/Comment_ field (an XRP tag must be a whole number up to 4294967295; otherwise at most 64 characters). It goes to the aggregator as
+  `destinationMemo`, which hands it to Houdini as the order's `destinationTag`, and the confirm screen shows it. The aggregator refuses a
+  `destinationMemo` unless the request is limited to `providers: ["HOUDINI"]`.
 - **Private send (Send mode).** Houdini routes an asset to itself (BTC → BTC to an unlinked address), a sizeable share of private
   volume. The tab opens with a _Swap | Send_ switch (`SwapPrivateMode`, `isPrivateSend` in `src/store/limit-swap-store.ts`) so users find it
   without having to pick one token twice. In Send mode the buy side follows the sell side (`setAssetFrom` / `setAssetTo` in

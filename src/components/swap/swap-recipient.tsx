@@ -7,6 +7,7 @@ import { QuoteResponseRoute } from '@tcswap/helpers/api'
 import { LoaderCircle } from 'lucide-react'
 import { CredenzaHeader, CredenzaTitle } from '@/components/ui/credenza'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { chainLabel } from '@/components/connect-wallet/config'
 import { Icon } from '@/components/icons'
@@ -24,7 +25,7 @@ import { useAccounts, useSelectedAccount } from '@/hooks/use-wallets'
 import { getQuotes } from '@/lib/api'
 import { resolveQuoteError } from '@/lib/errors'
 import { prepareQuoteForLimitSwap } from '@/lib/memo-helpers'
-import { isHoudiniProvider, isMayaProvider, isTaprootAddress } from '@/lib/swap-helpers'
+import { houdiniMemoKind, isHoudiniProvider, isMayaProvider, isTaprootAddress, isValidDestinationMemo } from '@/lib/swap-helpers'
 import { cn, truncate } from '@/lib/utils'
 import { useIsLimitSwapPaused, useLimitSwapMaxAge } from '@/hooks/use-mimir'
 import { useIsLimitSwap, useLimitSwapBuyAmount, useLimitSwapExpiry } from '@/store/limit-swap-store'
@@ -33,7 +34,7 @@ import { WalletAccount } from '@/store/wallets-store'
 
 interface SwapRecipientProps {
   provider: ProviderName
-  onFetchQuote: (quote: QuoteResponseRoute) => void
+  onFetchQuote: (quote: QuoteResponseRoute & { destinationMemo?: string }) => void
 }
 
 export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) => {
@@ -61,6 +62,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
   const replacementOrder = useReplacementOrder()
   const [destinationAddress, setDestinationAddress] = useState<string>(() => replacementOrder?.destination ?? '')
   const [refundAddress, setRefundAddress] = useState<string>('')
+  const [destinationMemo, setDestinationMemo] = useState('')
   const [refundAsked, setRefundAsked] = useState(false)
   const [warningChecked, setWarningChecked] = useState(false)
   const [warningCheckedLTC, setWarningCheckedLTC] = useState(false)
@@ -79,6 +81,10 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
   const options = accounts.filter(a => a.network === assetTo.chain)
   const isMayachain = isMayaProvider(provider)
   const isTaprootDestination = isMayachain && assetTo.chain === Chain.Bitcoin && isTaprootAddress(destinationAddress)
+  // Optional: a self-custody wallet needs none, an exchange deposit address needs its memo / tag.
+  const memoKind = isHoudini ? houdiniMemoKind(assetTo.chain) : undefined
+  const memo = memoKind ? destinationMemo.trim() : ''
+  const isMemoInvalid = !!memoKind && !isValidDestinationMemo(memoKind, memo)
 
   const destinationCheck = useValidAddress(destinationAddress, assetTo.chain)
   const refundCheck = useValidAddress(refundAddress, assetFrom.chain)
@@ -122,6 +128,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
       dry: !(depositOrder || selectedAccount),
       slippage: isLimitSwap ? 0 : (slippage ?? 99),
       providers: [provider],
+      ...(memo && { destinationMemo: memo }),
       ...(supportsStreaming && !isLimitSwap && { streamingInterval: customInterval, streamingQuantity: customQuantity })
     })
       .then(quotes => {
@@ -132,7 +139,8 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
           quote = prepareQuoteForLimitSwap(quote, limitSwapBuyAmount, Math.min(limitSwapExpiry, limitSwapMaxAge))
         }
 
-        onFetchQuote(quote)
+        // Carried on the quote so the confirm screen can show it; the route itself does not echo it.
+        onFetchQuote(memo ? { ...quote, destinationMemo: memo } : quote)
       })
       .catch(error => {
         const resolved = error instanceof USwapError ? resolveQuoteError(error) : error
@@ -148,6 +156,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
     destinationAddress.length &&
     !isTaprootDestination &&
     !isUnsupportedDestination &&
+    !isMemoInvalid &&
     !destinationCode.isChecking &&
     !quoting &&
     !(isLimitSwap && isLimitSwapPaused) &&
@@ -298,6 +307,24 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
                 {isDelegatedDestination && <div className="text-lucian text-xs font-semibold">{t('recipient.delegatedNotSupported')}</div>}
                 {destinationCode.isContract && <div className="text-lucian text-xs font-semibold">{t('recipient.contractNotSupported')}</div>}
               </div>
+
+              {/* One field for a destination tag, memo or comment, whatever the chain calls it - as Houdini's own app does. */}
+              {memoKind && (
+                <div className="flex flex-col gap-3">
+                  <Input
+                    value={destinationMemo}
+                    onChange={e => setDestinationMemo(e.target.value)}
+                    placeholder={t('recipient.memoPlaceholder')}
+                    aria-invalid={isMemoInvalid}
+                    className="bg-input-modal-bg-active border-border-sub-container-modal-low"
+                  />
+                  {isMemoInvalid && (
+                    <div className="text-lucian text-xs font-semibold">
+                      {memoKind === 'tag' ? t('recipient.destinationTagInvalid') : t('recipient.memoInvalid')}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {!isHoudini && (

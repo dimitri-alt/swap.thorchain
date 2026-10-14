@@ -142,7 +142,7 @@ export const getAssetBalance = async (chain: Chain, address: string, identifier:
 }
 
 export const getQuotes = async (
-  json: QuoteRequest & { streamingInterval?: number; streamingQuantity?: number },
+  json: QuoteRequest & { streamingInterval?: number; streamingQuantity?: number; destinationMemo?: string },
   abortController?: AbortController
 ) => {
   return USwapApi.getSwapQuote(json as QuoteRequest, {
