@@ -193,7 +193,6 @@
   "swap.recipient.taprootNotSupported": ["Maya Protocol does not support Taproot addresses", "Maya Protocol ne prend pas en charge les adresses Taproot"],
   "swap.recipient.delegatedNotSupported": ["This address uses EIP-7702 delegation and cannot receive the outbound. Revoke the delegation, or use a standard self-custody address", "Cette adresse utilise la délégation EIP-7702 et ne peut pas recevoir le transfert sortant. Révoquez la délégation ou utilisez une adresse d'auto-conservation standard"],
   "swap.recipient.contractNotSupported": ["This is a smart contract address and cannot receive the outbound. Use a self-custody wallet address", "Il s'agit d'une adresse de contrat intelligent qui ne peut pas recevoir le transfert sortant. Utilisez une adresse de portefeuille d'auto-conservation"],
-  "swap.recipient.destinationTagInvalid": ["An XRP destination tag is a whole number up to 4294967295", "Un tag de destination XRP est un nombre entier jusqu'à 4294967295"],
   "swap.recipient.memoPlaceholder": ["Memo/Tag/Comment (optional)", "Mémo/Tag/Commentaire (facultatif)"],
   "swap.recipient.memoInvalid": ["The memo can be at most 64 characters", "Le mémo ne peut pas dépasser 64 caractères"],
   "swap.recipient.titleAddresses": ["Enter Addresses", "Saisir les adresses"],

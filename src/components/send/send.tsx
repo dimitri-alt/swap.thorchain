@@ -44,7 +44,7 @@ import { TokenBalance, useWalletBalances } from '@/hooks/use-wallet-balances'
 import { useAccounts } from '@/hooks/use-wallets'
 import { houdiniQuoteRates, preferRate, useRates } from '@/hooks/use-rates'
 import { readableError } from '@/lib/errors'
-import { formatExpiration, houdiniMemoKind, isValidDestinationMemo } from '@/lib/swap-helpers'
+import { formatExpiration, isValidDestinationMemo, supportsHoudiniMemo } from '@/lib/swap-helpers'
 import { canTrackTransfer } from '@/lib/transfer-status'
 import { getUSwap } from '@/lib/wallets'
 import { usePrivateSwapAcknowledged } from '@/store/private-swap-store'
@@ -124,9 +124,9 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
   const numericAmount = parseFloat(amount) || 0
 
   // Private Send only: the same optional memo / tag / comment field as the swap's recipient step.
-  const memoKind = isPrivate ? houdiniMemoKind(selectedToken.balance.chain) : undefined
-  const memo = memoKind ? destinationMemo.trim() : ''
-  const isMemoInvalid = !!memoKind && !isValidDestinationMemo(memoKind, memo)
+  const hasMemo = isPrivate && supportsHoudiniMemo(selectedToken.balance.chain)
+  const memo = hasMemo ? destinationMemo.trim() : ''
+  const isMemoInvalid = hasMemo && !isValidDestinationMemo(selectedToken.balance.chain, memo)
   const fiatValue = rate ? rate.mul(numericAmount) : new USwapNumber(0)
 
   useEffect(() => {
@@ -488,7 +488,7 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
               <div className="text-lucian text-xs font-semibold">{t('error.invalidAddress', { chain: chainLabel(selectedToken.balance.chain) })}</div>
             )}
 
-            {memoKind && (
+            {hasMemo && (
               <>
                 <Input
                   value={destinationMemo}
@@ -499,7 +499,7 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
                 />
                 {isMemoInvalid && (
                   <div className="text-lucian text-xs font-semibold">
-                    {memoKind === 'tag' ? tSwap('recipient.destinationTagInvalid') : tSwap('recipient.memoInvalid')}
+                    {selectedToken.balance.chain === Chain.Ripple ? tSwap('recipient.destinationTagInvalid') : tSwap('recipient.memoInvalid')}
                   </div>
                 )}
               </>

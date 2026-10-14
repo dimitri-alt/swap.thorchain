@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol ne prend pas en charge les adresses Taproot",
       "delegatedNotSupported": "Cette adresse utilise la délégation EIP-7702 et ne peut pas recevoir le transfert sortant. Révoquez la délégation ou utilisez une adresse d'auto-conservation standard",
       "contractNotSupported": "Il s'agit d'une adresse de contrat intelligent qui ne peut pas recevoir le transfert sortant. Utilisez une adresse de portefeuille d'auto-conservation",
-      "destinationTagInvalid": "Un tag de destination XRP est un nombre entier jusqu'à 4294967295",
       "memoPlaceholder": "Mémo/Tag/Commentaire (facultatif)",
       "memoInvalid": "Le mémo ne peut pas dépasser 64 caractères",
       "titleAddresses": "Saisir les adresses",

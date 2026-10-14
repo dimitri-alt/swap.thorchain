@@ -247,7 +247,6 @@
       "taprootNotSupported": "O Maya Protocol não suporta endereços Taproot",
       "delegatedNotSupported": "Este endereço utiliza delegação EIP-7702 e não pode receber a transação de saída. Revogue a delegação ou utilize um endereço padrão de autocustódia",
       "contractNotSupported": "Este é um endereço de contrato inteligente e não pode receber a transação de saída. Utilize um endereço de carteira de autocustódia",
-      "destinationTagInvalid": "Uma destination tag XRP é um número inteiro até 4294967295",
       "memoPlaceholder": "Memo/Tag/Comentário (opcional)",
       "memoInvalid": "O memo pode ter no máximo 64 caracteres",
       "titleAddresses": "Inserir endereços",

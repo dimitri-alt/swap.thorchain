@@ -193,7 +193,6 @@
   "swap.recipient.taprootNotSupported": ["Maya Protocol does not support Taproot addresses", "ᛗᚨᛁᚨ ᛈᚱᛟᛏᛟᚲᛟᛚ ᛞᛟᛖᛊ ᚾᛟᛏ ᛊᚢᛈᛈᛟᚱᛏ ᛏᚨᛈᚱᛟᛟᛏ ᚨᛞᛞᚱᛖᛊᛊᛖᛊ"],
   "swap.recipient.delegatedNotSupported": ["This address uses EIP-7702 delegation and cannot receive the outbound. Revoke the delegation, or use a standard self-custody address", "ᚦᛁᛊ ᚨᛞᛞᚱᛖᛊᛊ ᚢᛊᛖᛊ ᛖᛁᛈ-7702 ᛞᛖᛚᛖᚷᚨᛏᛁᛟᚾ ᚨᚾᛞ ᚲᚨᚾᚾᛟᛏ ᚱᛖᚲᛖᛁᚹᛖ ᚦᛖ ᛟᚢᛏᛒᛟᚢᚾᛞ. ᚱᛖᚹᛟᚲᛖ ᚦᛖ ᛞᛖᛚᛖᚷᚨᛏᛁᛟᚾ, ᛟᚱ ᚢᛊᛖ ᚨ ᛊᛏᚨᚾᛞᚨᚱᛞ ᛊᛖᛚᚠ-ᚲᚢᛊᛏᛟᛞᛁ ᚨᛞᛞᚱᛖᛊᛊ"],
   "swap.recipient.contractNotSupported": ["This is a smart contract address and cannot receive the outbound. Use a self-custody wallet address", "ᚦᛁᛊ ᛁᛊ ᚨ ᛊᛗᚨᚱᛏ ᚲᛟᚾᛏᚱᚨᚲᛏ ᚨᛞᛞᚱᛖᛊᛊ ᚨᚾᛞ ᚲᚨᚾᚾᛟᛏ ᚱᛖᚲᛖᛁᚹᛖ ᚦᛖ ᛟᚢᛏᛒᛟᚢᚾᛞ. ᚢᛊᛖ ᚨ ᛊᛖᛚᚠ-ᚲᚢᛊᛏᛟᛞᛁ ᚹᚨᛚᛚᛖᛏ ᚨᛞᛞᚱᛖᛊᛊ"],
-  "swap.recipient.destinationTagInvalid": ["An XRP destination tag is a whole number up to 4294967295", "ᚨᚾ ᚲᛊᚱᛈ ᛞᛖᛊᛏᛁᚾᚨᛏᛁᛟᚾ ᛏᚨᚷ ᛁᛊ ᚨ ᚹᚺᛟᛚᛖ ᚾᚢᛗᛒᛖᚱ ᚢᛈ ᛏᛟ 4294967295"],
   "swap.recipient.memoPlaceholder": ["Memo/Tag/Comment (optional)", "ᛗᛖᛗᛟ/ᛏᚨᚷ/ᚲᛟᛗᛗᛖᚾᛏ (ᛟᛈᛏᛁᛟᚾᚨᛚ)"],
   "swap.recipient.memoInvalid": ["The memo can be at most 64 characters", "ᚦᛖ ᛗᛖᛗᛟ ᚲᚨᚾ ᛒᛖ ᚨᛏ ᛗᛟᛊᛏ 64 ᚲᚺᚨᚱᚨᚲᛏᛖᚱᛊ"],
   "swap.recipient.titleAddresses": ["Enter Addresses", "ᛖᚾᛏᛖᚱ ᚨᛞᛞᚱᛖᛊᛊᛖᛊ"],

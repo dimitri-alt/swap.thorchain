@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol 不支持 Taproot 地址",
       "delegatedNotSupported": "该地址使用了 EIP-7702 委托，无法接收转出资金。请撤销委托，或使用标准的自托管地址",
       "contractNotSupported": "这是智能合约地址，无法接收转出资金。请使用自托管钱包地址",
-      "destinationTagInvalid": "XRP 目标标签必须是不超过 4294967295 的整数",
       "memoPlaceholder": "备注/标签/说明（可选）",
       "memoInvalid": "备注最多为 64 个字符",
       "titleAddresses": "输入地址",

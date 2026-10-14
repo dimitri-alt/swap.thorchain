@@ -25,7 +25,14 @@ import { useAccounts, useSelectedAccount } from '@/hooks/use-wallets'
 import { getQuotes } from '@/lib/api'
 import { resolveQuoteError } from '@/lib/errors'
 import { prepareQuoteForLimitSwap } from '@/lib/memo-helpers'
-import { houdiniMemoKind, isHoudiniProvider, isMayaProvider, isTaprootAddress, isValidDestinationMemo } from '@/lib/swap-helpers'
+import {
+  isDepositOnlyPrivateSell,
+  isHoudiniProvider,
+  isMayaProvider,
+  isTaprootAddress,
+  isValidDestinationMemo,
+  supportsHoudiniMemo
+} from '@/lib/swap-helpers'
 import { cn, truncate } from '@/lib/utils'
 import { useIsLimitSwapPaused, useLimitSwapMaxAge } from '@/hooks/use-mimir'
 import { useIsLimitSwap, useLimitSwapBuyAmount, useLimitSwapExpiry } from '@/store/limit-swap-store'
@@ -76,15 +83,15 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
   const isHoudini = isHoudiniProvider(provider)
   // Without a wallet the user names the refund address - except for Houdini, which (like its own app)
   // needs one only when every route on offer asks for it.
-  const depositOrder = !selectedAccount && (provider === 'NEAR' || isHoudini)
+  const depositOrder = (!selectedAccount && (provider === 'NEAR' || isHoudini)) || (isHoudini && isDepositOnlyPrivateSell(true, assetFrom.chain))
   const refundRequired = depositOrder && (!isHoudini || refundAsked)
   const options = accounts.filter(a => a.network === assetTo.chain)
   const isMayachain = isMayaProvider(provider)
   const isTaprootDestination = isMayachain && assetTo.chain === Chain.Bitcoin && isTaprootAddress(destinationAddress)
   // Optional: a self-custody wallet needs none, an exchange deposit address needs its memo / tag.
-  const memoKind = isHoudini ? houdiniMemoKind(assetTo.chain) : undefined
-  const memo = memoKind ? destinationMemo.trim() : ''
-  const isMemoInvalid = !!memoKind && !isValidDestinationMemo(memoKind, memo)
+  const hasMemo = isHoudini && supportsHoudiniMemo(assetTo.chain)
+  const memo = hasMemo ? destinationMemo.trim() : ''
+  const isMemoInvalid = hasMemo && !isValidDestinationMemo(assetTo.chain, memo)
 
   const destinationCheck = useValidAddress(destinationAddress, assetTo.chain)
   const refundCheck = useValidAddress(refundAddress, assetFrom.chain)
@@ -309,7 +316,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
               </div>
 
               {/* One field for a destination tag, memo or comment, whatever the chain calls it - as Houdini's own app does. */}
-              {memoKind && (
+              {hasMemo && (
                 <div className="flex flex-col gap-3">
                   <Input
                     value={destinationMemo}
@@ -320,7 +327,7 @@ export const SwapRecipient = ({ provider, onFetchQuote }: SwapRecipientProps) =>
                   />
                   {isMemoInvalid && (
                     <div className="text-lucian text-xs font-semibold">
-                      {memoKind === 'tag' ? t('recipient.destinationTagInvalid') : t('recipient.memoInvalid')}
+                      {assetTo.chain === Chain.Ripple ? t('recipient.destinationTagInvalid') : t('recipient.memoInvalid')}
                     </div>
                   )}
                 </div>

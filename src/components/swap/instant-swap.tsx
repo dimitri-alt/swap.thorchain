@@ -1,6 +1,7 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { Chain } from '@tcswap/core'
 import { formatDuration, intervalToDuration } from 'date-fns'
 import { CircleCheck, ClockFading, LoaderCircle } from 'lucide-react'
 import { CredenzaDescription, CredenzaHeader, CredenzaTitle } from '@/components/ui/credenza'
@@ -14,7 +15,7 @@ import { Asset } from '@/components/swap/asset'
 import { DepositChannel } from '@/components/swap/instant-swap-dialog'
 import { SwapAddressWarning } from '@/components/swap/swap-address-warning'
 import { useSyncTransactions } from '@/hooks/use-sync-transactions'
-import { isHoudiniProvider } from '@/lib/swap-helpers'
+import { isHoudiniProvider, toXrpXAddress } from '@/lib/swap-helpers'
 import { cn } from '@/lib/utils'
 import { hasDepositArrived, useTransaction } from '@/store/transaction-store'
 
@@ -32,11 +33,20 @@ interface InstantSwapProps extends SwapMemolessChannelProps {
 export const InstantSwap = ({ assetFrom, assetTo, channel, onClose }: InstantSwapProps) => {
   const t = useTranslations('swap')
 
+  const [now, setNow] = useState(() => Date.now())
+  useEffect(() => {
+    if (!channel.expiration) return
+    const interval = setInterval(() => setNow(Date.now()), 1000)
+    return () => clearInterval(interval)
+  }, [channel.expiration])
+
   // Once the deposit has arrived (or the window has closed) the details are withdrawn, so nobody
-  // sends a second time; the swap itself is followed in History from then on.
+  // sends a second time; the swap itself is followed in History from then on. The window is closed
+  // by the local clock too: Houdini reports an unpaid order's expiry only some time after the fact.
   const tx = useTransaction(channel.txUid)
   const depositArrived = !!tx && hasDepositArrived(tx)
-  const showStatus = depositArrived || tx?.status === 'expired'
+  const windowClosed = tx?.status === 'expired' || (!!channel.expiration && channel.expiration * 1000 <= now)
+  const showStatus = depositArrived || windowClosed
 
   return (
     <>
@@ -57,7 +67,7 @@ export const InstantSwap = ({ assetFrom, assetTo, channel, onClose }: InstantSwa
           {showStatus ? (
             <DepositStatus arrived={depositArrived} ticker={assetFrom.ticker} onClose={onClose} />
           ) : (
-            <DepositDetails assetFrom={assetFrom} assetTo={assetTo} channel={channel} isTracked={!!tx} />
+            <DepositDetails assetFrom={assetFrom} assetTo={assetTo} channel={channel} isTracked={!!tx} now={now} />
           )}
         </div>
       </ScrollArea>
@@ -65,15 +75,21 @@ export const InstantSwap = ({ assetFrom, assetTo, channel, onClose }: InstantSwa
   )
 }
 
-const DepositDetails = ({ assetFrom, assetTo, channel, isTracked }: SwapMemolessChannelProps & { isTracked: boolean }) => {
+const DepositDetails = ({ assetFrom, assetTo, channel, isTracked, now }: SwapMemolessChannelProps & { isTracked: boolean; now: number }) => {
   const t = useTranslations('swap')
   const [warningChecked, setWarningChecked] = useState(false)
   const [warningCheckedLTC, setWarningCheckedLTC] = useState(false)
+  const [memoAcknowledged, setMemoAcknowledged] = useState(false)
 
   // Houdini's deposit address takes any sender, so the exact-amount / self-custody and LTC MWEB acknowledgements are skipped.
   const isHoudini = isHoudiniProvider(channel.provider)
   const isLTC = !isHoudini && (assetFrom.ticker === 'LTC' || assetTo.ticker === 'LTC')
-  const isBlurred = (!isHoudini && !warningChecked) || (isLTC && !warningCheckedLTC)
+  // A Houdini deposit tag (XRP's destination tag, a TON comment) is how the venue tells this deposit from every
+  // other one paid to the same address: without it the funds cannot be credited. The user confirms before seeing it.
+  const needsMemoAck = isHoudini && !!channel.memo
+  // For a wallet with no tag field (OKX Wallet's XRP send): the same deposit, tag included in the address.
+  const xAddress = isHoudini && channel.memo && assetFrom.chain === Chain.Ripple ? toXrpXAddress(channel.address, channel.memo) : undefined
+  const isBlurred = (!isHoudini && !warningChecked) || (isLTC && !warningCheckedLTC) || (needsMemoAck && !memoAcknowledged)
 
   return (
     <>
@@ -82,6 +98,15 @@ const DepositDetails = ({ assetFrom, assetTo, channel, isTracked }: SwapMemoless
           checked={warningChecked}
           onCheckedChange={setWarningChecked}
           text={t('warning.sendExact')}
+          textAccent={t('warning.lossOfFunds')}
+        />
+      )}
+
+      {needsMemoAck && (
+        <SwapAddressWarning
+          checked={memoAcknowledged}
+          onCheckedChange={setMemoAcknowledged}
+          text={t('warning.depositTag')}
           textAccent={t('warning.lossOfFunds')}
         />
       )}
@@ -113,10 +138,20 @@ const DepositDetails = ({ assetFrom, assetTo, channel, isTracked }: SwapMemoless
 
         {channel.memo && (
           <div className="flex flex-col items-center gap-1">
-            <div className="text-txt-label-small text-xs font-semibold">{t('instant.memoRequired')}</div>
+            <div className="text-txt-label-small text-xs font-semibold">{isHoudini ? t('instant.tagRequired') : t('instant.memoRequired')}</div>
             <div className="flex items-center gap-2">
               <div className={cn('text-txt-high-contrast text-sm font-semibold break-all', { 'blur-xs': isBlurred })}>{channel.memo}</div>
               <CopyButton text={channel.memo} />
+            </div>
+          </div>
+        )}
+
+        {xAddress && (
+          <div className="flex flex-col items-center gap-1 text-center">
+            <div className="text-txt-label-small text-xs font-semibold">{t('instant.xAddressLabel')}</div>
+            <div className="flex items-center gap-2">
+              <div className={cn('text-txt-high-contrast text-sm font-semibold break-all', { 'blur-xs': isBlurred })}>{xAddress}</div>
+              <CopyButton text={xAddress} />
             </div>
           </div>
         )}
@@ -136,7 +171,7 @@ const DepositDetails = ({ assetFrom, assetTo, channel, isTracked }: SwapMemoless
             {t('instant.expiresIn')} &nbsp;
             {formatDuration(
               intervalToDuration({
-                start: new Date().getTime(),
+                start: now,
                 end: channel.expiration * 1000
               }),
               { format: ['hours', 'minutes', 'seconds'], zero: false }

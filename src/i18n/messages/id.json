@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol tidak mendukung alamat Taproot",
       "delegatedNotSupported": "Alamat ini menggunakan delegasi EIP-7702 dan tidak dapat menerima dana keluar. Cabut delegasinya, atau gunakan alamat self-custody standar",
       "contractNotSupported": "Ini adalah alamat smart contract dan tidak dapat menerima dana keluar. Gunakan alamat wallet self-custody",
-      "destinationTagInvalid": "Destination tag XRP harus berupa bilangan bulat hingga 4294967295",
       "memoPlaceholder": "Memo/Tag/Komentar (opsional)",
       "memoInvalid": "Memo maksimal 64 karakter",
       "titleAddresses": "Masukkan alamat",

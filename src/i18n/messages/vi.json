@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol không hỗ trợ địa chỉ Taproot",
       "delegatedNotSupported": "Địa chỉ này sử dụng ủy quyền EIP-7702 và không thể nhận giao dịch chuyển ra. Hãy thu hồi ủy quyền hoặc dùng địa chỉ tự lưu ký thông thường",
       "contractNotSupported": "Đây là địa chỉ hợp đồng thông minh và không thể nhận giao dịch chuyển ra. Hãy dùng địa chỉ ví tự lưu ký",
-      "destinationTagInvalid": "Destination tag của XRP là số nguyên tối đa 4294967295",
       "memoPlaceholder": "Memo/Tag/Ghi chú (tùy chọn)",
       "memoInvalid": "Memo chỉ được tối đa 64 ký tự",
       "titleAddresses": "Nhập địa chỉ",

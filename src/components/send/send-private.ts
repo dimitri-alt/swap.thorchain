@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { Chain } from '@tcswap/core'
 import { USwapError } from '@tcswap/helpers'
 import { AppConfig } from '@/config'
 import { assetIdentifierStr } from '@/components/send/send-helpers'
@@ -12,14 +13,15 @@ import { getQuotes } from '@/lib/api'
 import { resolveQuoteError } from '@/lib/errors'
 
 // The Send dialog's Private Send tab is the swap form's private send (see docs/private-swaps.md): a
-// same-asset Houdini order whose deposit the connected wallet pays. Only assets on Houdini's list qualify.
+// same-asset Houdini order whose deposit the connected wallet pays. Only assets on Houdini's list qualify, and
+// not XRP: its deposit needs Houdini's destination tag, which the toolboxes would sign as a free-text memo.
 export const usePrivateSendAssetLookup = () => {
   const { assets } = useAssets()
 
   return useMemo(() => {
     const byId = new Map<string, Asset>()
     for (const asset of assets ?? []) {
-      if (asset.providers.includes(AppConfig.privateProvider)) byId.set(asset.identifier.toLowerCase(), asset)
+      if (asset.providers.includes(AppConfig.privateProvider) && asset.chain !== Chain.Ripple) byId.set(asset.identifier.toLowerCase(), asset)
     }
     return (token: TokenBalance) => byId.get(assetIdentifierStr(token.balance).toLowerCase())
   }, [assets])

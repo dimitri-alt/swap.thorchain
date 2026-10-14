@@ -193,7 +193,6 @@
   "swap.recipient.taprootNotSupported": ["Maya Protocol does not support Taproot addresses", "Maya Protocol은 Taproot 주소를 지원하지 않습니다"],
   "swap.recipient.delegatedNotSupported": ["This address uses EIP-7702 delegation and cannot receive the outbound. Revoke the delegation, or use a standard self-custody address", "이 주소는 EIP-7702 위임을 사용하고 있어 출금을 수신할 수 없습니다. 위임을 해제하거나 일반 자가수탁 주소를 사용하세요"],
   "swap.recipient.contractNotSupported": ["This is a smart contract address and cannot receive the outbound. Use a self-custody wallet address", "스마트 컨트랙트 주소이므로 출금을 수신할 수 없습니다. 자가수탁 지갑 주소를 사용하세요"],
-  "swap.recipient.destinationTagInvalid": ["An XRP destination tag is a whole number up to 4294967295", "XRP 데스티네이션 태그는 4294967295 이하의 정수여야 합니다"],
   "swap.recipient.memoPlaceholder": ["Memo/Tag/Comment (optional)", "메모/태그/코멘트 (선택)"],
   "swap.recipient.memoInvalid": ["The memo can be at most 64 characters", "메모는 최대 64자까지 입력할 수 있습니다"],
   "swap.recipient.titleAddresses": ["Enter Addresses", "주소 입력"],

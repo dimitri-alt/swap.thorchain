@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol non supporta gli indirizzi Taproot",
       "delegatedNotSupported": "Questo indirizzo utilizza la delega EIP-7702 e non può ricevere l'uscita. Revoca la delega oppure usa un indirizzo standard di self-custody",
       "contractNotSupported": "Questo è un indirizzo di smart contract e non può ricevere l'uscita. Usa l'indirizzo di un wallet self-custody",
-      "destinationTagInvalid": "Un destination tag XRP è un numero intero fino a 4294967295",
       "memoPlaceholder": "Memo/Tag/Commento (facoltativo)",
       "memoInvalid": "Il memo può contenere al massimo 64 caratteri",
       "titleAddresses": "Inserisci gli indirizzi",

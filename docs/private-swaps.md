@@ -43,10 +43,16 @@ PRIVATE tab ──quote──▶ api.thorchain.org/v1/quote  providers: ["HOUDIN
   payout and slippage tolerance; price impact stays, as the USD cost of the route. A more-than-2% cost still needs the acknowledgement checkbox, with
   private-specific wording.
 - **No halts.** Mimir halts stop THORChain and Maya, not Houdini; the halt banner and the greyed-out assets only apply on the other tabs.
-- **No XRP sells; a memo for exchange destinations.** A CEX deposit on XRP is identified by a destination tag and the SDK's XRP toolbox only
-  carries free-text memos, so the aggregator refuses XRP as the sell asset. Buying works to any address: when the buy chain is one Houdini marks
-  `memoNeeded` (Cosmos, XRP, THORChain, TON — `houdiniMemoKind` in `src/lib/swap-helpers.ts`), `SwapRecipient` offers one optional
-  _Memo/Tag/Comment_ field (an XRP tag must be a whole number up to 4294967295; otherwise at most 64 characters). It goes to the aggregator as
+- **XRP sells by deposit address only; a memo for exchange destinations.** A Houdini XRP deposit is identified by the destination tag Houdini
+  assigns (the route's `memo`), and the SDK's XRP toolbox only carries free-text memos, so an XRP deposit is never signed in-app: the
+  aggregator returns no `tx` for it, the swap button opens the deposit flow even with a wallet connected (`isDepositOnlyPrivateSell`), and the
+  deposit screen shows the tag as required behind a confirmation checkbox. For wallets with no tag field (OKX Wallet's XRP send) it also shows the
+  X-address (XLS-5d, `toXrpXAddress`) — the deposit address with the tag folded in — and the aggregator's QR encodes that X-address, so a
+  scanned deposit is either tagged or rejected as an invalid address, never paid untagged. The Send dialog's Private Send leaves XRP out. Buying works to any
+  address: when the buy chain is one Houdini marks
+  `memoNeeded` (Cosmos, XRP, THORChain, TON — `supportsHoudiniMemo` in `src/lib/swap-helpers.ts`), `SwapRecipient` offers one optional
+  _Memo/Tag/Comment_ field: free text up to 64 characters, except on XRP, where it must be a numeric destination tag (0–4294967295) —
+  Houdini refuses a text tag when it creates the order ("Unable to perform exchange, no available paths"). It goes to the aggregator as
   `destinationMemo`, which hands it to Houdini as the order's `destinationTag`, and the confirm screen shows it. The aggregator refuses a
   `destinationMemo` unless the request is limited to `providers: ["HOUDINI"]`. The Send dialog's Private Send tab offers the same field under its
   recipient address (`send.tsx`, passed through `privateSendQuote`).

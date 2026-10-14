@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol, Taproot adreslerini desteklemiyor",
       "delegatedNotSupported": "Bu adres EIP-7702 yetki devri kullanıyor ve giden transferi alamaz. Yetki devrini iptal edin veya standart bir kendi kendine saklama adresi kullanın",
       "contractNotSupported": "Bu bir akıllı sözleşme adresidir ve giden transferi alamaz. Kendi kendine saklama cüzdan adresi kullanın",
-      "destinationTagInvalid": "XRP hedef etiketi, en fazla 4294967295 olabilen bir tam sayıdır",
       "memoPlaceholder": "Memo/Etiket/Yorum (isteğe bağlı)",
       "memoInvalid": "Memo en fazla 64 karakter olabilir",
       "titleAddresses": "Adresleri Gir",

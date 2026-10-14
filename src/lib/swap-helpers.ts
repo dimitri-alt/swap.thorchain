@@ -2,6 +2,7 @@ import { assetFromString, Chain, getThorFactoryAssetDenom, getThorFactoryAssetTi
 import { ProviderName } from '@tcswap/helpers'
 import { QuoteResponseRoute } from '@tcswap/helpers/api'
 import { intervalToDuration } from 'date-fns'
+import { classicAddressToXAddress } from 'ripple-address-codec'
 import { Asset } from '@/components/swap/asset'
 import { AssetRateMap } from '@/hooks/use-rates'
 
@@ -157,16 +158,34 @@ export const isPrivateSend = (isPrivateSwap: boolean, from?: { identifier: strin
 
 // Chains Houdini marks `memoNeeded` (its GET /chains) whose assets the aggregator lists: a payout there
 // can carry a memo, destination tag or comment, which an exchange deposit address needs to credit the
-// right account. XRP's is a numeric destination tag. The other `memoNeeded` chains (Stellar, Hedera,
-// Celestia, …) are skipped by the aggregator's Houdini token sync, so they never reach the app.
+// right account. The other `memoNeeded` chains (Stellar, Hedera, Celestia, …) are skipped by the
+// aggregator's Houdini token sync, so they never reach the app.
 const HOUDINI_MEMO_CHAINS: Chain[] = [Chain.Cosmos, Chain.Ripple, Chain.THORChain, Chain.Ton]
-const MAX_DESTINATION_TAG = 4_294_967_295
 
-export const houdiniMemoKind = (chain: Chain): 'tag' | 'memo' | undefined =>
-  !HOUDINI_MEMO_CHAINS.includes(chain) ? undefined : chain === Chain.Ripple ? 'tag' : 'memo'
+export const supportsHoudiniMemo = (chain: Chain) => HOUDINI_MEMO_CHAINS.includes(chain)
 
-export const isValidDestinationMemo = (kind: 'tag' | 'memo', memo: string) =>
-  kind === 'tag' ? memo.length <= 10 && [...memo].every(c => c >= '0' && c <= '9') && Number(memo) <= MAX_DESTINATION_TAG : memo.length <= 64
+// Selling XRP privately is paid to a deposit address with Houdini's destination tag. The toolboxes attach XRP
+// memos as free text, which would land untagged, so it is never signed in-app - even with a wallet connected.
+export const isDepositOnlyPrivateSell = (isPrivateSwap: boolean, sellChain?: Chain) => isPrivateSwap && sellChain === Chain.Ripple
+
+// Free text up to Houdini's `destinationTag` limit - except an XRP destination tag, which is a uint32:
+// Houdini refuses a text tag when it creates the order ("Unable to perform exchange, no available paths").
+const MAX_XRP_DESTINATION_TAG = 4_294_967_295
+export const isXrpDestinationTag = (memo: string) =>
+  memo.length <= 10 && [...memo].every(c => c >= '0' && c <= '9') && Number(memo) <= MAX_XRP_DESTINATION_TAG
+
+// An XRP deposit address with its destination tag folded in (an X-address, XLS-5d): a wallet with no tag field
+// that reads X-addresses pays it tagged, and one that does not rejects it as invalid rather than paying untagged.
+export const toXrpXAddress = (address: string, tag: string) => {
+  if (!isXrpDestinationTag(tag)) return undefined
+  try {
+    return classicAddressToXAddress(address, Number(tag), false)
+  } catch {
+    return undefined
+  }
+}
+
+export const isValidDestinationMemo = (chain: Chain, memo: string) => (chain === Chain.Ripple ? isXrpDestinationTag(memo) : memo.length <= 64)
 
 // Maya Protocol cannot observe or refund Taproot (bech32m) transactions.
 export const isTaprootAddress = (address: string) => address.toLowerCase().startsWith('bc1p')

@@ -193,7 +193,6 @@
   "swap.recipient.taprootNotSupported": ["Maya Protocol does not support Taproot addresses", "Maya Protocol Taproot पतों का समर्थन नहीं करता"],
   "swap.recipient.delegatedNotSupported": ["This address uses EIP-7702 delegation and cannot receive the outbound. Revoke the delegation, or use a standard self-custody address", "यह पता EIP-7702 डेलिगेशन का उपयोग करता है और आउटबाउंड प्राप्त नहीं कर सकता। डेलिगेशन रद्द करें, या कोई सामान्य सेल्फ-कस्टडी पता उपयोग करें"],
   "swap.recipient.contractNotSupported": ["This is a smart contract address and cannot receive the outbound. Use a self-custody wallet address", "यह एक स्मार्ट कॉन्ट्रैक्ट पता है और आउटबाउंड प्राप्त नहीं कर सकता। सेल्फ-कस्टडी वॉलेट पते का उपयोग करें"],
-  "swap.recipient.destinationTagInvalid": ["An XRP destination tag is a whole number up to 4294967295", "XRP डेस्टिनेशन टैग 4294967295 तक की पूर्ण संख्या होनी चाहिए"],
   "swap.recipient.memoPlaceholder": ["Memo/Tag/Comment (optional)", "मेमो/टैग/कमेंट (वैकल्पिक)"],
   "swap.recipient.memoInvalid": ["The memo can be at most 64 characters", "मेमो अधिकतम 64 वर्णों का हो सकता है"],
   "swap.recipient.titleAddresses": ["Enter Addresses", "पते दर्ज करें"],

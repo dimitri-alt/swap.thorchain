@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol ไม่รองรับที่อยู่ Taproot",
       "delegatedNotSupported": "ที่อยู่นี้ใช้การมอบสิทธิ์แบบ EIP-7702 จึงไม่สามารถรับยอดขาออกได้ กรุณาเพิกถอนการมอบสิทธิ์ หรือใช้ที่อยู่แบบเก็บรักษาเองตามมาตรฐาน",
       "contractNotSupported": "นี่คือที่อยู่สัญญาอัจฉริยะ จึงไม่สามารถรับยอดขาออกได้ กรุณาใช้ที่อยู่กระเป๋าเงินแบบเก็บรักษาเอง",
-      "destinationTagInvalid": "Destination Tag ของ XRP ต้องเป็นจำนวนเต็มไม่เกิน 4294967295",
       "memoPlaceholder": "Memo/Tag/Comment (ไม่บังคับ)",
       "memoInvalid": "Memo ต้องมีความยาวไม่เกิน 64 ตัวอักษร",
       "titleAddresses": "กรอกที่อยู่",

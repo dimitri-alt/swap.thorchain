@@ -125,6 +125,7 @@
       "highPriceImpact": "I understand the price impact is in addition to the slippage tolerance. I accept the high price impact on this swap",
       "highPriceImpactPrivate": "I understand the amount received is well below the value of the amount sent, and I accept that cost for this private swap",
       "sendExact": "I understand that I must send exactly the specified amount from a self-custody wallet. I understand that sending from a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in",
+      "depositTag": "I confirm that I will include the Memo / Tag / Comment shown below in my transaction. Sending without it will result in",
       "lossOfFunds": "loss of funds.",
       "ltcMweb": "I understand that using an LTC MWEB address will result in",
       "selfCustody": "I understand that I must use a self-custody wallet. I understand that using a smart contract wallet, exchange address, delegated address, or an EIP 7702 wallet, will result in"
@@ -135,6 +136,8 @@
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expires in",
       "memoRequired": "Memo (required)",
+      "tagRequired": "Memo / Tag / Comment (required)",
+      "xAddressLabel": "Wallet has no tag field? Send to this address instead - the tag is built in",
       "waitingForDeposit": "Waiting for your deposit…",
       "openHistory": "Open History",
       "status": {
@@ -247,8 +250,8 @@
       "taprootNotSupported": "Maya Protocol does not support Taproot addresses",
       "delegatedNotSupported": "This address uses EIP-7702 delegation and cannot receive the outbound. Revoke the delegation, or use a standard self-custody address",
       "contractNotSupported": "This is a smart contract address and cannot receive the outbound. Use a self-custody wallet address",
-      "destinationTagInvalid": "An XRP destination tag is a whole number up to 4294967295",
       "memoPlaceholder": "Memo/Tag/Comment (optional)",
+      "destinationTagInvalid": "XRP needs a numeric destination tag - a whole number up to 4294967295",
       "memoInvalid": "The memo can be at most 64 characters",
       "titleAddresses": "Enter Addresses",
       "titleReceiving": "Enter Receiving Address",

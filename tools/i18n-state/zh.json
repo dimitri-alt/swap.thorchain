@@ -193,7 +193,6 @@
   "swap.recipient.taprootNotSupported": ["Maya Protocol does not support Taproot addresses", "Maya Protocol 不支持 Taproot 地址"],
   "swap.recipient.delegatedNotSupported": ["This address uses EIP-7702 delegation and cannot receive the outbound. Revoke the delegation, or use a standard self-custody address", "该地址使用了 EIP-7702 委托，无法接收转出资金。请撤销委托，或使用标准的自托管地址"],
   "swap.recipient.contractNotSupported": ["This is a smart contract address and cannot receive the outbound. Use a self-custody wallet address", "这是智能合约地址，无法接收转出资金。请使用自托管钱包地址"],
-  "swap.recipient.destinationTagInvalid": ["An XRP destination tag is a whole number up to 4294967295", "XRP 目标标签必须是不超过 4294967295 的整数"],
   "swap.recipient.memoPlaceholder": ["Memo/Tag/Comment (optional)", "备注/标签/说明（可选）"],
   "swap.recipient.memoInvalid": ["The memo can be at most 64 characters", "备注最多为 64 个字符"],
   "swap.recipient.titleAddresses": ["Enter Addresses", "输入地址"],

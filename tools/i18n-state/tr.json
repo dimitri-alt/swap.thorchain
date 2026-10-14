@@ -193,7 +193,6 @@
   "swap.recipient.taprootNotSupported": ["Maya Protocol does not support Taproot addresses", "Maya Protocol, Taproot adreslerini desteklemiyor"],
   "swap.recipient.delegatedNotSupported": ["This address uses EIP-7702 delegation and cannot receive the outbound. Revoke the delegation, or use a standard self-custody address", "Bu adres EIP-7702 yetki devri kullanıyor ve giden transferi alamaz. Yetki devrini iptal edin veya standart bir kendi kendine saklama adresi kullanın"],
   "swap.recipient.contractNotSupported": ["This is a smart contract address and cannot receive the outbound. Use a self-custody wallet address", "Bu bir akıllı sözleşme adresidir ve giden transferi alamaz. Kendi kendine saklama cüzdan adresi kullanın"],
-  "swap.recipient.destinationTagInvalid": ["An XRP destination tag is a whole number up to 4294967295", "XRP hedef etiketi, en fazla 4294967295 olabilen bir tam sayıdır"],
   "swap.recipient.memoPlaceholder": ["Memo/Tag/Comment (optional)", "Memo/Etiket/Yorum (isteğe bağlı)"],
   "swap.recipient.memoInvalid": ["The memo can be at most 64 characters", "Memo en fazla 64 karakter olabilir"],
   "swap.recipient.titleAddresses": ["Enter Addresses", "Adresleri Gir"],

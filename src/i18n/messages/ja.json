@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya ProtocolはTaprootアドレスに対応していません",
       "delegatedNotSupported": "このアドレスは EIP-7702 の委任を使用しているため、送金を受け取れません。委任を取り消すか、通常のセルフカストディアドレスをご利用ください",
       "contractNotSupported": "これはスマートコントラクトアドレスのため、送金を受け取れません。セルフカストディウォレットのアドレスをご利用ください",
-      "destinationTagInvalid": "XRPの宛先タグは4294967295までの整数です",
       "memoPlaceholder": "メモ/タグ/コメント（任意）",
       "memoInvalid": "メモは最大64文字です",
       "titleAddresses": "アドレスを入力",

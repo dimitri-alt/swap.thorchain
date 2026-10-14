@@ -247,7 +247,6 @@
       "taprootNotSupported": "Maya Protocol 不支援 Taproot 地址",
       "delegatedNotSupported": "此地址使用 EIP-7702 委派，無法接收出金。請撤銷委派，或改用一般自我保管地址",
       "contractNotSupported": "此為智能合約地址，無法接收出金。請使用自我保管錢包地址",
-      "destinationTagInvalid": "XRP 目標標籤必須為 0 至 4294967295 之間的整數",
       "memoPlaceholder": "備註/標籤/註解（選填）",
       "memoInvalid": "備註最多只能有 64 個字元",
       "titleAddresses": "輸入地址",

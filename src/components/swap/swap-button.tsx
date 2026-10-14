@@ -16,7 +16,7 @@ import { useSimulation } from '@/hooks/use-simulation'
 import { useAssetFrom, useAssetTo, useSwap } from '@/hooks/use-swap'
 import { useExternalWalletMode, useSelectedAccount, useSetExternalWalletMode } from '@/hooks/use-wallets'
 import { readableError } from '@/lib/errors'
-import { isMayaProvider, isPrivateSend, isTaprootAddress, waitForAllowance } from '@/lib/swap-helpers'
+import { isDepositOnlyPrivateSell, isMayaProvider, isPrivateSend, isTaprootAddress, waitForAllowance } from '@/lib/swap-helpers'
 import { getUSwap } from '@/lib/wallets'
 import { useIsLimitSwap, useLimitSwapBuyAmount } from '@/store/limit-swap-store'
 import { useIsPrivateSwap, usePrivateSwapAcknowledged } from '@/store/private-swap-store'
@@ -130,6 +130,10 @@ export const SwapButton = ({ instantSwapSupported, instantSwapAvailable }: SwapB
 
     if (isLimitSwap && limitSwapBuyAmount === '0') {
       return { text: t('button.enterLimitPrice'), spinner: false, accent: false }
+    }
+
+    if (isDepositOnlyPrivateSell(isPrivateSwap, assetFrom.chain)) {
+      return { text: actionLabel, spinner: false, accent: true, onClick: () => onInstantSwap(quote) }
     }
 
     if (!selectedAccount) {
