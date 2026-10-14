@@ -48,7 +48,8 @@ PRIVATE tab ──quote──▶ api.thorchain.org/v1/quote  providers: ["HOUDIN
   `memoNeeded` (Cosmos, XRP, THORChain, TON — `houdiniMemoKind` in `src/lib/swap-helpers.ts`), `SwapRecipient` offers one optional
   _Memo/Tag/Comment_ field (an XRP tag must be a whole number up to 4294967295; otherwise at most 64 characters). It goes to the aggregator as
   `destinationMemo`, which hands it to Houdini as the order's `destinationTag`, and the confirm screen shows it. The aggregator refuses a
-  `destinationMemo` unless the request is limited to `providers: ["HOUDINI"]`.
+  `destinationMemo` unless the request is limited to `providers: ["HOUDINI"]`. The Send dialog's Private Send tab offers the same field under its
+  recipient address (`send.tsx`, passed through `privateSendQuote`).
 - **Private send (Send mode).** Houdini routes an asset to itself (BTC → BTC to an unlinked address), a sizeable share of private
   volume. The tab opens with a _Swap | Send_ switch (`SwapPrivateMode`, `isPrivateSend` in `src/store/limit-swap-store.ts`) so users find it
   without having to pick one token twice. In Send mode the buy side follows the sell side (`setAssetFrom` / `setAssetTo` in

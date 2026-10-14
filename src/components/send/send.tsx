@@ -23,6 +23,7 @@ import { LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { Credenza, CredenzaContent, CredenzaHeader, CredenzaTitle } from '@/components/ui/credenza'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { chainLabel } from '@/components/connect-wallet/config'
 import { AnimatedButton } from '@/components/animated-button'
@@ -43,7 +44,7 @@ import { TokenBalance, useWalletBalances } from '@/hooks/use-wallet-balances'
 import { useAccounts } from '@/hooks/use-wallets'
 import { houdiniQuoteRates, preferRate, useRates } from '@/hooks/use-rates'
 import { readableError } from '@/lib/errors'
-import { formatExpiration } from '@/lib/swap-helpers'
+import { formatExpiration, houdiniMemoKind, isValidDestinationMemo } from '@/lib/swap-helpers'
 import { canTrackTransfer } from '@/lib/transfer-status'
 import { getUSwap } from '@/lib/wallets'
 import { usePrivateSwapAcknowledged } from '@/store/private-swap-store'
@@ -90,6 +91,7 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
   const [selectedAccount, setSelectedAccount] = useState(account)
   const [amount, setAmount] = useState('')
   const [recipient, setRecipient] = useState('')
+  const [destinationMemo, setDestinationMemo] = useState('')
   const [isValidRecipient, setIsValidRecipient] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [txFee, setTxFee] = useState<{ amount: USwapNumber; ticker: string } | null>(null)
@@ -101,6 +103,7 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
       setSelectedAccount(account)
       setAmount('')
       setRecipient('')
+      setDestinationMemo('')
       setIsValidRecipient(true)
       setTxFee(null)
       setIsPrivate(false)
@@ -119,6 +122,11 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
   const rate = preferRate(isPrivate, rates[tokenIdentifier], houdiniRates.rateFrom)
 
   const numericAmount = parseFloat(amount) || 0
+
+  // Private Send only: the same optional memo / tag / comment field as the swap's recipient step.
+  const memoKind = isPrivate ? houdiniMemoKind(selectedToken.balance.chain) : undefined
+  const memo = memoKind ? destinationMemo.trim() : ''
+  const isMemoInvalid = !!memoKind && !isValidDestinationMemo(memoKind, memo)
   const fiatValue = rate ? rate.mul(numericAmount) : new USwapNumber(0)
 
   useEffect(() => {
@@ -203,7 +211,7 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
     }
     setSubmitting(true)
 
-    const broadcast = privateSendQuote(privateAsset, amount, selectedAccount.address, recipient)
+    const broadcast = privateSendQuote(privateAsset, amount, selectedAccount.address, recipient, memo)
       .then(async route => {
         const houdiniId = route?.meta?.houdini?.houdiniId
         if (!route?.inboundAddress || !houdiniId) throw new Error(t('error.privateOrderFailed'))
@@ -310,6 +318,7 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
     !insufficientBalance &&
     recipient.length > 0 &&
     isValidRecipient &&
+    !isMemoInvalid &&
     !submitting &&
     (!isPrivate || (!!privateQuote.quote && privateAcknowledged))
   const recipientGets = privateQuote.quote && new USwapNumber(privateQuote.quote.expectedBuyAmount)
@@ -329,7 +338,10 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
         setSelectedAccount(tokenAccount)
         setAmount('')
         setTxFee(null)
-        if (chainChanged) setRecipient('')
+        if (chainChanged) {
+          setRecipient('')
+          setDestinationMemo('')
+        }
       }
     })
   }
@@ -420,7 +432,7 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
             </div>
           </div>
 
-          <div className="mt-2 flex flex-col gap-3">
+          <div className="mt-2 flex flex-col gap-1">
             <div className="text-txt-label-small text-sm font-semibold">{t('to')}</div>
             <div className="relative">
               <Textarea
@@ -474,6 +486,23 @@ export function Send({ isOpen, onOpenChange, initialToken, account }: SendDialog
             </div>
             {!isValidRecipient && recipient.length > 0 && (
               <div className="text-lucian text-xs font-semibold">{t('error.invalidAddress', { chain: chainLabel(selectedToken.balance.chain) })}</div>
+            )}
+
+            {memoKind && (
+              <>
+                <Input
+                  value={destinationMemo}
+                  onChange={e => setDestinationMemo(e.target.value)}
+                  placeholder={tSwap('recipient.memoPlaceholder')}
+                  aria-invalid={isMemoInvalid}
+                  className="bg-swap-bloc border-border-sub-container-modal-low"
+                />
+                {isMemoInvalid && (
+                  <div className="text-lucian text-xs font-semibold">
+                    {memoKind === 'tag' ? tSwap('recipient.destinationTagInvalid') : tSwap('recipient.memoInvalid')}
+                  </div>
+                )}
+              </>
             )}
           </div>
 

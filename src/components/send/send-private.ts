@@ -25,7 +25,7 @@ export const usePrivateSendAssetLookup = () => {
   }, [assets])
 }
 
-export const privateSendQuote = (asset: Asset, amount: string, sourceAddress: string, destinationAddress?: string) =>
+export const privateSendQuote = (asset: Asset, amount: string, sourceAddress: string, destinationAddress?: string, destinationMemo?: string) =>
   getQuotes({
     sellAsset: asset.identifier,
     buyAsset: asset.identifier,
@@ -33,6 +33,8 @@ export const privateSendQuote = (asset: Asset, amount: string, sourceAddress: st
     // Without a destination this is the indicative price, as on the swap form; with one it places
     // the Houdini order, refunded to the sending wallet so the aggregator can pick routes that need one.
     ...(destinationAddress && { sourceAddress, refundAddress: sourceAddress, destinationAddress }),
+    // The memo / tag an exchange deposit address on a memo chain needs; Houdini passes it on with the payout.
+    ...(destinationAddress && destinationMemo && { destinationMemo }),
     dry: !destinationAddress,
     slippage: 99,
     providers: [AppConfig.privateProvider]
