@@ -13,6 +13,7 @@ export type AssetLogoMap = Record<string, string>
 
 const RUNE_IDENTIFIER = 'THOR.RUNE'
 const CACAO_IDENTIFIER = 'MAYA.CACAO'
+const WRAPPED_NEAR = 'wrap.near'
 
 const isMayaProvider = (provider?: ProviderName) => provider === ProviderName.MAYACHAIN || provider === ProviderName.MAYACHAIN_STREAMING
 
@@ -95,6 +96,20 @@ export const useRates = (identifiers: string[], provider?: ProviderName): { rate
     return addresses
   }, [identifiers])
 
+  // NEAR has no THORChain/Maya pool. Its tokens are `NEAR.<TICKER>-<contract>`, and a contract can itself contain
+  // '-' (`abg-966.meme-cooking.near`), so it is everything after the first '-'. The native coin trades as wNEAR.
+  const nearContracts = useMemo(() => {
+    const contracts = new Map<string, string>()
+    for (const id of identifiers) {
+      const upper = id.toUpperCase()
+      const dash = id.indexOf('-')
+      if (upper === 'NEAR.NEAR') contracts.set(id, WRAPPED_NEAR)
+      else if (upper.startsWith('NEAR.') && dash > 0) contracts.set(id, id.slice(dash + 1).toLowerCase())
+    }
+    return contracts
+  }, [identifiers])
+  const nearAddresses = useMemo(() => Array.from(new Set(nearContracts.values())).sort(), [nearContracts])
+
   const { data: dexScreenerData, isLoading: dexScreenerLoading } = useQuery({
     queryKey: ['dexscreener-tokens-sol', solanaMints.slice().sort().join(',')],
     queryFn: () => getDexScreenerTokens(solanaMints, 'solana'),
@@ -109,6 +124,16 @@ export const useRates = (identifiers: string[], provider?: ProviderName): { rate
     queryKey: ['dexscreener-tokens-eth', ethAddresses.slice().sort().join(',')],
     queryFn: () => getDexScreenerTokens(ethAddresses, 'ethereum'),
     enabled: ethAddresses.length > 0,
+    staleTime: 3 * 60_000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    retry: false
+  })
+
+  const { data: dexScreenerNearData, isLoading: dexScreenerNearLoading } = useQuery({
+    queryKey: ['dexscreener-tokens-near', nearAddresses.join(',')],
+    queryFn: () => getDexScreenerTokens(nearAddresses, 'near'),
+    enabled: nearAddresses.length > 0,
     staleTime: 3 * 60_000,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
@@ -152,13 +177,22 @@ export const useRates = (identifiers: string[], provider?: ProviderName): { rate
     }
   }
 
+  if (dexScreenerNearData) {
+    nearContracts.forEach((contract, id) => {
+      const info = dexScreenerNearData[contract]
+      if (info?.price && !rates[id]) rates[id] = new USwapNumber(info.price)
+      if (info?.logo) logos[id] = info.logo
+    })
+  }
+
   const dexScreenerPending = solanaMints.length > 0 && dexScreenerLoading
   const dexScreenerEthPending = ethAddresses.length > 0 && dexScreenerEthLoading
+  const dexScreenerNearPending = nearAddresses.length > 0 && dexScreenerNearLoading
 
   return {
     rates,
     logos,
-    isLoading: midgardLoading || dexScreenerPending || dexScreenerEthPending || identifiers.length === 0
+    isLoading: midgardLoading || dexScreenerPending || dexScreenerEthPending || dexScreenerNearPending || identifiers.length === 0
   }
 }
 

@@ -11,7 +11,10 @@ const uSwap = axios.create({
   }
 })
 
-export const getDexScreenerTokens = async (tokenAddresses: string[], chainId: 'solana' | 'ethereum' = 'solana'): Promise<Record<string, { price?: number; logo?: string }>> => {
+export const getDexScreenerTokens = async (
+  tokenAddresses: string[],
+  chainId: 'solana' | 'ethereum' | 'near' = 'solana'
+): Promise<Record<string, { price?: number; logo?: string }>> => {
   if (tokenAddresses.length === 0) return {}
   const addresses = tokenAddresses.join(',')
   try {
@@ -20,7 +23,7 @@ export const getDexScreenerTokens = async (tokenAddresses: string[], chainId: 's
     for (const pair of res.data || []) {
       const addr = pair?.baseToken?.address
       if (!addr) continue
-      const key = chainId === 'ethereum' ? addr.toLowerCase() : addr
+      const key = chainId === 'solana' ? addr : addr.toLowerCase()
       const existing = result[key] ?? {}
       if (existing.price == null && pair?.priceUsd != null) {
         existing.price = parseFloat(pair.priceUsd)
