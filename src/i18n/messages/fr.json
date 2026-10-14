@@ -125,6 +125,7 @@
       "highPriceImpact": "Je comprends que l'impact sur le prix s'ajoute à la tolérance au slippage. J'accepte l'impact élevé sur le prix de cet échange",
       "highPriceImpactPrivate": "Je comprends que le montant reçu est bien inférieur à la valeur du montant envoyé, et j'accepte ce coût pour ce swap privé",
       "sendExact": "Je comprends que je dois envoyer exactement le montant indiqué depuis un portefeuille auto-hébergé. Je comprends qu'un envoi depuis un portefeuille de smart contract, une adresse d'exchange, une adresse déléguée ou un portefeuille EIP 7702 entraînera une",
+      "depositTag": "Je confirme que j'inclurai le Memo / Tag / Commentaire indiqué ci-dessous dans ma transaction. Un envoi sans celui-ci entraînera",
       "lossOfFunds": "perte de fonds.",
       "ltcMweb": "Je comprends que l'utilisation d'une adresse LTC MWEB entraînera une",
       "selfCustody": "Je comprends que je dois utiliser un portefeuille auto-hébergé. Je comprends que l'utilisation d'un portefeuille de smart contract, d'une adresse d'exchange, d'une adresse déléguée ou d'un portefeuille EIP 7702 entraînera une"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expire dans",
       "memoRequired": "Mémo (requis)",
+      "tagRequired": "Memo / Tag / Commentaire (requis)",
+      "xAddressLabel": "Votre portefeuille n'a pas de champ tag ? Envoyez plutôt à cette adresse - le tag y est intégré",
       "waitingForDeposit": "En attente de votre dépôt…",
       "openHistory": "Ouvrir l'historique",
       "status": {
         "depositReceived": {
           "title": "Dépôt reçu",
           "description": "Vos {ticker} sont bien arrivés - ne les envoyez pas à nouveau. Suivez l'état du swap dans l'historique."
+        },
+        "closed": {
+          "title": "Fenêtre de dépôt fermée",
+          "description": "N'envoyez pas de fonds à cette adresse. Si vous avez déjà envoyé vos {ticker}, ils peuvent encore arriver - suivez-les dans l'Historique."
         },
         "expired": {
           "title": "Délai de dépôt expiré",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Cette adresse utilise la délégation EIP-7702 et ne peut pas recevoir le transfert sortant. Révoquez la délégation ou utilisez une adresse d'auto-conservation standard",
       "contractNotSupported": "Il s'agit d'une adresse de contrat intelligent qui ne peut pas recevoir le transfert sortant. Utilisez une adresse de portefeuille d'auto-conservation",
       "memoPlaceholder": "Mémo/Tag/Commentaire (facultatif)",
+      "destinationTagInvalid": "XRP nécessite un tag de destination numérique - un nombre entier jusqu'à 4294967295",
       "memoInvalid": "Le mémo ne peut pas dépasser 64 caractères",
       "titleAddresses": "Saisir les adresses",
       "titleReceiving": "Saisir l'adresse de réception",

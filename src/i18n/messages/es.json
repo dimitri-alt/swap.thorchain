@@ -125,6 +125,7 @@
       "highPriceImpact": "Entiendo que el impacto en el precio es adicional a la tolerancia de Slippage. Acepto el alto impacto en el precio de este intercambio.",
       "highPriceImpactPrivate": "Entiendo que el importe recibido es muy inferior al valor del importe enviado y acepto ese coste para este swap privado",
       "sendExact": "Entiendo que debo enviar exactamente el monto especificado desde una billetera de autocustodia. Entiendo que enviar desde una billetera de Smart Contract, una dirección de exchange, una dirección delegada o una billetera EIP 7702 resultará en",
+      "depositTag": "Confirmo que incluiré el Memo / Tag / Comentario que se muestra a continuación en mi transacción. Enviar sin él provocará",
       "lossOfFunds": "pérdida de fondos.",
       "ltcMweb": "Entiendo que usar una dirección LTC MWEB resultará en",
       "selfCustody": "Entiendo que debo usar una billetera de autocustodia. Entiendo que usar una billetera de Smart Contract, una dirección de exchange, una dirección delegada o una billetera EIP 7702 resultará en"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "Código QR",
       "expiresIn": "Expira en",
       "memoRequired": "Memo (obligatorio)",
+      "tagRequired": "Memo / Tag / Comentario (obligatorio)",
+      "xAddressLabel": "¿Tu billetera no tiene campo de tag? Envía a esta dirección en su lugar: el tag va incluido",
       "waitingForDeposit": "Esperando tu depósito…",
       "openHistory": "Abrir historial",
       "status": {
         "depositReceived": {
           "title": "Depósito recibido",
           "description": "Tus {ticker} han llegado: no los envíes de nuevo. Sigue el estado del swap en el historial."
+        },
+        "closed": {
+          "title": "Ventana de depósito cerrada",
+          "description": "No envíes fondos a esta dirección. Si ya enviaste tus {ticker}, aún pueden llegar: síguelo en el Historial."
         },
         "expired": {
           "title": "Plazo de depósito expirado",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Esta dirección usa delegación EIP-7702 y no puede recibir la salida. Revoca la delegación o usa una dirección estándar de autocustodia",
       "contractNotSupported": "Esta es una dirección de contrato inteligente y no puede recibir la salida. Usa una dirección de billetera de autocustodia",
       "memoPlaceholder": "Memo/Etiqueta/Comentario (opcional)",
+      "destinationTagInvalid": "XRP requiere un destination tag numérico: un número entero de hasta 4294967295",
       "memoInvalid": "El memo puede tener como máximo 64 caracteres",
       "titleAddresses": "Ingresa las direcciones",
       "titleReceiving": "Ingresa la dirección de recepción",

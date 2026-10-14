@@ -125,6 +125,7 @@
       "highPriceImpact": "Saya memahami bahwa price impact merupakan tambahan dari toleransi slippage. Saya menerima price impact tinggi pada swap ini",
       "highPriceImpactPrivate": "Saya memahami jumlah yang diterima jauh di bawah nilai jumlah yang dikirim, dan saya menerima biaya tersebut untuk swap privat ini",
       "sendExact": "Saya memahami bahwa saya harus mengirim tepat sebesar jumlah yang ditentukan dari dompet self-custody. Saya memahami bahwa mengirim dari dompet smart contract, alamat bursa, alamat yang didelegasikan, atau dompet EIP 7702, akan mengakibatkan",
+      "depositTag": "Saya mengonfirmasi bahwa saya akan menyertakan Memo / Tag / Comment yang ditampilkan di bawah ini dalam transaksi saya. Mengirim tanpa itu akan mengakibatkan",
       "lossOfFunds": "kehilangan dana.",
       "ltcMweb": "Saya memahami bahwa menggunakan alamat LTC MWEB akan mengakibatkan",
       "selfCustody": "Saya memahami bahwa saya harus menggunakan dompet self-custody. Saya memahami bahwa menggunakan dompet smart contract, alamat bursa, alamat yang didelegasikan, atau dompet EIP 7702, akan mengakibatkan"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "Kode QR",
       "expiresIn": "Kedaluwarsa dalam",
       "memoRequired": "Memo (wajib)",
+      "tagRequired": "Memo / Tag / Comment (wajib)",
+      "xAddressLabel": "Dompet tidak punya kolom tag? Kirim ke alamat ini saja - tag sudah termasuk di dalamnya",
       "waitingForDeposit": "Menunggu deposit Anda…",
       "openHistory": "Buka Riwayat",
       "status": {
         "depositReceived": {
           "title": "Deposit diterima",
           "description": "{ticker} Anda telah tiba - jangan kirim lagi. Pantau status swap di Riwayat."
+        },
+        "closed": {
+          "title": "Jendela deposit ditutup",
+          "description": "Jangan kirim dana ke alamat ini. Jika Anda sudah mengirim {ticker} Anda, dana masih bisa tiba - pantau di History."
         },
         "expired": {
           "title": "Jendela deposit telah berakhir",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Alamat ini menggunakan delegasi EIP-7702 dan tidak dapat menerima dana keluar. Cabut delegasinya, atau gunakan alamat self-custody standar",
       "contractNotSupported": "Ini adalah alamat smart contract dan tidak dapat menerima dana keluar. Gunakan alamat wallet self-custody",
       "memoPlaceholder": "Memo/Tag/Komentar (opsional)",
+      "destinationTagInvalid": "XRP memerlukan destination tag berupa angka - bilangan bulat hingga 4294967295",
       "memoInvalid": "Memo maksimal 64 karakter",
       "titleAddresses": "Masukkan alamat",
       "titleReceiving": "Masukkan alamat penerima",

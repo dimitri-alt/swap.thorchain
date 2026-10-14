@@ -125,6 +125,7 @@
       "highPriceImpact": "Comprendo che l'impatto sul prezzo si aggiunge alla tolleranza di slippage. Accetto l'elevato impatto sul prezzo di questo swap",
       "highPriceImpactPrivate": "Comprendo che l'importo ricevuto è molto inferiore al valore dell'importo inviato e accetto questo costo per questo swap privato",
       "sendExact": "Comprendo che devo inviare esattamente l'importo specificato da un portafoglio self-custody. Comprendo che l'invio da un portafoglio smart contract, un indirizzo di exchange, un indirizzo delegato o un portafoglio EIP 7702 comporterà la",
+      "depositTag": "Confermo che includerò nella mia transazione il Memo / Tag / Comment mostrato qui sotto. L'invio senza di esso comporterà",
       "lossOfFunds": "perdita dei fondi.",
       "ltcMweb": "Comprendo che l'utilizzo di un indirizzo LTC MWEB comporterà la",
       "selfCustody": "Comprendo che devo utilizzare un portafoglio self-custody. Comprendo che l'utilizzo di un portafoglio smart contract, un indirizzo di exchange, un indirizzo delegato o un portafoglio EIP 7702 comporterà la"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "Codice QR",
       "expiresIn": "Scade tra",
       "memoRequired": "Memo (obbligatorio)",
+      "tagRequired": "Memo / Tag / Comment (obbligatorio)",
+      "xAddressLabel": "Il tuo wallet non ha un campo tag? Invia invece a questo indirizzo - il tag è già incluso",
       "waitingForDeposit": "In attesa del tuo deposito…",
       "openHistory": "Apri Cronologia",
       "status": {
         "depositReceived": {
           "title": "Deposito ricevuto",
           "description": "I tuoi {ticker} sono arrivati - non inviarli di nuovo. Segui lo stato dello swap nella Cronologia."
+        },
+        "closed": {
+          "title": "Finestra di deposito chiusa",
+          "description": "Non inviare fondi a questo indirizzo. Se hai già inviato i tuoi {ticker}, potrebbero comunque arrivare - segui l'operazione nella Cronologia."
         },
         "expired": {
           "title": "Finestra di deposito scaduta",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Questo indirizzo utilizza la delega EIP-7702 e non può ricevere l'uscita. Revoca la delega oppure usa un indirizzo standard di self-custody",
       "contractNotSupported": "Questo è un indirizzo di smart contract e non può ricevere l'uscita. Usa l'indirizzo di un wallet self-custody",
       "memoPlaceholder": "Memo/Tag/Commento (facoltativo)",
+      "destinationTagInvalid": "XRP richiede un destination tag numerico - un numero intero fino a 4294967295",
       "memoInvalid": "Il memo può contenere al massimo 64 caratteri",
       "titleAddresses": "Inserisci gli indirizzi",
       "titleReceiving": "Inserisco l'indirizzo di ricezione",

@@ -125,6 +125,7 @@
       "highPriceImpact": "Eu entendo que o impacto no preço é adicional à tolerância de slippage. Aceito o alto impacto no preço desta troca",
       "highPriceImpactPrivate": "Compreendo que o montante recebido é bastante inferior ao valor do montante enviado e aceito esse custo nesta troca privada",
       "sendExact": "Eu entendo que devo enviar exatamente a quantia especificada de uma carteira de autocustódia. Entendo que enviar de uma carteira de smart contract, endereço de exchange, endereço delegado ou uma carteira EIP 7702 resultará em",
+      "depositTag": "Confirmo que irei incluir o Memo / Tag / Comentário apresentado abaixo na minha transação. Enviar sem ele resultará em",
       "lossOfFunds": "perda de fundos.",
       "ltcMweb": "Eu entendo que usar um endereço LTC MWEB resultará em",
       "selfCustody": "Eu entendo que devo usar uma carteira de autocustódia. Entendo que usar uma carteira de smart contract, endereço de exchange, endereço delegado ou uma carteira EIP 7702 resultará em"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "QR Code",
       "expiresIn": "Expira em",
       "memoRequired": "Memo (obrigatório)",
+      "tagRequired": "Memo / Tag / Comentário (obrigatório)",
+      "xAddressLabel": "A carteira não tem campo de tag? Envie antes para este endereço - a tag já está incluída",
       "waitingForDeposit": "A aguardar o seu depósito…",
       "openHistory": "Abrir Histórico",
       "status": {
         "depositReceived": {
           "title": "Depósito recebido",
           "description": "O seu {ticker} chegou — não o envie novamente. Acompanhe o estado da troca no Histórico."
+        },
+        "closed": {
+          "title": "Janela de depósito fechada",
+          "description": "Não envie fundos para este endereço. Se já enviou os seus {ticker}, ainda podem chegar - acompanhe em Histórico."
         },
         "expired": {
           "title": "Janela de depósito expirada",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Este endereço utiliza delegação EIP-7702 e não pode receber a transação de saída. Revogue a delegação ou utilize um endereço padrão de autocustódia",
       "contractNotSupported": "Este é um endereço de contrato inteligente e não pode receber a transação de saída. Utilize um endereço de carteira de autocustódia",
       "memoPlaceholder": "Memo/Tag/Comentário (opcional)",
+      "destinationTagInvalid": "XRP requer uma destination tag numérica - um número inteiro até 4294967295",
       "memoInvalid": "O memo pode ter no máximo 64 caracteres",
       "titleAddresses": "Inserir endereços",
       "titleReceiving": "Inserir endereço de recebimento",

@@ -125,6 +125,7 @@
       "highPriceImpact": "我理解价格影响是在Slippage容差之外的额外部分。我接受本次兑换的高价格影响。",
       "highPriceImpactPrivate": "我明白收到的数量远低于发送数量的价值，并接受本次隐私兑换的这一成本",
       "sendExact": "我理解我必须从自托管钱包发送精确的指定金额。我理解从Smart Contract钱包、交易所地址、委托地址或EIP 7702钱包发送将导致",
+      "depositTag": "我确认将在交易中附带下方显示的 Memo / Tag / Comment。未附带将导致",
       "lossOfFunds": "资金损失。",
       "ltcMweb": "我理解使用LTC MWEB地址将导致",
       "selfCustody": "我理解我必须使用自托管钱包。我理解使用Smart Contract钱包、交易所地址、委托地址或EIP 7702钱包将导致"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "二维码",
       "expiresIn": "剩余时间",
       "memoRequired": "备注（必填）",
+      "tagRequired": "Memo / Tag / Comment（必填）",
+      "xAddressLabel": "钱包没有标签字段？请改为发送到此地址——标签已内置其中",
       "waitingForDeposit": "等待您的存入…",
       "openHistory": "打开历史记录",
       "status": {
         "depositReceived": {
           "title": "已收到存入",
           "description": "您的 {ticker} 已到账——请勿重复发送。可在历史记录中跟踪此次兑换的状态。"
+        },
+        "closed": {
+          "title": "充值窗口已关闭",
+          "description": "请勿向此地址发送资金。如果您已发送 {ticker}，它仍可能到账——请在历史记录中查看。"
         },
         "expired": {
           "title": "存入时限已过期",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "该地址使用了 EIP-7702 委托，无法接收转出资金。请撤销委托，或使用标准的自托管地址",
       "contractNotSupported": "这是智能合约地址，无法接收转出资金。请使用自托管钱包地址",
       "memoPlaceholder": "备注/标签/说明（可选）",
+      "destinationTagInvalid": "XRP 需要数字目标标签——不超过 4294967295 的整数",
       "memoInvalid": "备注最多为 64 个字符",
       "titleAddresses": "输入地址",
       "titleReceiving": "输入接收地址",

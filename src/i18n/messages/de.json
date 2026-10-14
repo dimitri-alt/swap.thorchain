@@ -125,6 +125,7 @@
       "highPriceImpact": "Ich verstehe, dass die Preisauswirkung zusätzlich zur Slippage-Toleranz hinzukommt. Ich akzeptiere die hohe Preisauswirkung bei diesem Swap",
       "highPriceImpactPrivate": "Mir ist bewusst, dass der erhaltene Betrag deutlich unter dem Wert des gesendeten Betrags liegt, und ich akzeptiere diese Kosten für diesen privaten Swap",
       "sendExact": "Ich verstehe, dass ich genau den angegebenen Betrag aus einer Self-Custody-Wallet senden muss. Ich verstehe, dass das Senden von einer Smart-Contract-Wallet, einer Exchange-Adresse, einer delegierten Adresse oder einer EIP-7702-Wallet zum",
+      "depositTag": "Ich bestätige, dass ich das unten angezeigte Memo / Tag / Kommentar in meiner Transaktion angebe. Ein Senden ohne dieses führt zum",
       "lossOfFunds": "Verlust von Geldern führt.",
       "ltcMweb": "Ich verstehe, dass die Verwendung einer LTC-MWEB-Adresse zum",
       "selfCustody": "Ich verstehe, dass ich eine Self-Custody-Wallet verwenden muss. Ich verstehe, dass die Verwendung einer Smart-Contract-Wallet, einer Exchange-Adresse, einer delegierten Adresse oder einer EIP-7702-Wallet zum"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "QR-Code",
       "expiresIn": "Läuft ab in",
       "memoRequired": "Memo (erforderlich)",
+      "tagRequired": "Memo / Tag / Kommentar (erforderlich)",
+      "xAddressLabel": "Wallet hat kein Tag-Feld? Senden Sie stattdessen an diese Adresse – das Tag ist bereits enthalten",
       "waitingForDeposit": "Warten auf deine Einzahlung…",
       "openHistory": "Verlauf öffnen",
       "status": {
         "depositReceived": {
           "title": "Einzahlung erhalten",
           "description": "Dein {ticker} ist eingegangen – sende es nicht erneut. Verfolge den Status des Swaps im Verlauf."
+        },
+        "closed": {
+          "title": "Einzahlungsfenster geschlossen",
+          "description": "Senden Sie keine Gelder an diese Adresse. Falls Sie Ihre {ticker} bereits gesendet haben, können sie dennoch eintreffen – verfolgen Sie dies im Verlauf."
         },
         "expired": {
           "title": "Einzahlungsfenster abgelaufen",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Diese Adresse nutzt EIP-7702-Delegation und kann den Auszahlungsbetrag nicht empfangen. Widerrufe die Delegation oder verwende eine reguläre Self-Custody-Adresse",
       "contractNotSupported": "Dies ist eine Smart-Contract-Adresse und kann den Auszahlungsbetrag nicht empfangen. Verwende eine Self-Custody-Wallet-Adresse",
       "memoPlaceholder": "Memo/Tag/Kommentar (optional)",
+      "destinationTagInvalid": "XRP benötigt ein numerisches Destination Tag – eine ganze Zahl bis 4294967295",
       "memoInvalid": "Das Memo darf maximal 64 Zeichen lang sein",
       "titleAddresses": "Adressen eingeben",
       "titleReceiving": "Empfangsadresse eingeben",

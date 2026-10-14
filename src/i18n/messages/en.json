@@ -145,6 +145,10 @@
           "title": "Deposit received",
           "description": "Your {ticker} has arrived - do not send it again. Follow the swap's status in History."
         },
+        "closed": {
+          "title": "Deposit window closed",
+          "description": "Do not send funds to this address. If you already sent your {ticker}, it can still arrive - follow it in History."
+        },
         "expired": {
           "title": "Deposit window expired",
           "description": "Do not send funds to this address. Start a new swap to get fresh deposit details."

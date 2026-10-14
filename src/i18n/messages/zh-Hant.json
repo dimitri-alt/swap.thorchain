@@ -125,6 +125,7 @@
       "highPriceImpact": "我理解價格影響是在Slippage容差之外的額外部分。我接受本次兌換的高價格影響。",
       "highPriceImpactPrivate": "我了解收到的金額遠低於送出的金額價值，並接受此隱私交換所產生的成本",
       "sendExact": "我理解我必須從自託管錢包發送精確的指定金額。我理解從Smart Contract錢包、交易所地址、委託地址或EIP 7702錢包發送將導致",
+      "depositTag": "我確認將在交易中附上下方顯示的 Memo / Tag / Comment。若未附上即發送，將導致",
       "lossOfFunds": "資金損失。",
       "ltcMweb": "我理解使用LTC MWEB地址將導致",
       "selfCustody": "我理解我必須使用自託管錢包。我理解使用Smart Contract錢包、交易所地址、委託地址或EIP 7702錢包將導致"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "二維碼",
       "expiresIn": "剩餘時間",
       "memoRequired": "Memo（必填）",
+      "tagRequired": "Memo / Tag / Comment（必填）",
+      "xAddressLabel": "錢包沒有 tag 欄位？請改為發送至此地址 - 已內建 tag",
       "waitingForDeposit": "等待您的存入款項…",
       "openHistory": "開啟歷史紀錄",
       "status": {
         "depositReceived": {
           "title": "已收到存入款項",
           "description": "您的 {ticker} 已送達 — 請勿重複發送。可在歷史紀錄中追蹤此次交換的狀態。"
+        },
+        "closed": {
+          "title": "存入視窗已關閉",
+          "description": "請勿再將資金發送至此地址。若您已發送 {ticker}，仍可能會入帳 - 請於「歷史紀錄」中追蹤。"
         },
         "expired": {
           "title": "存入時限已過期",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "此地址使用 EIP-7702 委派，無法接收出金。請撤銷委派，或改用一般自我保管地址",
       "contractNotSupported": "此為智能合約地址，無法接收出金。請使用自我保管錢包地址",
       "memoPlaceholder": "備註/標籤/註解（選填）",
+      "destinationTagInvalid": "XRP 需要數字格式的 destination tag - 最大為 4294967295 的整數",
       "memoInvalid": "備註最多只能有 64 個字元",
       "titleAddresses": "輸入地址",
       "titleReceiving": "輸入接收地址",

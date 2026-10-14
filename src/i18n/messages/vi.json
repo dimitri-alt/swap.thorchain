@@ -125,6 +125,7 @@
       "highPriceImpact": "Tôi hiểu rằng tác động giá là khoản bổ sung ngoài dung sai Slippage. Tôi chấp nhận tác động giá cao trên giao dịch hoán đổi này",
       "highPriceImpactPrivate": "Tôi hiểu rằng số tiền nhận được thấp hơn nhiều so với giá trị số tiền đã gửi, và tôi chấp nhận chi phí đó cho giao dịch riêng tư này",
       "sendExact": "Tôi hiểu rằng tôi phải gửi chính xác số lượng đã chỉ định từ một ví tự lưu ký. Tôi hiểu rằng gửi từ ví hợp đồng thông minh, địa chỉ sàn giao dịch, địa chỉ được ủy quyền hoặc ví EIP 7702 sẽ dẫn đến",
+      "depositTag": "Tôi xác nhận rằng tôi sẽ đính kèm Memo / Tag / Comment hiển thị bên dưới vào giao dịch của mình. Gửi mà không có nó sẽ dẫn đến",
       "lossOfFunds": "mất tiền.",
       "ltcMweb": "Tôi hiểu rằng việc sử dụng địa chỉ LTC MWEB sẽ dẫn đến",
       "selfCustody": "Tôi hiểu rằng tôi phải sử dụng ví tự lưu ký. Tôi hiểu rằng việc sử dụng ví hợp đồng thông minh, địa chỉ sàn giao dịch, địa chỉ được ủy quyền hoặc ví EIP 7702 sẽ dẫn đến"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "Mã QR",
       "expiresIn": "Hết hạn sau",
       "memoRequired": "Memo (bắt buộc)",
+      "tagRequired": "Memo / Tag / Comment (bắt buộc)",
+      "xAddressLabel": "Ví không có trường tag? Hãy gửi đến địa chỉ này - tag đã được tích hợp sẵn",
       "waitingForDeposit": "Đang chờ khoản nạp của bạn…",
       "openHistory": "Mở Lịch sử",
       "status": {
         "depositReceived": {
           "title": "Đã nhận khoản nạp",
           "description": "{ticker} của bạn đã đến - đừng gửi lại lần nữa. Theo dõi trạng thái giao dịch hoán đổi trong Lịch sử."
+        },
+        "closed": {
+          "title": "Đã đóng cửa sổ nạp tiền",
+          "description": "Không gửi tiền đến địa chỉ này. Nếu bạn đã gửi {ticker}, giao dịch vẫn có thể đến - hãy theo dõi trong Lịch sử."
         },
         "expired": {
           "title": "Đã hết thời hạn nạp",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Địa chỉ này sử dụng ủy quyền EIP-7702 và không thể nhận giao dịch chuyển ra. Hãy thu hồi ủy quyền hoặc dùng địa chỉ tự lưu ký thông thường",
       "contractNotSupported": "Đây là địa chỉ hợp đồng thông minh và không thể nhận giao dịch chuyển ra. Hãy dùng địa chỉ ví tự lưu ký",
       "memoPlaceholder": "Memo/Tag/Ghi chú (tùy chọn)",
+      "destinationTagInvalid": "XRP cần destination tag dạng số - một số nguyên tối đa 4294967295",
       "memoInvalid": "Memo chỉ được tối đa 64 ký tự",
       "titleAddresses": "Nhập địa chỉ",
       "titleReceiving": "Nhập địa chỉ nhận",

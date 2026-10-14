@@ -34,19 +34,31 @@ export const InstantSwap = ({ assetFrom, assetTo, channel, onClose }: InstantSwa
   const t = useTranslations('swap')
 
   const [now, setNow] = useState(() => Date.now())
-  useEffect(() => {
-    if (!channel.expiration) return
-    const interval = setInterval(() => setNow(Date.now()), 1000)
-    return () => clearInterval(interval)
-  }, [channel.expiration])
 
   // Once the deposit has arrived (or the window has closed) the details are withdrawn, so nobody
   // sends a second time; the swap itself is followed in History from then on. The window is closed
-  // by the local clock too: Houdini reports an unpaid order's expiry only some time after the fact.
+  // by the local clock too - but a Houdini order still takes a deposit sent just before the deadline
+  // (it reports that, or EXPIRED, itself), so its screen says "closed" and points to History, which
+  // goes on tracking it; the screen itself stops polling once the window is over.
   const tx = useTransaction(channel.txUid)
   const depositArrived = !!tx && hasDepositArrived(tx)
-  const windowClosed = tx?.status === 'expired' || (!!channel.expiration && channel.expiration * 1000 <= now)
-  const showStatus = depositArrived || windowClosed
+  const lapsed = !!channel.expiration && channel.expiration * 1000 <= now
+  const status: DepositState | undefined = depositArrived
+    ? 'arrived'
+    : tx?.status === 'expired'
+      ? 'expired'
+      : lapsed
+        ? isHoudiniProvider(channel.provider) && tx
+          ? 'closed'
+          : 'expired'
+        : undefined
+  const showStatus = !!status
+
+  useEffect(() => {
+    if (!channel.expiration || status) return
+    const interval = setInterval(() => setNow(Date.now()), 1000)
+    return () => clearInterval(interval)
+  }, [channel.expiration, status])
 
   return (
     <>
@@ -64,8 +76,8 @@ export const InstantSwap = ({ assetFrom, assetTo, channel, onClose }: InstantSwa
 
       <ScrollArea className="flex min-h-0 flex-1 px-4 md:px-8" classNameViewport="flex-1 h-auto">
         <div className="flex flex-col gap-4 pb-8">
-          {showStatus ? (
-            <DepositStatus arrived={depositArrived} ticker={assetFrom.ticker} onClose={onClose} />
+          {status ? (
+            <DepositStatus state={status} ticker={assetFrom.ticker} onClose={onClose} />
           ) : (
             <DepositDetails assetFrom={assetFrom} assetTo={assetTo} channel={channel} isTracked={!!tx} now={now} />
           )}
@@ -130,7 +142,7 @@ const DepositDetails = ({ assetFrom, assetTo, channel, isTracked, now }: SwapMem
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-2">
             <div className={cn('text-txt-label-small text-sm font-semibold break-all', { 'blur-xs': isBlurred })}>{channel.address}</div>
-            <CopyButton text={channel.address} />
+            {!isBlurred && <CopyButton text={channel.address} />}
           </div>
 
           <div className="text-gray border-gray rounded-full border px-1.5 text-[10px] font-semibold">{chainLabel(assetFrom.chain)}</div>
@@ -141,7 +153,7 @@ const DepositDetails = ({ assetFrom, assetTo, channel, isTracked, now }: SwapMem
             <div className="text-txt-label-small text-xs font-semibold">{isHoudini ? t('instant.tagRequired') : t('instant.memoRequired')}</div>
             <div className="flex items-center gap-2">
               <div className={cn('text-txt-high-contrast text-sm font-semibold break-all', { 'blur-xs': isBlurred })}>{channel.memo}</div>
-              <CopyButton text={channel.memo} />
+              {!isBlurred && <CopyButton text={channel.memo} />}
             </div>
           </div>
         )}
@@ -151,7 +163,7 @@ const DepositDetails = ({ assetFrom, assetTo, channel, isTracked, now }: SwapMem
             <div className="text-txt-label-small text-xs font-semibold">{t('instant.xAddressLabel')}</div>
             <div className="flex items-center gap-2">
               <div className={cn('text-txt-high-contrast text-sm font-semibold break-all', { 'blur-xs': isBlurred })}>{xAddress}</div>
-              <CopyButton text={xAddress} />
+              {!isBlurred && <CopyButton text={xAddress} />}
             </div>
           </div>
         )}
@@ -199,10 +211,12 @@ const WaitingForDeposit = () => {
   )
 }
 
-const DepositStatus = ({ arrived, ticker, onClose }: { arrived: boolean; ticker: string; onClose?: () => void }) => {
+type DepositState = 'arrived' | 'expired' | 'closed'
+
+const DepositStatus = ({ state, ticker, onClose }: { state: DepositState; ticker: string; onClose?: () => void }) => {
   const t = useTranslations('swap')
   const { dialogs, openDialog } = useDialog()
-  const key = arrived ? 'depositReceived' : 'expired'
+  const key = state === 'arrived' ? 'depositReceived' : state
 
   const openHistory = () => {
     onClose?.()
@@ -213,14 +227,18 @@ const DepositStatus = ({ arrived, ticker, onClose }: { arrived: boolean; ticker:
   return (
     <>
       <div className="flex items-center gap-3 rounded-xl border p-4">
-        {arrived ? <CircleCheck className="text-green-contrast size-5 shrink-0" /> : <ClockFading className="text-lucian size-5 shrink-0" />}
+        {state === 'arrived' ? (
+          <CircleCheck className="text-green-contrast size-5 shrink-0" />
+        ) : (
+          <ClockFading className={cn('size-5 shrink-0', state === 'closed' ? 'text-jacob' : 'text-lucian')} />
+        )}
         <div className="space-y-1 text-sm">
           <p className="text-txt-high-contrast font-semibold">{t(`instant.status.${key}.title`)}</p>
           <p className="text-txt-label-small">{t(`instant.status.${key}.description`, { ticker })}</p>
         </div>
       </div>
 
-      {arrived && (
+      {state !== 'expired' && (
         <GenericButton colorType="1" size="large" className="w-full" onClick={openHistory}>
           {t('instant.openHistory')}
         </GenericButton>

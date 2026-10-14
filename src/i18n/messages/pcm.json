@@ -125,6 +125,7 @@
       "highPriceImpact": "I understand say di price impact dey on top di slippage tolerance. I accept di high price impact on dis swap",
       "highPriceImpactPrivate": "I understand say di amount wey I go collect dey well below di value of wetin I send, and I accept dat cost for dis private swap",
       "sendExact": "I understand say I must send exactly di amount wey dem talk from a self-custody wallet. I understand say if I send from a smart contract wallet, exchange address, delegated address, or EIP 7702 wallet, e go cause",
+      "depositTag": "I confirm say I go put di Memo / Tag / Comment wey dey show below inside my transaction. If I send am without am, e go cause",
       "lossOfFunds": "loss of money.",
       "ltcMweb": "I understand say if I use LTC MWEB address e go cause",
       "selfCustody": "I understand say I must use a self-custody wallet. I understand say if I use a smart contract wallet, exchange address, delegated address, or EIP 7702 wallet, e go cause"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "QR Code",
       "expiresIn": "E go expire in",
       "memoRequired": "Memo (compulsory)",
+      "tagRequired": "Memo / Tag / Comment (you must put am)",
+      "xAddressLabel": "Your wallet no get tag field? Send go dis address instead - di tag don dey inside",
       "waitingForDeposit": "Dey wait for your deposit…",
       "openHistory": "Open History",
       "status": {
         "depositReceived": {
           "title": "Deposit don land",
           "description": "Your {ticker} don arrive - no send am again. Follow di swap status for History."
+        },
+        "closed": {
+          "title": "Deposit window don close",
+          "description": "No send money go dis address. If you don already send your {ticker}, e fit still land - follow am for History."
         },
         "expired": {
           "title": "Deposit time don pass",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Dis address dey use EIP-7702 delegation so e no fit collect di outbound. Cancel di delegation, abi use normal self-custody address",
       "contractNotSupported": "Dis one na smart contract address so e no fit collect di outbound. Use self-custody wallet address",
       "memoPlaceholder": "Memo/Tag/Comment (e no compulsory)",
+      "destinationTagInvalid": "XRP need destination tag wey be number - whole number wey no pass 4294967295",
       "memoInvalid": "Di memo no fit pass 64 characters",
       "titleAddresses": "Put Addresses",
       "titleReceiving": "Put Receiving Address",

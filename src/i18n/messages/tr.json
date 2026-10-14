@@ -125,6 +125,7 @@
       "highPriceImpact": "Fiyat etkisinin Slippage toleransına ek olduğunu anlıyorum. Bu takastaki yüksek fiyat etkisini kabul ediyorum.",
       "highPriceImpactPrivate": "Alınan miktarın, gönderilen miktarın değerinin çok altında olduğunu anlıyorum ve bu özel takas için söz konusu maliyeti kabul ediyorum",
       "sendExact": "Belirtilen tutarı bir öz saklamalı cüzdandan tam olarak göndermem gerektiğini anlıyorum. Bir Smart Contract cüzdanından, borsa adresinden, yetkilendirilmiş adresten veya EIP 7702 cüzdanından göndermek",
+      "depositTag": "İşlemime aşağıda gösterilen Memo / Tag / Comment bilgisini ekleyeceğimi onaylıyorum. Bu bilgi olmadan gönderim yapmak şu sonuca yol açar:",
       "lossOfFunds": "fon kaybına yol açar.",
       "ltcMweb": "LTC MWEB adresi kullanmak",
       "selfCustody": "Bir öz saklamalı cüzdan kullanmam gerektiğini anlıyorum. Bir Smart Contract cüzdanı, borsa adresi, yetkilendirilmiş adres veya EIP 7702 cüzdanı kullanmak"
@@ -135,12 +136,18 @@
       "qrCodeAlt": "QR Kodu",
       "expiresIn": "Sona erme",
       "memoRequired": "Memo (zorunlu)",
+      "tagRequired": "Memo / Tag / Comment (zorunlu)",
+      "xAddressLabel": "Cüzdanınızda tag alanı yok mu? Bunun yerine bu adrese gönderin - tag adresin içinde yer alır",
       "waitingForDeposit": "Yatırmanız bekleniyor…",
       "openHistory": "Geçmişi Aç",
       "status": {
         "depositReceived": {
           "title": "Yatırma alındı",
           "description": "{ticker} varlığınız ulaştı - tekrar göndermeyin. Takas durumunu Geçmiş bölümünden takip edin."
+        },
+        "closed": {
+          "title": "Yatırma penceresi kapandı",
+          "description": "Bu adrese fon göndermeyin. {ticker} varlığınızı zaten gönderdiyseniz yine de ulaşabilir - Geçmiş bölümünden takip edin."
         },
         "expired": {
           "title": "Yatırma süresi doldu",
@@ -248,6 +255,7 @@
       "delegatedNotSupported": "Bu adres EIP-7702 yetki devri kullanıyor ve giden transferi alamaz. Yetki devrini iptal edin veya standart bir kendi kendine saklama adresi kullanın",
       "contractNotSupported": "Bu bir akıllı sözleşme adresidir ve giden transferi alamaz. Kendi kendine saklama cüzdan adresi kullanın",
       "memoPlaceholder": "Memo/Etiket/Yorum (isteğe bağlı)",
+      "destinationTagInvalid": "XRP için sayısal bir hedef tag gerekir - 4294967295'e kadar tam sayı",
       "memoInvalid": "Memo en fazla 64 karakter olabilir",
       "titleAddresses": "Adresleri Gir",
       "titleReceiving": "Alıcı Adresi Gir",

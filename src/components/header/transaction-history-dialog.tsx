@@ -155,7 +155,9 @@ export const TransactionHistoryDialog = ({ isOpen, onOpenChange }: HistoryDialog
               }
 
               // Once the deposit is in, the deposit details (and their countdown) have served their purpose.
-              const showRQ = tx.qrCodeData && !hasDepositArrived(tx) && status !== 'expired'
+              // Nor past the window's deadline, before the provider has reported on it: the screen would only say it closed.
+              const windowLapsed = !!tx.expiration && tx.expiration * 1000 <= now.getTime()
+              const showRQ = tx.qrCodeData && !hasDepositArrived(tx) && status !== 'expired' && !windowLapsed
               const showLimitSwapActions = !!tx.limitSwapMemo && isTxPending(status) && (!!orderAccount(tx) || !!tx.qrCodeData)
 
               const explorerLinks = getExplorerLinks(tx)
