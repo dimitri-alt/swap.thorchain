@@ -405,6 +405,8 @@
   "send.pool.pnl": ["PnL", "PnL"],
   "send.pool.noRunepoolPosition": ["No RUNEPool position found for this wallet.", "No RUNEPool position found for this wallet."],
   "send.thorname.searchPlaceholder": ["Search a {name}", "{name} لبھو"],
+  "send.thorname.description": ["{protocol} has a feature similar to .eth names, called {name}. A {name} can receive any token that is tradeable on {protocol}. You can assign any address you want to your {name}. Affiliates can also have their fees paid out in any token that is supported by {protocol}, by using a {name}.", "{protocol} وچ .eth ناواں ورگی اک خصوصیت اے، جیہنوں {name} کہندے نیں۔ اک {name} اوہ ہر ٹوکن وصول کر سکدا اے جیہڑا {protocol} تے ٹریڈ ہو سکدا اے۔ تُسیں اپنے {name} نال جیہڑا وی پتہ چاہو جوڑ سکدے او۔ ایفیلی ایٹس وی {name} ورت کے اپنیاں فیساں {protocol} ولوں سپورٹ کیتے گئے کسے وی ٹوکن وچ لے سکدے نیں۔"],
+  "send.thorname.requirement": ["You need to have a wallet that supports {protocol} and own {ticker} to buy a {name}.", "{name} خریدن لئی تہاڈے کول {protocol} نوں سپورٹ کرن والا والٹ ہونا چاہیدا اے تے {ticker} وی ہونا چاہیدا اے۔"],
   "send.thorname.register": ["Register", "رجسٹر کرو"],
   "send.thorname.yours": ["is yours", "تہاڈا اے"],
   "send.thorname.availableLabel": ["Available", "دستیاب"],

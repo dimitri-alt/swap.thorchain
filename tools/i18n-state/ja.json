@@ -405,6 +405,8 @@
   "send.pool.pnl": ["PnL", "PnL"],
   "send.pool.noRunepoolPosition": ["No RUNEPool position found for this wallet.", "No RUNEPool position found for this wallet."],
   "send.thorname.searchPlaceholder": ["Search a {name}", "{name}を検索"],
+  "send.thorname.description": ["{protocol} has a feature similar to .eth names, called {name}. A {name} can receive any token that is tradeable on {protocol}. You can assign any address you want to your {name}. Affiliates can also have their fees paid out in any token that is supported by {protocol}, by using a {name}.", "{protocol}には.ethネームに似た{name}という機能があります。{name}は{protocol}で取引可能なあらゆるトークンを受け取ることができます。{name}には任意のアドレスを割り当てられます。アフィリエイトも{name}を使用することで、{protocol}がサポートする任意のトークンで手数料を受け取ることができます。"],
+  "send.thorname.requirement": ["You need to have a wallet that supports {protocol} and own {ticker} to buy a {name}.", "{name}を購入するには、{protocol}に対応したウォレットと{ticker}の保有が必要です。"],
   "send.thorname.register": ["Register", "登録"],
   "send.thorname.yours": ["is yours", "はあなたのものです"],
   "send.thorname.availableLabel": ["Available", "利用可能"],

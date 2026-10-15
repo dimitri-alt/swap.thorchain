@@ -405,6 +405,8 @@
   "send.pool.pnl": ["PnL", "PnL"],
   "send.pool.noRunepoolPosition": ["No RUNEPool position found for this wallet.", "No RUNEPool position found for this wallet."],
   "send.thorname.searchPlaceholder": ["Search a {name}", "Cerca un {name}"],
+  "send.thorname.description": ["{protocol} has a feature similar to .eth names, called {name}. A {name} can receive any token that is tradeable on {protocol}. You can assign any address you want to your {name}. Affiliates can also have their fees paid out in any token that is supported by {protocol}, by using a {name}.", "{protocol} dispone di una funzionalità simile ai nomi .eth, chiamata {name}. Un {name} può ricevere qualsiasi token scambiabile su {protocol}. Puoi assegnare al tuo {name} qualsiasi indirizzo desideri. Anche gli affiliati possono ricevere le proprie commissioni in qualsiasi token supportato da {protocol}, utilizzando un {name}."],
+  "send.thorname.requirement": ["You need to have a wallet that supports {protocol} and own {ticker} to buy a {name}.", "Devi avere un wallet che supporti {protocol} e possedere {ticker} per acquistare un {name}."],
   "send.thorname.register": ["Register", "Registra"],
   "send.thorname.yours": ["is yours", "è tuo"],
   "send.thorname.availableLabel": ["Available", "Disponibile"],

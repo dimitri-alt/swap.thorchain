@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "ابحث عن {name}",
+      "description": "يوفّر {protocol} ميزة مشابهة لأسماء ‎.eth تُسمى {name}. ويمكن لـ {name} استقبال أي عملة قابلة للتداول على {protocol}. كما يمكنك ربط أي عنوان تريده بـ {name} الخاص بك. ويمكن للشركاء التابعين أيضاً تحصيل رسومهم بأي عملة يدعمها {protocol} عبر استخدام {name}.",
+      "requirement": "تحتاج إلى محفظة تدعم {protocol} وإلى امتلاك {ticker} لشراء {name}.",
       "register": "تسجيل",
       "yours": "ملكك",
       "availableLabel": "متاح",

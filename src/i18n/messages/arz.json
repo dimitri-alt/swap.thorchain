@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "دوّر على {name}",
+      "description": "{protocol} فيه خاصية شبه أسماء .eth، اسمها {name}. الـ {name} يقدر يستقبل أي توكن متداول على {protocol}. تقدر تربط أي عنوان تحبه بالـ {name} بتاعك. كمان الشركاء (Affiliates) يقدروا ياخدوا عمولاتهم بأي توكن مدعوم من {protocol} عن طريق استخدام {name}.",
+      "requirement": "لازم يكون عندك محفظة بتدعم {protocol} وتمتلك {ticker} عشان تشتري {name}.",
       "register": "سجّل",
       "yours": "بتاعك",
       "availableLabel": "متاح",

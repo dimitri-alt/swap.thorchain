@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "{name} ara",
+      "description": "{protocol}, .eth isimlerine benzer şekilde {name} adı verilen bir özelliğe sahiptir. Bir {name}, {protocol} üzerinde işlem görebilen her tokenı alabilir. {name} kaydınıza istediğiniz herhangi bir adresi atayabilirsiniz. İş ortakları da bir {name} kullanarak ücretlerini {protocol} tarafından desteklenen herhangi bir token olarak tahsil edebilir.",
+      "requirement": "Bir {name} satın almak için {protocol} destekleyen bir cüzdana sahip olmanız ve {ticker} bulundurmanız gerekir.",
       "register": "Kaydet",
       "yours": "size ait",
       "availableLabel": "Müsait",

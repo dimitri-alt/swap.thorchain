@@ -405,6 +405,8 @@
   "send.pool.pnl": ["PnL", "PnL"],
   "send.pool.noRunepoolPosition": ["No RUNEPool position found for this wallet.", "No RUNEPool position found for this wallet."],
   "send.thorname.searchPlaceholder": ["Search a {name}", "جستجوی یک {name}"],
+  "send.thorname.description": ["{protocol} has a feature similar to .eth names, called {name}. A {name} can receive any token that is tradeable on {protocol}. You can assign any address you want to your {name}. Affiliates can also have their fees paid out in any token that is supported by {protocol}, by using a {name}.", "{protocol} قابلیتی مشابه نام‌های .eth دارد که {name} نامیده می‌شود. یک {name} می‌تواند هر توکنی را که در {protocol} قابل معامله است دریافت کند. می‌توانید هر آدرسی که بخواهید را به {name} خود اختصاص دهید. همکاران (افیلیت‌ها) نیز می‌توانند با استفاده از یک {name}، کارمزد خود را در هر توکنی که {protocol} پشتیبانی می‌کند دریافت کنند."],
+  "send.thorname.requirement": ["You need to have a wallet that supports {protocol} and own {ticker} to buy a {name}.", "برای خرید یک {name}، باید کیف پولی داشته باشید که از {protocol} پشتیبانی کند و {ticker} در اختیار داشته باشید."],
   "send.thorname.register": ["Register", "ثبت"],
   "send.thorname.yours": ["is yours", "مال شماست"],
   "send.thorname.availableLabel": ["Available", "در دسترس"],

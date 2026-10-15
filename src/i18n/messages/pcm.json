@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "Find a {name}",
+      "description": "{protocol} get one feature wey be like .eth names, dem dey call am {name}. One {name} fit receive any token wey you fit trade for {protocol}. You fit put any address wey you want for your {name}. Affiliates sef fit collect dia fees for any token wey {protocol} support, by using {name}.",
+      "requirement": "You go need wallet wey support {protocol} and you must get {ticker} before you fit buy {name}.",
       "register": "Register",
       "yours": "na your own",
       "availableLabel": "Available",

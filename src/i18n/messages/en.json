@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "Search a {name}",
+      "description": "{protocol} has a feature similar to .eth names, called {name}. A {name} can receive any token that is tradeable on {protocol}. You can assign any address you want to your {name}. Affiliates can also have their fees paid out in any token that is supported by {protocol}, by using a {name}.",
+      "requirement": "You need to have a wallet that supports {protocol} and own {ticker} to buy a {name}.",
       "register": "Register",
       "yours": "is yours",
       "availableLabel": "Available",

@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "Cerca un {name}",
+      "description": "{protocol} dispone di una funzionalità simile ai nomi .eth, chiamata {name}. Un {name} può ricevere qualsiasi token scambiabile su {protocol}. Puoi assegnare al tuo {name} qualsiasi indirizzo desideri. Anche gli affiliati possono ricevere le proprie commissioni in qualsiasi token supportato da {protocol}, utilizzando un {name}.",
+      "requirement": "Devi avere un wallet che supporti {protocol} e possedere {ticker} per acquistare un {name}.",
       "register": "Registra",
       "yours": "è tuo",
       "availableLabel": "Disponibile",

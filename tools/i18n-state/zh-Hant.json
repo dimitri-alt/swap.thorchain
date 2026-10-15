@@ -405,6 +405,8 @@
   "send.pool.pnl": ["PnL", "PnL"],
   "send.pool.noRunepoolPosition": ["No RUNEPool position found for this wallet.", "No RUNEPool position found for this wallet."],
   "send.thorname.searchPlaceholder": ["Search a {name}", "搜尋 {name}"],
+  "send.thorname.description": ["{protocol} has a feature similar to .eth names, called {name}. A {name} can receive any token that is tradeable on {protocol}. You can assign any address you want to your {name}. Affiliates can also have their fees paid out in any token that is supported by {protocol}, by using a {name}.", "{protocol} 具備類似 .eth 名稱的功能，稱為 {name}。{name} 可接收任何在 {protocol} 上可交易的代幣。您可以將任意地址指定給您的 {name}。推廣夥伴也可以透過 {name}，以 {protocol} 支援的任何代幣領取其費用。"],
+  "send.thorname.requirement": ["You need to have a wallet that supports {protocol} and own {ticker} to buy a {name}.", "您需要擁有支援 {protocol} 的錢包，並持有 {ticker} 才能購買 {name}。"],
   "send.thorname.register": ["Register", "註冊"],
   "send.thorname.yours": ["is yours", "是您的"],
   "send.thorname.availableLabel": ["Available", "可用"],

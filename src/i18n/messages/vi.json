@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "Tìm kiếm một {name}",
+      "description": "{protocol} có một tính năng tương tự tên .eth, gọi là {name}. Một {name} có thể nhận bất kỳ token nào được giao dịch trên {protocol}. Bạn có thể gán bất kỳ địa chỉ nào bạn muốn cho {name} của mình. Các đối tác liên kết cũng có thể nhận phí của họ bằng bất kỳ token nào được {protocol} hỗ trợ, bằng cách sử dụng một {name}.",
+      "requirement": "Bạn cần có ví hỗ trợ {protocol} và sở hữu {ticker} để mua một {name}.",
       "register": "Đăng ký",
       "yours": "là của bạn",
       "availableLabel": "Khả dụng",

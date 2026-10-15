@@ -48,6 +48,8 @@ export interface ThornameConfig {
   key: 'thorname' | 'mayaname'
   /** Brand name interpolated into titles, e.g. "THORName" / "MAYAName". */
   label: string
+  /** Protocol display name used in the tab description, e.g. "THORChain" / "Maya Protocol". */
+  protocol: string
   /** L1 chain the deposit is broadcast on, also used to resolve the account. */
   chain: Chain
   /** Alias chain segment inside the `~` memo (`THOR` / `MAYA`). */
@@ -73,6 +75,7 @@ export interface ThornameConfig {
 export const THORNAME_CONFIG: ThornameConfig = {
   key: 'thorname',
   label: 'THORName',
+  protocol: 'THORChain',
   chain: Chain.THORChain,
   aliasChain: 'THOR',
   ticker: 'RUNE',
@@ -94,6 +97,7 @@ export const THORNAME_CONFIG: ThornameConfig = {
 export const MAYANAME_CONFIG: ThornameConfig = {
   key: 'mayaname',
   label: 'MAYAName',
+  protocol: 'Maya Protocol',
   chain: Chain.Maya,
   aliasChain: 'MAYA',
   ticker: 'CACAO',

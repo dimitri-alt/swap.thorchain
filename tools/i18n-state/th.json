@@ -405,6 +405,8 @@
   "send.pool.pnl": ["PnL", "PnL"],
   "send.pool.noRunepoolPosition": ["No RUNEPool position found for this wallet.", "No RUNEPool position found for this wallet."],
   "send.thorname.searchPlaceholder": ["Search a {name}", "ค้นหา {name}"],
+  "send.thorname.description": ["{protocol} has a feature similar to .eth names, called {name}. A {name} can receive any token that is tradeable on {protocol}. You can assign any address you want to your {name}. Affiliates can also have their fees paid out in any token that is supported by {protocol}, by using a {name}.", "{protocol} มีฟีเจอร์ที่คล้ายกับชื่อ .eth เรียกว่า {name} โดย {name} สามารถรับโทเคนใดก็ได้ที่สามารถซื้อขายได้บน {protocol} คุณสามารถกำหนดที่อยู่ใดก็ได้ให้กับ {name} ของคุณ นอกจากนี้พาร์ทเนอร์ยังสามารถรับค่าธรรมเนียมเป็นโทเคนใดก็ได้ที่ {protocol} รองรับ โดยใช้ {name}"],
+  "send.thorname.requirement": ["You need to have a wallet that supports {protocol} and own {ticker} to buy a {name}.", "คุณต้องมีกระเป๋าเงินที่รองรับ {protocol} และถือ {ticker} เพื่อซื้อ {name}"],
   "send.thorname.register": ["Register", "ลงทะเบียน"],
   "send.thorname.yours": ["is yours", "เป็นของคุณ"],
   "send.thorname.availableLabel": ["Available", "พร้อมใช้งาน"],

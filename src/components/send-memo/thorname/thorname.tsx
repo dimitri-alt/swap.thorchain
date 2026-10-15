@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { SwapAddressFrom } from '@/components/swap/swap-address-from'
 import { ThornameView } from '@/components/send-memo/thorname/thorname-view'
 import { THORNAME_CONFIGS, ThornameConfig } from '@/components/send-memo/thorname/thorname-config'
@@ -10,6 +11,7 @@ import { cn } from '@/lib/utils'
 const TABS: ThornameConfig['key'][] = ['thorname', 'mayaname']
 
 export function Thorname() {
+  const t = useTranslations('send')
   const [tab, setTab] = useState<ThornameConfig['key']>('thorname')
   const config = THORNAME_CONFIGS[tab]
   const account = useSelectedAccount()
@@ -36,6 +38,11 @@ export function Thorname() {
       </div>
 
       <ThornameView key={tab} config={config} />
+
+      <div className="text-txt-label-small space-y-3 px-1 text-sm leading-relaxed">
+        <p>{t('thorname.description', { protocol: config.protocol, name: config.label })}</p>
+        <p>{t('thorname.requirement', { protocol: config.protocol, ticker: config.ticker, name: config.label })}</p>
+      </div>
     </div>
   )
 }

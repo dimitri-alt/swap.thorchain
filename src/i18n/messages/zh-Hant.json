@@ -501,6 +501,8 @@
     },
     "thorname": {
       "searchPlaceholder": "搜尋 {name}",
+      "description": "{protocol} 具備類似 .eth 名稱的功能，稱為 {name}。{name} 可接收任何在 {protocol} 上可交易的代幣。您可以將任意地址指定給您的 {name}。推廣夥伴也可以透過 {name}，以 {protocol} 支援的任何代幣領取其費用。",
+      "requirement": "您需要擁有支援 {protocol} 的錢包，並持有 {ticker} 才能購買 {name}。",
       "register": "註冊",
       "yours": "是您的",
       "availableLabel": "可用",
