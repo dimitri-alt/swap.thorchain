@@ -3,8 +3,8 @@ import { getMayaMimir, getMimir } from '@/lib/api'
 import { DEFAULT_LIMIT_SWAP_MAX_AGE, MIN_LIMIT_SWAP_MAX_AGE } from '@/lib/limit-swap'
 
 // Mimir carries kill switches (halted chains, HALTMEMOLESS, ENABLEADVSWAPQUEUE) that gate what the
-// UI offers, so it is polled every minute for the screens to react while open.
-const MIMIR_REFRESH_MS = 60 * 1000
+// UI offers, so it is polled every five minutes for the screens to react while open.
+const MIMIR_REFRESH_MS = 5 * 60 * 1000
 
 export const useMimir = () => {
   const { data: mimir, isLoading } = useQuery({

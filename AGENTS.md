@@ -77,7 +77,7 @@ Two-component architecture:
 - `docs/agent-readiness/` — notes on agent-readiness scanners and decisions; read before changing discovery surfaces.
 - `src/lib/banner.ts` + `src/app/api/banner/route.ts` + `src/hooks/use-banner.ts` — the announcement banner. It is content owned by the affiliate
   admin (`swap.thorchain-admin`, admin-only `/banner`, published at its `/api/banner`), not by this repo: this app proxies that endpoint through its
-  own origin (30s cache, `BANNER_API_URL`) and each tab polls every 60s once the browser is idle, so a banner goes up without a deploy and never
+  own origin (30s cache, `BANNER_API_URL`) and each tab polls every 10 min once the browser is idle, so a banner goes up without a deploy and never
   competes with the swap's own requests. An icon uploaded there is proxied the same way at `/api/banner/icon`, so the banner is always same-origin. Nothing is bundled — an unreachable
   admin means the last-seen banner, or none. Its copy is translated by the admin on save and is deliberately not in `src/i18n/messages`. See
   `docs/banner.md`.

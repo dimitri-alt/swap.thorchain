@@ -10,12 +10,12 @@ putting one up, or taking it down, is a save rather than a deploy.
 admin /banner ──save──▶ data/banner.json ──▶ admin /api/banner
                                                    │  fetched at most every 30s
                                             swap /api/banner   ← this app, one cache for everyone
-                                                   │  polled every 60s by each open tab
+                                                   │  polled every 10 min by each open tab
                                             <AnnouncementBanner />
 ```
 
 Nothing about a swap depends on the banner, so it never competes with the requests that matter: the first fetch waits for the browser to go idle (at
-most 3s), and the header renders without it until then. A published change is on screen within about a minute. Nothing is baked into the build: if the
+most 3s), and the header renders without it until then. A published change is on screen within about ten minutes. Nothing is baked into the build: if the
 admin cannot be reached this app keeps serving the last banner it saw, and a cold start with the admin down shows no banner at all rather than
 resurrecting an old one.
 
@@ -52,7 +52,7 @@ Banner copy is _not_ part of `src/i18n/messages` and never reaches the review qu
 ## Taking one down
 
 Switching **Show the banner** off hides it while keeping the copy, so the same banner can go back up later. **Delete this banner** removes it outright
-— the English, every translation and the icon — and leaves the admin with an empty form. Either way visitors stop seeing it within about a minute.
+— the English, every translation and the icon — and leaves the admin with an empty form. Either way visitors stop seeing it within about ten minutes.
 
 ## Dismissal
 

@@ -4,7 +4,7 @@ import { FALLBACK_BANNER, normalizeBanner, type Banner } from '@/lib/banner'
 
 // Published from the affiliate admin, so it can change at any time without a
 // deploy: polled like mimir rather than read once.
-const BANNER_REFRESH_MS = 60 * 1000
+const BANNER_REFRESH_MS = 10 * 60 * 1000
 
 // Nothing about the swap depends on the banner, so it must not compete with the
 // requests that do. The fetch waits for the browser to go idle — after the asset
