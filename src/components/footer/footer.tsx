@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { MessageCircle, X } from 'lucide-react'
 import { Icon } from '@/components/icons'
-import { FOOTER_CLEARANCE_CSS, toggleChatwoot, useChatwootOpen, useChatwootReady } from '@/components/chatwoot-widget'
+import { toggleChatwoot, useChatwootOpen } from '@/components/chatwoot-widget'
 import { Tooltip } from '@/components/tooltip'
 import { AppConfig } from '@/config'
 import { Separator } from '../ui/separator'
@@ -12,7 +12,6 @@ export function FooterContent({ className }: { className?: string }) {
   const t = useTranslations('footer')
   const tCommon = useTranslations('common')
   const chatOpen = useChatwootOpen()
-  const chatReady = useChatwootReady()
 
   return (
     <div className={className}>
@@ -42,22 +41,16 @@ export function FooterContent({ className }: { className?: string }) {
           <a className="sr-only" href="/developers">
             {t('developers')}
           </a>
-          {chatReady && (
-            <>
-              {/* Hides the floating bubble only where this button replaces it. */}
-              <style>{FOOTER_CLEARANCE_CSS}</style>
-              <button
-                type="button"
-                onClick={toggleChatwoot}
-                aria-expanded={chatOpen}
-                title={chatOpen ? tCommon('close') : t('liveChat')}
-                className="hover:text-txt-high-contrast flex cursor-pointer items-center gap-1 transition-colors"
-              >
-                {chatOpen ? <X className="size-4" /> : <MessageCircle className="size-4" />}
-                {t('support')}
-              </button>
-            </>
-          )}
+          <button
+            type="button"
+            onClick={toggleChatwoot}
+            aria-expanded={chatOpen}
+            title={chatOpen ? tCommon('close') : t('liveChat')}
+            className="hover:text-txt-high-contrast flex cursor-pointer items-center gap-1 transition-colors"
+          >
+            {chatOpen ? <X className="size-4" /> : <MessageCircle className="size-4" />}
+            {t('support')}
+          </button>
         </div>
       </div>
     </div>
