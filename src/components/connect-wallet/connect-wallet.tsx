@@ -133,7 +133,7 @@ export const ConnectWallet = ({ isOpen, onOpenChange, chain }: ConnectWalletProp
     }
 
     if (wallet.key === 'keystore') {
-      return <Keystore key={wallet.key} wallet={wallet} onConnect={onConnect} />
+      return <Keystore key={wallet.key} wallet={wallet} chains={chains} onConnect={onConnect} />
     }
 
     return null
@@ -167,7 +167,7 @@ export const ConnectWallet = ({ isOpen, onOpenChange, chain }: ConnectWalletProp
           )}
 
           {selectedWallet ? (
-            <div className="flex min-h-0 flex-1 flex-col">{renderSelectedWallet(selectedWallet)}</div>
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col">{renderSelectedWallet(selectedWallet)}</div>
           ) : (
             <div className="hidden flex-1 flex-col md:flex">
               <div className="text-txt-label-small mb-3 px-8 text-base font-semibold">{t('chains')}</div>

@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { mnemonicToSeedSync } from '@scure/bip39'
-import { WalletOption } from '@tcswap/core'
+import { Chain, WalletOption } from '@tcswap/core'
 import { LoaderCircle } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
-import { ALL_CHAINS } from '@/components/connect-wallet/config'
 import { SwapError } from '@/components/swap/swap-error'
 import { GenericButton } from '@/components/generic-button'
 import { useWallets } from '@/hooks/use-wallets'
 
-export function ImportPhrase({ onBack, onConnect }: { onBack: () => void; onConnect: () => void }) {
+export function ImportPhrase({ chains, onBack, onConnect }: { chains: Chain[]; onBack: () => void; onConnect: () => void }) {
   const t = useTranslations('wallet')
   const [phrase, setPhrase] = useState<string | undefined>()
   const [error, setError] = useState<Error | undefined>()
@@ -24,7 +23,7 @@ export function ImportPhrase({ onBack, onConnect }: { onBack: () => void; onConn
       // validate seed phrase
       mnemonicToSeedSync(phrase || '')
 
-      await connect(WalletOption.KEYSTORE, ALL_CHAINS, { phrase })
+      await connect(WalletOption.KEYSTORE, chains, { phrase })
       onConnect()
     } catch (e: any) {
       setError(e)
