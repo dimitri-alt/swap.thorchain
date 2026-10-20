@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { readWalletLink, writeWalletLink } from '@/store/wallets-store-cookie'
-import { getAccounts, getUSwap, supportedChains } from '@/lib/wallets'
+import { getAccounts, getUSwap, supportedChains, syncBraveAccountWatch } from '@/lib/wallets'
 
 export interface WalletAccount {
   address: string
@@ -66,8 +66,9 @@ export const useWalletStore = create<WalletState>()(
 
       disconnect: (wallet: WalletOption) => {
         const uSwap = getUSwap()
+        // `disconnectChain` acts on whichever wallet holds the chain's slot, so skip chains another wallet holds.
         supportedChains[wallet as keyof typeof supportedChains]?.forEach(chain => {
-          uSwap.disconnectChain(chain)
+          if (uSwap.getWalletByChain(chain)?.walletType === wallet) uSwap.disconnectChain(chain)
         })
 
         set(state => {
@@ -135,6 +136,7 @@ export const useWalletStore = create<WalletState>()(
 
 // Mirror connected providers/chains to the shared cookie when they change.
 useWalletStore.subscribe(state => {
+  syncBraveAccountWatch(state.accounts)
   if (!state.hasHydrated) return
   writeWalletLink(state.accounts)
 })

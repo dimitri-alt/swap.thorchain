@@ -3,6 +3,7 @@ import { EVMPlugin } from '@tcswap/plugins/evm'
 import { HoudiniPlugin } from '@tcswap/plugins/houdini'
 import { SolanaPlugin } from '@tcswap/plugins/solana'
 import { MayachainPlugin, ThorchainPlugin } from '@tcswap/plugins/thorchain'
+import { braveWallet, getBraveEVMProvider, getBraveSolanaProvider, watchBraveAccounts } from '@tcswap/wallets/brave'
 import { evmWallet } from '@tcswap/wallets/evm-extensions'
 import { exodusWallet } from '@tcswap/wallets/exodus'
 import { keplrWallet } from '@tcswap/wallets/keplr'
@@ -26,6 +27,7 @@ const defaultPlugins = {
 }
 
 const defaultWallets = {
+  ...braveWallet,
   ...evmWallet,
   ...exodusWallet,
   ...keplrWallet,
@@ -129,6 +131,14 @@ export async function connectWallet(option: WalletOption, chains: Chain[], confi
     case WalletOption.TRUSTWALLET_WEB:
       const trust = getEIP6963Wallets().providers.find(p => p.info.name === 'Trust Wallet')
       return connectEach(c => uSwap.connectEVMWallet(c, WalletOption.TRUSTWALLET_WEB, trust?.provider))
+    case WalletOption.BRAVE:
+      assertBraveAccounts(chains)
+      braveConnects++
+      try {
+        return await connectEach(c => uSwap.connectBrave(c))
+      } finally {
+        braveConnects--
+      }
     case WalletOption.KEPLR:
       return connectEach(c => uSwap.connectKeplr(c))
     case WalletOption.OKX:
@@ -150,6 +160,43 @@ export async function connectWallet(option: WalletOption, chains: Chain[], confi
       throw new Error(`Unsupported wallet option: ${option}`)
     }
   }
+}
+
+// Brave can hold only one of its two accounts; name the missing one, since `connectEach` swallows the SDK's error.
+function assertBraveAccounts(chains: Chain[]) {
+  if (chains.includes(Chain.Solana) && !getBraveSolanaProvider()) {
+    throw new Error('Brave Wallet has no Solana account available. Create or enable one in Brave Wallet, or deselect Solana.')
+  }
+  if (chains.some(c => c !== Chain.Solana) && !getBraveEVMProvider()) {
+    throw new Error('Brave Wallet has no Ethereum account available. Create or enable one in Brave Wallet, or deselect the EVM chains.')
+  }
+}
+
+// Brave signs with its current account, not the connected one, so reload on a switch (as TronLink does).
+// Watched while a Brave account is connected; events during a connect are the grant itself.
+let braveConnects = 0
+let unwatchBrave: (() => void) | undefined
+
+export function syncBraveAccountWatch(accounts: { provider: WalletOption }[]) {
+  const connected = accounts.some(a => a.provider === WalletOption.BRAVE)
+
+  if (connected && !unwatchBrave) unwatchBrave = watchBraveAccounts(onBraveAccountChange)
+  if (!connected && unwatchBrave) {
+    unwatchBrave()
+    unwatchBrave = undefined
+  }
+}
+
+// A switch only matters on a side the user connected; `undefined` comes from Solana, EVM addresses are 0x.
+function onBraveAccountChange(address: string | undefined) {
+  if (braveConnects > 0) return
+
+  const isSolana = !address?.startsWith('0x')
+  const connected = useWalletStore.getState().accounts.filter(a => a.provider === WalletOption.BRAVE && (a.network === Chain.Solana) === isSolana)
+  if (connected.length === 0) return
+
+  const known = address !== undefined && connected.some(a => a.address.toLowerCase() === address.toLowerCase())
+  if (!known) window.location.reload()
 }
 
 export async function getAccounts(
@@ -207,7 +254,7 @@ const BTC_ADDRESS_TYPE_LABEL = {
 } as const
 
 export const supportedChains = {
-  [WalletOption.BRAVE]: evmWallet.connectEVMWallet.supportedChains,
+  [WalletOption.BRAVE]: braveWallet.connectBrave.supportedChains,
   [WalletOption.COINBASE_WEB]: evmWallet.connectEVMWallet.supportedChains,
   [WalletOption.EIP6963]: evmWallet.connectEVMWallet.supportedChains,
   [WalletOption.EXODUS]: exodusWallet.connectExodus.supportedChains,

@@ -1,5 +1,6 @@
 import { Chain, okxMobileEnabled, WalletOption } from '@tcswap/core'
 import { getChainConfig } from '@tcswap/helpers'
+import { getBraveEVMProvider, getBraveSolanaProvider } from '@tcswap/wallets/brave'
 import { supportedChains } from '@/lib/wallets'
 
 export enum WalletType {
@@ -70,6 +71,14 @@ export const WALLETS: WalletParams[] = [
     option: WalletOption.TRUSTWALLET_WEB,
     link: 'https://trustwallet.com',
     supportedChains: supportedChains[WalletOption.TRUSTWALLET_WEB]
+  },
+  {
+    key: 'brave',
+    type: WalletType.browser,
+    label: 'Brave Wallet',
+    option: WalletOption.BRAVE,
+    link: 'https://brave.com/wallet',
+    supportedChains: supportedChains[WalletOption.BRAVE]
   },
   {
     key: 'exodus',
@@ -148,7 +157,7 @@ export const isWalletAvailable = (option: WalletOption) => {
     case WalletOption.KEYSTORE: return true
 
     case WalletOption.BRAVE:
-      return window?.ethereum?.isBraveWallet
+      return getBraveSolanaProvider() || getBraveEVMProvider()
     case WalletOption.TRUSTWALLET_WEB:
       return window?.ethereum?.isTrust || window?.trustwallet
     case WalletOption.COINBASE_WEB:

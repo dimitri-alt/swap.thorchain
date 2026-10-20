@@ -27,7 +27,9 @@ Two-component architecture:
 - `src/lib/tronlink.ts` — a connector the SDK does not ship, registered in `wallets.ts` like any `@tcswap/wallets/*` one. Exodus is not one of
   these: it lives in the SDK as `@tcswap/wallets/exodus` (the browser extension), added in `../TCSwap`. Mind the version — through 4.3.26 that
   subpath was an alias for Exodus's unrelated Passkeys wallet, which has always had its own `@tcswap/wallets/passkeys` export and still does; only
-  4.3.27 onwards carries the extension connector, so `package.json` must ask for at least that.
+  4.3.27 onwards carries the extension connector, so `package.json` must ask for at least that. Brave Wallet is in the SDK too, as
+  `@tcswap/wallets/brave` (`connectBrave`, 4.3.34 onwards): it reaches both of Brave's accounts, EVM and Solana, through Brave's own providers,
+  where `connectEVMWallet` with `WalletOption.BRAVE` gets the EVM account only, from whichever extension owns `window.ethereum`.
 - `isPrivateSwap` in `src/store/limit-swap-store.ts` — the PRIVATE tab: the swap is routed through Houdini Swap
   (`AppConfig.privateProvider`, `providers: ["HOUDINI"]` on the aggregator, `@tcswap/plugins/houdini` in the SDK) instead of the native protocols. Each
   tab has its own asset list (`useModeAssets` in `src/hooks/use-assets.ts`), and a private route is priced floating and tracked by its Houdini order
