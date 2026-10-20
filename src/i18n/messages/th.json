@@ -352,6 +352,7 @@
       "bondAmount": "จำนวน Bond",
       "rebondAmount": "จำนวน Rebond",
       "nodeAddress": "ที่อยู่ Node",
+      "bondAddress": "ที่อยู่ Bond",
       "newAddress": "ที่อยู่วอลเล็ตใหม่",
       "enterNodeAddress": "กรอกที่อยู่ Node",
       "invalidNodeAddress": "ที่อยู่ Node ไม่ถูกต้อง",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "ไม่พบ node หรือไม่พร้อมใช้งาน",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "ติดตาม"
       },
-      "node": {
-        "version": "เวอร์ชัน",
-        "ipAddress": "ที่อยู่ IP",
-        "status": "สถานะ",
-        "providers": "ผู้ให้บริการ",
-        "yourShare": "ส่วนแบ่งของคุณ",
-        "slashPoints": "Slash Points",
-        "operatorFee": "ค่าธรรมเนียมผู้ดำเนินการ",
-        "information": "ข้อมูล Node",
+      "track": {
         "bond": "Bond",
-        "nextReward": "รางวัลถัดไป"
+        "nextReward": "รางวัลถัดไป",
+        "effectiveApr": "APR ที่แท้จริง",
+        "perYear": "{amount}/ปี",
+        "totalRewards": "รางวัลทั้งหมด",
+        "totalRewardsHint": "รางวัลที่ได้รับจากทุกโหนดที่ที่อยู่นี้เคย bond โดยคำนวณจากประวัติการ bond ของที่อยู่นี้ หาก bond ถูกคืนตอนที่โหนด churn out จะไม่มีบันทึกหลงเหลืออยู่ ตัวเลขนี้จึงอาจต่ำกว่ายอดจริง แต่จะไม่สูงกว่า",
+        "node": "โหนด",
+        "apr": "APR",
+        "fee": "ค่าธรรมเนียม",
+        "netApr": "APR สุทธิ",
+        "noBonds": "ที่อยู่นี้ไม่มี RUNE ที่ bond ไว้กับโหนดใด",
+        "nodeAddress": "นี่คือที่อยู่ของโหนด กรุณากรอกที่อยู่ bond ที่ใช้ bond RUNE กับโหนดนี้ เพื่อดูสถานะของคุณ",
+        "trackOperator": "ติดตาม bond ของผู้ดำเนินการโหนด",
+        "unavailable": "ไม่สามารถแสดงสถานะ bond ได้ กรุณาลองใหม่อีกครั้ง"
       }
     },
     "stake": {

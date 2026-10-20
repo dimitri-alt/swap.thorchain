@@ -352,6 +352,7 @@
       "bondAmount": "Bond Tutarı",
       "rebondAmount": "Rebond Tutarı",
       "nodeAddress": "Node Adresi",
+      "bondAddress": "Bond Adresi",
       "newAddress": "Yeni Cüzdan Adresi",
       "enterNodeAddress": "Node Adresi Gir",
       "invalidNodeAddress": "Geçersiz Node Adresi",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node bulunamadı veya kullanılamıyor.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Takip Et"
       },
-      "node": {
-        "version": "Sürüm",
-        "ipAddress": "IP Adresi",
-        "status": "Durum",
-        "providers": "Sağlayıcılar",
-        "yourShare": "Payın",
-        "slashPoints": "Ceza Puanları",
-        "operatorFee": "Operatör Ücreti",
-        "information": "Node Bilgisi",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Sonraki Ödül"
+        "nextReward": "Sonraki Ödül",
+        "effectiveApr": "Efektif APR",
+        "perYear": "{amount}/yıl",
+        "totalRewards": "Toplam Ödüller",
+        "totalRewardsHint": "Bu adresin bond verdiği her node'dan kazanılan ödüller; bond geçmişine göre hesaplanır. Node churn ile çıktığında geri ödenen bir bond kayıt bırakmaz, bu yüzden bu tutar gerçek toplamdan düşük olabilir, asla yüksek olmaz.",
+        "node": "Node",
+        "apr": "APR",
+        "fee": "Ücret",
+        "netApr": "Net APR",
+        "noBonds": "Bu adresin hiçbir node'a bond edilmiş RUNE'u yok.",
+        "nodeAddress": "Bu bir node adresi. Pozisyonunuzu görmek için buna RUNE bond eden bond adresini girin.",
+        "trackOperator": "Node operatörünün bond'unu takip et",
+        "unavailable": "Bond pozisyonu alınamadı. Lütfen tekrar deneyin."
       }
     },
     "stake": {

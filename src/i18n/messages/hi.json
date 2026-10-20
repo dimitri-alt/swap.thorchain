@@ -352,6 +352,7 @@
       "bondAmount": "Bond राशि",
       "rebondAmount": "Rebond राशि",
       "nodeAddress": "Node पता",
+      "bondAddress": "बॉन्ड पता",
       "newAddress": "नया वॉलेट पता",
       "enterNodeAddress": "Node पता दर्ज करें",
       "invalidNodeAddress": "अमान्य Node पता",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node नहीं मिला या अनुपलब्ध है.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "ट्रैक करें"
       },
-      "node": {
-        "version": "संस्करण",
-        "ipAddress": "IP पता",
-        "status": "स्थिति",
-        "providers": "प्रदाता",
-        "yourShare": "आपका हिस्सा",
-        "slashPoints": "Slash Points",
-        "operatorFee": "ऑपरेटर शुल्क",
-        "information": "Node जानकारी",
-        "bond": "Bond",
-        "nextReward": "अगला रिवॉर्ड"
+      "track": {
+        "bond": "बॉन्ड",
+        "nextReward": "अगला रिवॉर्ड",
+        "effectiveApr": "प्रभावी APR",
+        "perYear": "{amount}/वर्ष",
+        "totalRewards": "कुल रिवॉर्ड",
+        "totalRewardsHint": "इस पते ने जिन-जिन नोड्स पर बॉन्ड किया है, उन सभी से अर्जित रिवॉर्ड, इसके बॉन्ड इतिहास के आधार पर निकाले गए। जब कोई नोड चर्न आउट होने पर बॉन्ड वापस किया जाता है, तो उसका कोई रिकॉर्ड नहीं बचता, इसलिए यह वास्तविक कुल से कम हो सकता है, अधिक कभी नहीं।",
+        "node": "नोड",
+        "apr": "APR",
+        "fee": "शुल्क",
+        "netApr": "नेट APR",
+        "noBonds": "इस पते का किसी भी नोड से कोई RUNE बॉन्ड नहीं है।",
+        "nodeAddress": "यह एक नोड पता है। अपनी पोज़िशन देखने के लिए वह बॉन्ड पता दर्ज करें जिसने इसमें RUNE बॉन्ड किया है।",
+        "trackOperator": "नोड ऑपरेटर का बॉन्ड ट्रैक करें",
+        "unavailable": "बॉन्ड पोज़िशन उपलब्ध नहीं है। कृपया पुनः प्रयास करें।"
       }
     },
     "stake": {

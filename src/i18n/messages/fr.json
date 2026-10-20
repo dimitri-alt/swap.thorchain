@@ -352,6 +352,7 @@
       "bondAmount": "Montant du Bond",
       "rebondAmount": "Montant du Rebond",
       "nodeAddress": "Adresse du Node",
+      "bondAddress": "Adresse de bond",
       "newAddress": "Nouvelle adresse de wallet",
       "enterNodeAddress": "Saisir l'adresse du Node",
       "invalidNodeAddress": "Adresse de Node invalide",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node introuvable ou indisponible.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Suivre"
       },
-      "node": {
-        "version": "Version",
-        "ipAddress": "Adresse IP",
-        "status": "Statut",
-        "providers": "Fournisseurs",
-        "yourShare": "Votre part",
-        "slashPoints": "Slash Points",
-        "operatorFee": "Frais d'opérateur",
-        "information": "Informations sur le node",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Prochaine récompense"
+        "nextReward": "Prochaine récompense",
+        "effectiveApr": "APR effectif",
+        "perYear": "{amount}/an",
+        "totalRewards": "Récompenses totales",
+        "totalRewardsHint": "Récompenses perçues sur chaque nœud auquel cette adresse a lié des fonds, calculées à partir de son historique de bonds. Un bond remboursé lorsque son nœud a quitté le réseau ne laisse aucune trace : ce total peut donc être inférieur au montant réel, jamais supérieur.",
+        "node": "Nœud",
+        "apr": "APR",
+        "fee": "Frais",
+        "netApr": "APR net",
+        "noBonds": "Cette adresse n'a aucun RUNE bondé sur un nœud.",
+        "nodeAddress": "Ceci est une adresse de nœud. Saisissez l'adresse de bond qui y a bondé des RUNE pour voir votre position.",
+        "trackOperator": "Suivre le bond de l'opérateur du nœud",
+        "unavailable": "Position de bond indisponible. Veuillez réessayer."
       }
     },
     "stake": {

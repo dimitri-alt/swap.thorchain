@@ -352,6 +352,7 @@
       "bondAmount": "Bond Amount",
       "rebondAmount": "Rebond Amount",
       "nodeAddress": "Node Address",
+      "bondAddress": "Bond Address",
       "newAddress": "New Wallet Address",
       "enterNodeAddress": "Put Node Address",
       "invalidNodeAddress": "Node Address no correct",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "We no see di node or e no dey available.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Track"
       },
-      "node": {
-        "version": "Version",
-        "ipAddress": "IP Address",
-        "status": "Status",
-        "providers": "Providers",
-        "yourShare": "Your Share",
-        "slashPoints": "Slash Points",
-        "operatorFee": "Operator Fee",
-        "information": "Node Information",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Next Reward"
+        "nextReward": "Next Reward",
+        "effectiveApr": "Effective APR",
+        "perYear": "{amount}/year",
+        "totalRewards": "Total Rewards",
+        "totalRewardsHint": "Rewards wey this address don earn for every node wey e bond to, we calculate am from im bond history. Any bond wey dem pay back when im node churn out no dey leave record, so dis number fit small pass di real total, but e no fit pass am.",
+        "node": "Node",
+        "apr": "APR",
+        "fee": "Fee",
+        "netApr": "Net APR",
+        "noBonds": "Dis address no get RUNE wey bond to any node.",
+        "nodeAddress": "Dis one na node address. Put di bond address wey bond RUNE to am make you fit see your position.",
+        "trackOperator": "Track di node operator im bond",
+        "unavailable": "Bond position no dey available. Abeg try again."
       }
     },
     "stake": {

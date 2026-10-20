@@ -352,6 +352,7 @@
       "bondAmount": "Bond数量",
       "rebondAmount": "Rebond数量",
       "nodeAddress": "节点地址",
+      "bondAddress": "绑定地址",
       "newAddress": "新钱包地址",
       "enterNodeAddress": "输入节点地址",
       "invalidNodeAddress": "无效的节点地址",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "未找到节点或节点不可用。",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "追踪"
       },
-      "node": {
-        "version": "版本",
-        "ipAddress": "IP地址",
-        "status": "状态",
-        "providers": "提供者",
-        "yourShare": "您的份额",
-        "slashPoints": "罚没点数",
-        "operatorFee": "运营者费用",
-        "information": "节点信息",
-        "bond": "Bond",
-        "nextReward": "下次奖励"
+      "track": {
+        "bond": "绑定",
+        "nextReward": "下次奖励",
+        "effectiveApr": "实际 APR",
+        "perYear": "{amount}/年",
+        "totalRewards": "总奖励",
+        "totalRewardsHint": "该地址曾绑定过的所有节点所获得的奖励，根据其绑定历史计算得出。节点轮出（churn out）时退还的绑定不会留下记录，因此该数值可能低于实际总额，但绝不会高于实际总额。",
+        "node": "节点",
+        "apr": "APR",
+        "fee": "费用",
+        "netApr": "净 APR",
+        "noBonds": "该地址未向任何节点绑定 RUNE。",
+        "nodeAddress": "这是一个节点地址。请输入向其绑定 RUNE 的绑定地址以查看您的仓位。",
+        "trackOperator": "追踪节点运营者的绑定",
+        "unavailable": "无法获取绑定仓位，请重试。"
       }
     },
     "stake": {

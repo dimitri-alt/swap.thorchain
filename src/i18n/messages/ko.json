@@ -352,6 +352,7 @@
       "bondAmount": "Bond 금액",
       "rebondAmount": "Rebond 금액",
       "nodeAddress": "노드 주소",
+      "bondAddress": "본드 주소",
       "newAddress": "새 지갑 주소",
       "enterNodeAddress": "노드 주소 입력",
       "invalidNodeAddress": "유효하지 않은 노드 주소",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "노드를 찾을 수 없거나 사용할 수 없습니다.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "추적"
       },
-      "node": {
-        "version": "버전",
-        "ipAddress": "IP 주소",
-        "status": "상태",
-        "providers": "공급자",
-        "yourShare": "내 지분",
-        "slashPoints": "슬래시 포인트",
-        "operatorFee": "운영자 수수료",
-        "information": "노드 정보",
-        "bond": "Bond",
-        "nextReward": "다음 보상"
+      "track": {
+        "bond": "본드",
+        "nextReward": "다음 보상",
+        "effectiveApr": "실질 APR",
+        "perYear": "{amount}/년",
+        "totalRewards": "총 보상",
+        "totalRewardsHint": "이 주소가 본딩한 모든 노드에서 획득한 보상으로, 본드 내역을 기반으로 산출됩니다. 노드가 처닝 아웃될 때 반환된 본드는 기록이 남지 않으므로, 실제 총액보다 낮게 표시될 수는 있어도 높게 표시되지는 않습니다.",
+        "node": "노드",
+        "apr": "APR",
+        "fee": "수수료",
+        "netApr": "순 APR",
+        "noBonds": "이 주소는 어떤 노드에도 RUNE을 본딩하지 않았습니다.",
+        "nodeAddress": "이 주소는 노드 주소입니다. 포지션을 확인하려면 이 노드에 RUNE을 본딩한 본드 주소를 입력하세요.",
+        "trackOperator": "노드 운영자의 본드 추적",
+        "unavailable": "본드 포지션을 불러올 수 없습니다. 다시 시도해 주세요."
       }
     },
     "stake": {

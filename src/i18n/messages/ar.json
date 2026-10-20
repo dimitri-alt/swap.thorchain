@@ -352,6 +352,7 @@
       "bondAmount": "مبلغ الـ Bond",
       "rebondAmount": "مبلغ إعادة الـ Bond",
       "nodeAddress": "عنوان الـ Node",
+      "bondAddress": "عنوان الربط",
       "newAddress": "عنوان المحفظة الجديد",
       "enterNodeAddress": "أدخل عنوان الـ Node",
       "invalidNodeAddress": "عنوان Node غير صالح",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "لم يُعثَر على الـ Node أو أنه غير متاح.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "تتبّع"
       },
-      "node": {
-        "version": "الإصدار",
-        "ipAddress": "عنوان IP",
-        "status": "الحالة",
-        "providers": "المزوّدون",
-        "yourShare": "حصتك",
-        "slashPoints": "Slash Points",
-        "operatorFee": "رسوم المشغّل",
-        "information": "معلومات الـ Node",
-        "bond": "Bond",
-        "nextReward": "المكافأة التالية"
+      "track": {
+        "bond": "الربط",
+        "nextReward": "المكافأة التالية",
+        "effectiveApr": "العائد السنوي الفعلي",
+        "perYear": "{amount}/سنة",
+        "totalRewards": "إجمالي المكافآت",
+        "totalRewardsHint": "المكافآت المكتسبة من كل عقدة قام هذا العنوان بالربط (bond) معها، محسوبة من سجل عمليات الربط الخاصة به. أي مبلغ ربط تم استرداده عند خروج عقدته من الدورة لا يترك أي سجل، لذا قد يكون هذا الرقم أقل من الإجمالي الحقيقي، ولن يكون أعلى منه أبدًا.",
+        "node": "العقدة",
+        "apr": "APR",
+        "fee": "الرسوم",
+        "netApr": "صافي APR",
+        "noBonds": "لا يوجد RUNE مربوط من هذا العنوان بأي عقدة.",
+        "nodeAddress": "هذا عنوان عقدة. أدخل عنوان الربط الذي ربط RUNE بها لعرض مركزك.",
+        "trackOperator": "تتبّع ربط مشغّل العقدة",
+        "unavailable": "مركز الربط غير متاح. يرجى المحاولة مرة أخرى."
       }
     },
     "stake": {

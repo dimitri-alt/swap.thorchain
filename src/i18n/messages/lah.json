@@ -352,6 +352,7 @@
       "bondAmount": "Bond رقم",
       "rebondAmount": "Rebond رقم",
       "nodeAddress": "Node پتہ",
+      "bondAddress": "بانڈ ایڈریس",
       "newAddress": "نواں والٹ پتہ",
       "enterNodeAddress": "Node پتہ پاؤ",
       "invalidNodeAddress": "غلط Node پتہ",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node نئیں لبھیا یا دستیاب نئیں۔",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Track"
       },
-      "node": {
-        "version": "ورژن",
-        "ipAddress": "IP پتہ",
-        "status": "حالت",
-        "providers": "فراہم کرݨ والے",
-        "yourShare": "تُہاݙا حصہ",
-        "slashPoints": "Slash پوائنٹ",
-        "operatorFee": "آپریٹر فیس",
-        "information": "Node معلومات",
-        "bond": "Bond",
-        "nextReward": "اگلا انعام"
+      "track": {
+        "bond": "بانڈ",
+        "nextReward": "اگلا انعام",
+        "effectiveApr": "مؤثر APR",
+        "perYear": "{amount}/سال",
+        "totalRewards": "کل انعام",
+        "totalRewardsHint": "اوہ انعام جیہڑے ایس ایڈریس نے جنہاں وی نوڈاں تے بانڈ کیتا، اوہناں توں کمائے، جیہڑے ایدے بانڈ دے اِتہاس توں کڈھے گئے نیں۔ جیہڑا بانڈ اپنے نوڈ دے churn out ہون ویلے واپس ملیا، اوہدا کوئی ریکارڈ نئیں رہندا، ایس لئی ایہہ گنتی اصل کُل توں گھٹ ہو سکدی اے، ودھ کدی نئیں۔",
+        "node": "نوڈ",
+        "apr": "APR",
+        "fee": "فیس",
+        "netApr": "خالص APR",
+        "noBonds": "ایس ایڈریس دا کسے وی نوڈ نال کوئی RUNE بانڈ نئیں۔",
+        "nodeAddress": "ایہہ اک نوڈ ایڈریس اے۔ اپݨی پوزیشن ویکھݨ لئی اوہ بانڈ ایڈریس پاؤ جیہنے ایس نال RUNE بانڈ کیتا۔",
+        "trackOperator": "نوڈ آپریٹر دے بانڈ دی نگرانی کرو",
+        "unavailable": "بانڈ پوزیشن دستیاب نئیں۔ مہربانی کر کے مُڑ کوشش کرو۔"
       }
     },
     "stake": {

@@ -352,6 +352,7 @@
       "bondAmount": "Bond Amount",
       "rebondAmount": "Rebond Amount",
       "nodeAddress": "Node Address",
+      "bondAddress": "Bond Address",
       "newAddress": "New Wallet Address",
       "enterNodeAddress": "Enter Node Address",
       "invalidNodeAddress": "Invalid Node Address",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node not found or unavailable.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Track"
       },
-      "node": {
-        "version": "Version",
-        "ipAddress": "IP Address",
-        "status": "Status",
-        "providers": "Providers",
-        "yourShare": "Your Share",
-        "slashPoints": "Slash Points",
-        "operatorFee": "Operator Fee",
-        "information": "Node Information",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Next Reward"
+        "nextReward": "Next Reward",
+        "effectiveApr": "Effective APR",
+        "perYear": "{amount}/year",
+        "totalRewards": "Total Rewards",
+        "totalRewardsHint": "Rewards earned on every node this address has bonded to, worked out from its bond history. A bond paid back when its node churned out leaves no record, so this can be lower than the real total, never higher.",
+        "node": "Node",
+        "apr": "APR",
+        "fee": "Fee",
+        "netApr": "Net APR",
+        "noBonds": "This address has no RUNE bonded to any node.",
+        "nodeAddress": "This is a node address. Enter the bond address that bonded RUNE to it to see your position.",
+        "trackOperator": "Track the node operator's bond",
+        "unavailable": "Bond position unavailable. Please try again."
       }
     },
     "stake": {

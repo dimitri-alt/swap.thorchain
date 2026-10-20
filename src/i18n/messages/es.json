@@ -352,6 +352,7 @@
       "bondAmount": "Monto de Bond",
       "rebondAmount": "Monto de Rebond",
       "nodeAddress": "Dirección del nodo",
+      "bondAddress": "Dirección de bond",
       "newAddress": "Nueva dirección de wallet",
       "enterNodeAddress": "Ingresa la dirección del nodo",
       "invalidNodeAddress": "Dirección de nodo no válida",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Nodo no encontrado o no disponible.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Seguir"
       },
-      "node": {
-        "version": "Versión",
-        "ipAddress": "Dirección IP",
-        "status": "Estado",
-        "providers": "Proveedores",
-        "yourShare": "Tu parte",
-        "slashPoints": "Puntos de penalización",
-        "operatorFee": "Comisión del operador",
-        "information": "Información del nodo",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Próxima recompensa"
+        "nextReward": "Próxima recompensa",
+        "effectiveApr": "APR efectivo",
+        "perYear": "{amount}/año",
+        "totalRewards": "Recompensas totales",
+        "totalRewardsHint": "Recompensas obtenidas en cada nodo al que esta dirección ha hecho bond, calculadas a partir de su historial de bonds. Un bond devuelto cuando su nodo salió del churn no deja registro, por lo que esta cifra puede ser inferior al total real, nunca superior.",
+        "node": "Nodo",
+        "apr": "APR",
+        "fee": "Comisión",
+        "netApr": "APR neto",
+        "noBonds": "Esta dirección no tiene RUNE en bond con ningún nodo.",
+        "nodeAddress": "Esta es una dirección de nodo. Introduce la dirección de bond que le hizo bond de RUNE para ver tu posición.",
+        "trackOperator": "Seguir el bond del operador del nodo",
+        "unavailable": "Posición de bond no disponible. Inténtalo de nuevo."
       }
     },
     "stake": {

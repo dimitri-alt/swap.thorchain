@@ -352,6 +352,7 @@
       "bondAmount": "Bond額",
       "rebondAmount": "Rebond額",
       "nodeAddress": "Nodeアドレス",
+      "bondAddress": "ボンドアドレス",
       "newAddress": "新しいウォレットアドレス",
       "enterNodeAddress": "Nodeアドレスを入力",
       "invalidNodeAddress": "無効なNodeアドレスです",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Nodeが見つからないか、利用できません。",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "追跡"
       },
-      "node": {
-        "version": "バージョン",
-        "ipAddress": "IPアドレス",
-        "status": "ステータス",
-        "providers": "プロバイダー",
-        "yourShare": "あなたのシェア",
-        "slashPoints": "Slashポイント",
-        "operatorFee": "オペレーター手数料",
-        "information": "Node情報",
-        "bond": "Bond",
-        "nextReward": "次の報酬"
+      "track": {
+        "bond": "ボンド",
+        "nextReward": "次回の報酬",
+        "effectiveApr": "実効APR",
+        "perYear": "{amount}/年",
+        "totalRewards": "累計報酬",
+        "totalRewardsHint": "このアドレスがボンドしたすべてのノードで獲得した報酬で、ボンド履歴から算出されます。ノードがチャーンアウトした際に返還されたボンドは記録が残らないため、実際の合計より低くなることはあっても、高くなることはありません。",
+        "node": "ノード",
+        "apr": "APR",
+        "fee": "手数料",
+        "netApr": "正味APR",
+        "noBonds": "このアドレスはどのノードにもRUNEをボンドしていません。",
+        "nodeAddress": "これはノードアドレスです。ポジションを表示するには、このノードにRUNEをボンドしたボンドアドレスを入力してください。",
+        "trackOperator": "ノードオペレーターのボンドを追跡",
+        "unavailable": "ボンドポジションを取得できません。もう一度お試しください。"
       }
     },
     "stake": {

@@ -171,6 +171,7 @@ export const getMayaMimir = async (): Promise<Record<string, number>> => {
 export interface ThorNodeInfo {
   node_address: string
   status: string
+  node_operator_address: string
   total_bond: string
   current_award: string
   ip_address: string
@@ -185,6 +186,52 @@ export interface ThorNodeInfo {
 
 export const getThorNodeInfo = async (address: string): Promise<ThorNodeInfo> => {
   return thornode.get(`/thorchain/node/${address}`).then(res => res.data)
+}
+
+export interface BondProviderNodes {
+  address: string
+  nodes: { address: string; bond: string; status: string }[]
+  totalBonded: string
+}
+
+export const getBondProviderNodes = async (address: string): Promise<BondProviderNodes> => {
+  return midgard.get(`/v2/bonds/${address}`).then(res => res.data)
+}
+
+export interface BondAction {
+  type: 'bond' | 'unbond' | 'rebond'
+  status: string
+  in: { address: string; coins: { amount: string }[] }[]
+  out: { coins: { amount: string }[] }[]
+  metadata: {
+    bond?: { nodeAddress: string; memo?: string }
+    rebond?: { nodeAddress: string; newBondAddress: string }
+  }
+}
+
+// A truncated history would misstate rewards, so more than this is an error
+const BOND_ACTIONS_MAX_PAGES = 20
+
+// Midgard also matches an address named in the memo, so this includes actions signed by others
+export const getBondActions = async (address: string): Promise<BondAction[]> => {
+  const actions: BondAction[] = []
+  let nextPageToken: string | undefined
+  for (let page = 0; page < BOND_ACTIONS_MAX_PAGES; page++) {
+    const { data } = await midgard.get('/v2/actions', { params: { address, type: 'bond,unbond,rebond', limit: 50, nextPageToken } })
+    actions.push(...data.actions)
+    nextPageToken = data.actions.length ? data.meta?.nextPageToken : undefined
+    if (!nextPageToken) return actions
+  }
+  throw new Error('Bond history too long')
+}
+
+// current_award accrues from the last churn
+export const getLastChurnHeight = async (): Promise<number> => {
+  const { data } = await midgard.get('/v2/churns')
+  const height = parseInt(data?.[0]?.height)
+  // A 0 fallback would show every APR as ~0%
+  if (!(height > 0)) throw new Error('No churn height')
+  return height
 }
 
 export const getTcyStaker = async (address: string): Promise<{ address: string; amount: string }> => {

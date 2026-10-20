@@ -352,6 +352,7 @@
       "bondAmount": "Quantia do bond",
       "rebondAmount": "Quantia do rebond",
       "nodeAddress": "Endereço do node",
+      "bondAddress": "Endereço de Bond",
       "newAddress": "Novo endereço de wallet",
       "enterNodeAddress": "Inserir endereço do node",
       "invalidNodeAddress": "Endereço do node inválido",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node não encontrado ou indisponível.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Acompanhar"
       },
-      "node": {
-        "version": "Versão",
-        "ipAddress": "Endereço IP",
-        "status": "Status",
-        "providers": "Provedores",
-        "yourShare": "Sua parte",
-        "slashPoints": "Slash Points",
-        "operatorFee": "Taxa do operador",
-        "information": "Informações do node",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Próxima recompensa"
+        "nextReward": "Próxima Recompensa",
+        "effectiveApr": "APR Efetiva",
+        "perYear": "{amount}/ano",
+        "totalRewards": "Recompensas Totais",
+        "totalRewardsHint": "Recompensas obtidas em cada nó a que este endereço fez bond, calculadas a partir do seu histórico de bond. Um bond devolvido quando o nó saiu da rotação não deixa registo, pelo que este valor pode ser inferior ao total real, nunca superior.",
+        "node": "Nó",
+        "apr": "APR",
+        "fee": "Taxa",
+        "netApr": "APR Líquida",
+        "noBonds": "Este endereço não tem RUNE em bond em nenhum nó.",
+        "nodeAddress": "Este é um endereço de nó. Introduza o endereço de bond que vinculou RUNE a este nó para ver a sua posição.",
+        "trackOperator": "Acompanhar o bond do operador do nó",
+        "unavailable": "Posição de bond indisponível. Tente novamente."
       }
     },
     "stake": {

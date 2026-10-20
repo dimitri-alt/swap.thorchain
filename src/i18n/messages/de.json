@@ -352,6 +352,7 @@
       "bondAmount": "Bond-Betrag",
       "rebondAmount": "Rebond-Betrag",
       "nodeAddress": "Node-Adresse",
+      "bondAddress": "Bond-Adresse",
       "newAddress": "Neue Wallet-Adresse",
       "enterNodeAddress": "Node-Adresse eingeben",
       "invalidNodeAddress": "Ungültige Node-Adresse",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node nicht gefunden oder nicht verfügbar.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Verfolgen"
       },
-      "node": {
-        "version": "Version",
-        "ipAddress": "IP-Adresse",
-        "status": "Status",
-        "providers": "Provider",
-        "yourShare": "Ihr Anteil",
-        "slashPoints": "Slash Points",
-        "operatorFee": "Operator-Gebühr",
-        "information": "Node-Informationen",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Nächste Belohnung"
+        "nextReward": "Nächste Belohnung",
+        "effectiveApr": "Effektiver APR",
+        "perYear": "{amount}/Jahr",
+        "totalRewards": "Gesamtbelohnungen",
+        "totalRewardsHint": "Belohnungen, die auf allen Nodes verdient wurden, für die diese Adresse gebondet hat – ermittelt aus ihrer Bond-Historie. Ein Bond, der beim Churn-Out des Nodes zurückgezahlt wurde, hinterlässt keinen Eintrag, daher kann dieser Wert niedriger als der tatsächliche Gesamtbetrag sein, niemals höher.",
+        "node": "Node",
+        "apr": "APR",
+        "fee": "Gebühr",
+        "netApr": "Netto-APR",
+        "noBonds": "Diese Adresse hat kein RUNE an einen Node gebondet.",
+        "nodeAddress": "Dies ist eine Node-Adresse. Gib die Bond-Adresse ein, die RUNE daran gebondet hat, um deine Position zu sehen.",
+        "trackOperator": "Bond des Node-Betreibers verfolgen",
+        "unavailable": "Bond-Position nicht verfügbar. Bitte versuche es erneut."
       }
     },
     "stake": {

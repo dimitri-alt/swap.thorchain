@@ -352,6 +352,7 @@
       "bondAmount": "Bond পরিমাণ",
       "rebondAmount": "Rebond পরিমাণ",
       "nodeAddress": "Node ঠিকানা",
+      "bondAddress": "বন্ড অ্যাড্রেস",
       "newAddress": "নতুন ওয়ালেট ঠিকানা",
       "enterNodeAddress": "Node ঠিকানা লিখুন",
       "invalidNodeAddress": "অবৈধ Node ঠিকানা",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node পাওয়া যায়নি বা উপলব্ধ নেই।",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "ট্র্যাক"
       },
-      "node": {
-        "version": "সংস্করণ",
-        "ipAddress": "IP ঠিকানা",
-        "status": "স্ট্যাটাস",
-        "providers": "প্রদানকারী",
-        "yourShare": "আপনার শেয়ার",
-        "slashPoints": "Slash Points",
-        "operatorFee": "অপারেটর ফি",
-        "information": "Node তথ্য",
-        "bond": "Bond",
-        "nextReward": "পরবর্তী পুরস্কার"
+      "track": {
+        "bond": "বন্ড",
+        "nextReward": "পরবর্তী রিওয়ার্ড",
+        "effectiveApr": "কার্যকর APR",
+        "perYear": "{amount}/বছর",
+        "totalRewards": "মোট রিওয়ার্ড",
+        "totalRewardsHint": "এই ঠিকানাটি যেসব নোডে বন্ড করেছে, তার বন্ড ইতিহাস থেকে হিসাব করা প্রতিটি নোডে অর্জিত পুরস্কার। কোনো নোড চার্ন আউট হওয়ার সময় ফেরত দেওয়া বন্ডের কোনো রেকর্ড থাকে না, তাই এই পরিমাণ প্রকৃত মোটের চেয়ে কম হতে পারে, কখনও বেশি নয়।",
+        "node": "নোড",
+        "apr": "APR",
+        "fee": "ফি",
+        "netApr": "নিট APR",
+        "noBonds": "এই অ্যাড্রেস থেকে কোনো নোডে RUNE বন্ড করা নেই।",
+        "nodeAddress": "এটি একটি নোড অ্যাড্রেস। আপনার পজিশন দেখতে, যে বন্ড অ্যাড্রেস এতে RUNE বন্ড করেছে সেটি লিখুন।",
+        "trackOperator": "নোড অপারেটরের বন্ড ট্র্যাক করুন",
+        "unavailable": "বন্ড পজিশন পাওয়া যাচ্ছে না। অনুগ্রহ করে আবার চেষ্টা করুন।"
       }
     },
     "stake": {

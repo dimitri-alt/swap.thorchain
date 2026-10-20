@@ -352,6 +352,7 @@
       "bondAmount": "Số lượng Bond",
       "rebondAmount": "Số lượng Rebond",
       "nodeAddress": "Địa chỉ Node",
+      "bondAddress": "Địa chỉ Bond",
       "newAddress": "Địa chỉ ví mới",
       "enterNodeAddress": "Nhập địa chỉ Node",
       "invalidNodeAddress": "Địa chỉ Node không hợp lệ",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Không tìm thấy node hoặc node không khả dụng.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Theo dõi"
       },
-      "node": {
-        "version": "Phiên bản",
-        "ipAddress": "Địa chỉ IP",
-        "status": "Trạng thái",
-        "providers": "Nhà cung cấp",
-        "yourShare": "Phần của bạn",
-        "slashPoints": "Slash Points",
-        "operatorFee": "Phí vận hành",
-        "information": "Thông tin Node",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Phần thưởng tiếp theo"
+        "nextReward": "Phần thưởng tiếp theo",
+        "effectiveApr": "APR hiệu dụng",
+        "perYear": "{amount}/năm",
+        "totalRewards": "Tổng phần thưởng",
+        "totalRewardsHint": "Phần thưởng kiếm được từ mọi node mà địa chỉ này đã bond, được tính dựa trên lịch sử bond của địa chỉ. Khoản bond đã được hoàn trả khi node churn ra ngoài sẽ không để lại dấu vết, nên con số này có thể thấp hơn tổng thực tế, chứ không bao giờ cao hơn.",
+        "node": "Node",
+        "apr": "APR",
+        "fee": "Phí",
+        "netApr": "APR ròng",
+        "noBonds": "Địa chỉ này không có RUNE nào được bond vào bất kỳ node nào.",
+        "nodeAddress": "Đây là địa chỉ node. Nhập địa chỉ bond đã bond RUNE vào node này để xem vị thế của bạn.",
+        "trackOperator": "Theo dõi bond của node operator",
+        "unavailable": "Không thể tải vị thế bond. Vui lòng thử lại."
       }
     },
     "stake": {

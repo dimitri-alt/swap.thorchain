@@ -352,6 +352,7 @@
       "bondAmount": "Bond رقم",
       "rebondAmount": "Rebond رقم",
       "nodeAddress": "Node پتہ",
+      "bondAddress": "بانڈ ایڈریس",
       "newAddress": "نیا والٹ پتہ",
       "enterNodeAddress": "Node پتہ درج کریں",
       "invalidNodeAddress": "غلط Node پتہ",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node نہیں ملا یا دستیاب نہیں۔",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "ٹریک کریں"
       },
-      "node": {
-        "version": "ورژن",
-        "ipAddress": "IP پتہ",
-        "status": "حیثیت",
-        "providers": "فراہم کنندگان",
-        "yourShare": "آپ کا حصہ",
-        "slashPoints": "Slash Points",
-        "operatorFee": "آپریٹر فیس",
-        "information": "Node معلومات",
-        "bond": "Bond",
-        "nextReward": "اگلا انعام"
+      "track": {
+        "bond": "بانڈ",
+        "nextReward": "اگلا انعام",
+        "effectiveApr": "مؤثر APR",
+        "perYear": "{amount}/سال",
+        "totalRewards": "کل انعامات",
+        "totalRewardsHint": "اس ایڈریس نے جن جن نوڈز پر بانڈ کیا ہے، ان سب سے حاصل شدہ انعامات، جو اس کی بانڈ ہسٹری سے اخذ کیے گئے ہیں۔ جو بانڈ اپنے نوڈ کے چرن آؤٹ ہونے پر واپس کر دیا گیا ہو، اس کا کوئی ریکارڈ باقی نہیں رہتا، اس لیے یہ حقیقی مجموعے سے کم ہو سکتا ہے، زیادہ کبھی نہیں۔",
+        "node": "نوڈ",
+        "apr": "APR",
+        "fee": "فیس",
+        "netApr": "خالص APR",
+        "noBonds": "اس ایڈریس کا کسی بھی نوڈ کے ساتھ کوئی RUNE بانڈ نہیں ہے۔",
+        "nodeAddress": "یہ ایک نوڈ ایڈریس ہے۔ اپنی پوزیشن دیکھنے کے لیے وہ بانڈ ایڈریس درج کریں جس نے اس میں RUNE بانڈ کیا ہے۔",
+        "trackOperator": "نوڈ آپریٹر کا بانڈ ٹریک کریں",
+        "unavailable": "بانڈ پوزیشن دستیاب نہیں۔ براہ کرم دوبارہ کوشش کریں۔"
       }
     },
     "stake": {

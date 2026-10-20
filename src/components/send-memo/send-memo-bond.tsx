@@ -1,6 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Chain, USwapNumber } from '@tcswap/core'
 import { LoaderCircle } from 'lucide-react'
@@ -15,13 +16,15 @@ import { DecimalInput } from '@/components/decimal/decimal-input'
 import { DecimalText } from '@/components/decimal/decimal-text'
 import { Icon } from '@/components/icons'
 import { GenericButton } from '@/components/generic-button'
-import { assetIdentifierStr, tokenToAsset } from '@/components/send/send-helpers'
+import { tokenToAsset } from '@/components/send/send-helpers'
 import { isRuneToken, isThorAddress } from '@/components/send-memo/send-memo-helpers'
 import { useWalletBalances } from '@/hooks/use-wallet-balances'
 import { useSelectedAccount } from '@/hooks/use-wallets'
 import { useResolveAccount } from '@/hooks/use-resolve-account'
 import { useRates } from '@/hooks/use-rates'
 import { useNodeInfo } from '@/hooks/bond/use-node-info'
+import { BondPosition, useBondPosition } from '@/hooks/bond/use-bond-position'
+import { deleteCookie, readCookie, writeCookie } from '@/lib/cookies'
 import { getUSwap } from '@/lib/wallets'
 import { WalletAccount } from '@/store/wallets-store'
 import { cn, toCurrencyFixed } from '@/lib/utils'
@@ -29,6 +32,20 @@ import { cn, toCurrencyFixed } from '@/lib/utils'
 type BondTab = 'bond' | 'unbond' | 'rebond' | 'track'
 
 const BOND_TABS: BondTab[] = ['bond', 'unbond', 'rebond', 'track']
+
+const RUNE_IDENTIFIER = 'THOR.RUNE'
+const RATE_IDS = [RUNE_IDENTIFIER]
+
+// Same parameter as the other bond trackers (rune.tools, boone.tools)
+const BOND_ADDRESS_PARAM = 'bond_address'
+const BOND_ADDRESS_COOKIE = 'bond-address'
+
+function writeBondAddressParam(value: string): void {
+  const url = new URL(window.location.href)
+  if (value) url.searchParams.set(BOND_ADDRESS_PARAM, value)
+  else url.searchParams.delete(BOND_ADDRESS_PARAM)
+  window.history.replaceState(window.history.state, '', url)
+}
 
 interface BondFormProps {
   account?: WalletAccount
@@ -47,15 +64,25 @@ export function SendMemoBond({ account, initialTab = 'bond' }: BondFormProps) {
   const selectedAccount = useSelectedAccount()
   const thorAccount = account ?? selectedAccount
 
-  const [tab, setTab] = useState<BondTab>(initialTab)
+  const searchParams = useSearchParams()
+  const bondAddressParam = searchParams.get(BOND_ADDRESS_PARAM)?.trim() ?? ''
+
+  const [tab, setTab] = useState<BondTab>(bondAddressParam ? 'track' : initialTab)
   const [nodeAddress, setNodeAddress] = useState('')
+  const [bondAddress, setBondAddress] = useState(bondAddressParam)
+  // Once set, the connected wallet no longer fills the address in
+  const bondAddressChosen = useRef(!!bondAddressParam)
+  const chooseBondAddress = (value: string) => {
+    bondAddressChosen.current = true
+    setBondAddress(value)
+  }
   const [newAddress, setNewAddress] = useState('')
   const [amount, setAmount] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  const rateIds = useMemo(() => (runeToken ? [assetIdentifierStr(runeToken.balance)] : []), [runeToken])
-  const { rates } = useRates(rateIds)
-  const runeRate = runeToken ? rates[assetIdentifierStr(runeToken.balance)] : undefined
+  // Not from the wallet's RUNE token, so Track works without a wallet
+  const { rates } = useRates(RATE_IDS)
+  const runeRate = rates[RUNE_IDENTIFIER]
 
   const numericAmount = parseFloat(amount) || 0
   const fiatValue = runeRate ? runeRate.mul(numericAmount) : new USwapNumber(0)
@@ -69,6 +96,43 @@ export function SendMemoBond({ account, initialTab = 'bond' }: BondFormProps) {
   const newAddressValid = isThorAddress(newAddress)
 
   const { nodeInfo, isLoading: nodeInfoLoading, error: nodeInfoError } = useNodeInfo(nodeAddressValid ? nodeAddress : '')
+
+  const trackTab = tab === 'track'
+  const bondAddressValid = isThorAddress(bondAddress)
+  const {
+    position,
+    nodeOperator,
+    isLoading: positionLoading,
+    isHistoryLoading,
+    error: positionError
+  } = useBondPosition(trackTab && bondAddressValid ? bondAddress : '')
+
+  // On load only: the URL is rewritten below, and reacting to it would undo what the user typed
+  useEffect(() => {
+    if (bondAddressChosen.current) return
+    const saved = readCookie(BOND_ADDRESS_COOKIE)
+    if (saved) chooseBondAddress(saved)
+  }, [])
+
+  // The selected account can briefly be another chain's until useResolveAccount switches it
+  const walletAddress = thorAccount?.address
+  useEffect(() => {
+    if (bondAddressChosen.current) return
+    setBondAddress(walletAddress && isThorAddress(walletAddress) ? walletAddress : '')
+  }, [walletAddress])
+
+  useEffect(() => {
+    if (!trackTab) return
+    const value = bondAddress.trim()
+    if (value && !bondAddressValid) return
+    if (value) writeCookie(BOND_ADDRESS_COOKIE, value)
+    else deleteCookie(BOND_ADDRESS_COOKIE)
+    writeBondAddressParam(value)
+  }, [trackTab, bondAddress, bondAddressValid])
+
+  const addressValue = trackTab ? bondAddress : nodeAddress
+  const setAddressValue = trackTab ? chooseBondAddress : setNodeAddress
+  const addressValid = trackTab ? bondAddressValid : nodeAddressValid
 
   const canSend = useMemo(() => {
     if (!thorAccount || submitting) return false
@@ -151,6 +215,7 @@ export function SendMemoBond({ account, initialTab = 'bond' }: BondFormProps) {
             onClick={() => {
               setTab(key)
               setAmount('')
+              if (key !== 'track') writeBondAddressParam('')
             }}
             className={cn('cursor-pointer transition-colors', tab === key ? 'text-txt-contrast-1-default' : 'text-txt-text-modal')}
           >
@@ -161,21 +226,21 @@ export function SendMemoBond({ account, initialTab = 'bond' }: BondFormProps) {
       <div className="bg-modal rounded-20 relative space-y-1.25 border p-2.5">
         <div className="relative">
           <Textarea
-            placeholder={t('bond.nodeAddress')}
-            value={nodeAddress}
-            onChange={e => setNodeAddress(e.target.value)}
+            placeholder={trackTab ? t('bond.bondAddress') : t('bond.nodeAddress')}
+            value={addressValue}
+            onChange={e => setAddressValue(e.target.value)}
             className={cn(
               'bg-swap-bloc border-border-sub-container-modal-low',
-              nodeAddress.trim() && !nodeAddressValid && 'border-destructive focus-visible:ring-destructive'
+              addressValue.trim() && !addressValid && 'border-destructive focus-visible:ring-destructive'
             )}
           />
-          {nodeAddress ? (
-            <GenericButton size="small" icon={<Icon name="trash" />} className="absolute end-3 top-3" onClick={() => setNodeAddress('')} />
+          {addressValue ? (
+            <GenericButton size="small" icon={<Icon name="trash" />} className="absolute end-3 top-3" onClick={() => setAddressValue('')} />
           ) : (
             <GenericButton
               size="small"
               className="absolute end-3 top-3 shrink-0"
-              onClick={() => navigator.clipboard.readText().then(text => setNodeAddress(text.trim()))}
+              onClick={() => navigator.clipboard.readText().then(text => setAddressValue(text.trim()))}
             >
               {t('paste')}
             </GenericButton>
@@ -263,18 +328,31 @@ export function SendMemoBond({ account, initialTab = 'bond' }: BondFormProps) {
           </div>
         )}
 
-        {tab === 'track' && nodeAddressValid && (
+        {trackTab && bondAddressValid && (
           <div className="bg-swap-bloc rounded-15 border p-4">
-            {nodeInfoLoading ? (
+            {positionLoading ? (
               <div className="flex items-center justify-center py-6">
                 <LoaderCircle size={20} className="text-txt-label-small animate-spin" />
               </div>
-            ) : nodeInfoError || !nodeInfo ? (
-              <p className="text-txt-label-small text-sm">{t('bond.nodeNotFoundOrUnavailable')}</p>
+            ) : positionError || !position ? (
+              <p className="text-txt-label-small text-sm">{t('bond.track.unavailable')}</p>
+            ) : position.nodes.length === 0 && nodeOperator ? (
+              <div className="space-y-3">
+                <p className="text-txt-label-small text-sm">{t('bond.track.nodeAddress')}</p>
+                <GenericButton size="small" onClick={() => chooseBondAddress(nodeOperator)}>
+                  {t('bond.track.trackOperator')}
+                </GenericButton>
+              </div>
+            ) : position.nodes.length === 0 ? (
+              <p className="text-txt-label-small text-sm">{t('bond.track.noBonds')}</p>
             ) : (
-              <NodeInfoCard nodeInfo={nodeInfo} runeRate={runeRate} connectedAddress={thorAccount?.address} />
+              <BondSummary position={position} runeRate={runeRate} historyLoading={isHistoryLoading} />
             )}
           </div>
+        )}
+
+        {trackTab && bondAddressValid && !positionLoading && !positionError && !!position?.nodes.length && (
+          <BondNodesTable position={position} runeRate={runeRate} />
         )}
 
         {tab !== 'track' && (
@@ -299,66 +377,93 @@ export function SendMemoBond({ account, initialTab = 'bond' }: BondFormProps) {
   )
 }
 
-function NodeInfoCard({
-  nodeInfo,
-  runeRate,
-  connectedAddress
-}: {
-  nodeInfo: import('@/lib/api').ThorNodeInfo
-  runeRate?: USwapNumber
-  connectedAddress?: string
-}) {
+const rune = (value: number, digits = 0) => `${value.toLocaleString(undefined, { maximumFractionDigits: digits })} RUNE`
+const usd = (value: number, runeRate?: USwapNumber) =>
+  runeRate ? toCurrencyFixed(runeRate.mul(value).toCurrency('$', { trimTrailingZeros: false })) : null
+const percent = (value: number) => `${(value * 100).toFixed(1)}%`
+
+function BondSummary({ position, runeRate, historyLoading }: { position: BondPosition; runeRate?: USwapNumber; historyLoading: boolean }) {
   const t = useTranslations('send')
-  const bond = parseInt(nodeInfo.total_bond) / 1e8
-  const reward = parseInt(nodeInfo.current_award) / 1e8
-  const bondFiat = runeRate ? runeRate.mul(bond) : new USwapNumber(0)
-  const rewardFiat = runeRate ? runeRate.mul(reward) : new USwapNumber(0)
-
-  const providers = nodeInfo.bond_providers?.providers ?? []
-  // node_operator_fee is in basis points (10000 = 100%)
-  const operatorFeeBps = parseInt(nodeInfo.bond_providers?.node_operator_fee ?? '0')
-  const operatorFeePercent = (operatorFeeBps / 100).toFixed(0) + '%'
-
-  const myProvider = connectedAddress ? providers.find(p => p.bond_address === connectedAddress) : undefined
-  const myBond = myProvider ? parseInt(myProvider.bond) / 1e8 : 0
-  const myShare = bond > 0 && myBond > 0 ? ((myBond / bond) * 100).toFixed(1) + '%' : '0%'
-
-  // Slash points indicate health: 0 = healthy
-  const slashPoints = nodeInfo.slash_points ?? 0
-
-  const rows: { label: string; value: string }[] = [
-    { label: t('bond.node.version'), value: nodeInfo.version },
-    { label: t('bond.node.ipAddress'), value: nodeInfo.ip_address },
-    { label: t('bond.node.status'), value: nodeInfo.status },
-    { label: t('bond.node.providers'), value: String(providers.length) },
-    { label: t('bond.node.yourShare'), value: myShare },
-    { label: t('bond.node.slashPoints'), value: String(slashPoints) },
-    { label: t('bond.node.operatorFee'), value: operatorFeePercent }
-  ]
 
   return (
-    <div className="space-y-3">
-      <p className="text-txt-high-contrast text-sm font-semibold">{t('bond.node.information')}</p>
-      <div className="grid grid-cols-2 gap-2">
-        <div className="bg-modal rounded-xl border p-3">
-          <p className="text-txt-label-small mb-1 text-xs tracking-wide uppercase">{t('bond.node.bond')}</p>
-          <p className="text-txt-high-contrast text-lg font-bold">{bond.toLocaleString(undefined, { maximumFractionDigits: 0 })} RUNE</p>
-          {runeRate && <p className="text-txt-label-small text-xs">{toCurrencyFixed(bondFiat.toCurrency('$', { trimTrailingZeros: false }))}</p>}
-        </div>
-        <div className="bg-modal rounded-xl border p-3">
-          <p className="text-txt-label-small mb-1 text-xs tracking-wide uppercase">{t('bond.node.nextReward')}</p>
-          <p className="text-txt-high-contrast text-lg font-bold">{reward.toFixed(1)} RUNE</p>
-          {runeRate && <p className="text-txt-label-small text-xs">{toCurrencyFixed(rewardFiat.toCurrency('$', { trimTrailingZeros: false }))}</p>}
-        </div>
+    <div className="grid grid-cols-2 gap-2">
+      <div className="bg-modal rounded-xl border p-3">
+        <p className="text-txt-label-small mb-1 text-xs tracking-wide uppercase">{t('bond.track.bond')}</p>
+        <p className="text-txt-high-contrast text-lg font-bold">{rune(position.bond)}</p>
+        {runeRate && <p className="text-txt-label-small text-xs">{usd(position.bond, runeRate)}</p>}
       </div>
-      <div className="space-y-1.5">
-        {rows.map(({ label, value }) => (
-          <div key={label} className="flex items-center justify-between text-sm">
-            <span className="text-txt-label-small">{label}</span>
-            <span className="text-txt-high-contrast font-medium">{value}</span>
-          </div>
-        ))}
+      <div className="bg-modal rounded-xl border p-3">
+        <p className="text-txt-label-small mb-1 text-xs tracking-wide uppercase">{t('bond.track.nextReward')}</p>
+        <p className="text-txt-high-contrast text-lg font-bold">{rune(position.nextReward, 1)}</p>
+        {runeRate && <p className="text-txt-label-small text-xs">{usd(position.nextReward, runeRate)}</p>}
       </div>
+      <div className="bg-modal rounded-xl border p-3">
+        <p className="text-txt-label-small mb-1 text-xs tracking-wide uppercase">{t('bond.track.effectiveApr')}</p>
+        <p className="text-txt-high-contrast text-lg font-bold">{percent(position.apr)}</p>
+        <p className="text-txt-label-small text-xs">{t('bond.track.perYear', { amount: rune(position.yearlyReward) })}</p>
+        {runeRate && (
+          <p className="text-txt-label-small text-xs">{t('bond.track.perYear', { amount: usd(position.yearlyReward, runeRate) ?? '' })}</p>
+        )}
+      </div>
+      <div className="bg-modal rounded-xl border p-3" title={t('bond.track.totalRewardsHint')}>
+        <p className="text-txt-label-small mb-1 text-xs tracking-wide uppercase">{t('bond.track.totalRewards')}</p>
+        {position.totalRewards !== undefined ? (
+          <>
+            <p className="text-txt-high-contrast text-lg font-bold">{rune(position.totalRewards)}</p>
+            {runeRate && <p className="text-txt-label-small text-xs">{usd(position.totalRewards, runeRate)}</p>}
+          </>
+        ) : historyLoading ? (
+          <LoaderCircle size={20} className="text-txt-label-small mt-1 animate-spin" />
+        ) : (
+          <p className="text-txt-high-contrast text-lg font-bold">—</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function BondNodesTable({ position, runeRate }: { position: BondPosition; runeRate?: USwapNumber }) {
+  const t = useTranslations('send')
+
+  return (
+    <div className="bg-swap-bloc rounded-15 overflow-x-auto border">
+      <table className="w-full text-xs tabular-nums">
+        <thead>
+          <tr className="text-txt-label-small text-[10px] tracking-wide uppercase">
+            <th className="px-3 py-2 text-start font-medium">{t('bond.track.node')}</th>
+            <th className="px-3 py-2 text-end font-medium">{t('bond.track.bond')}</th>
+            <th className="px-3 py-2 text-end font-medium">{t('bond.track.apr')}</th>
+            <th className="px-3 py-2 text-end font-medium">{t('bond.track.fee')}</th>
+            <th className="px-3 py-2 text-end font-medium">{t('bond.track.netApr')}</th>
+          </tr>
+        </thead>
+        <tbody className="text-txt-high-contrast">
+          {position.nodes.map(node => (
+            <tr key={node.address} className="hover:bg-modal border-t transition-colors">
+              <td className="px-3 py-2">
+                <a
+                  href={`https://thorchain.net/node/${node.address}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={node.address}
+                  className="flex items-center gap-1.5 font-mono font-medium hover:underline"
+                >
+                  <span className={cn('size-1.5 shrink-0 rounded-full', node.status === 'Active' ? 'bg-green-default' : 'bg-txt-label-small')} />
+                  {node.address.slice(-4)}
+                </a>
+                <div className="text-txt-label-small ps-3 text-[10px]">{node.status}</div>
+              </td>
+              <td className="px-3 py-2 text-end">
+                <div className="font-medium">{node.bond.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
+                {runeRate && <div className="text-txt-label-small text-[10px]">{usd(node.bond, runeRate)}</div>}
+              </td>
+              <td className="px-3 py-2 text-end">{percent(node.apr)}</td>
+              <td className="text-txt-label-small px-3 py-2 text-end">{(node.fee * 100).toFixed(0)}%</td>
+              <td className="text-green-contrast px-3 py-2 text-end font-semibold">{percent(node.netApr)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }

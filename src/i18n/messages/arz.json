@@ -352,6 +352,7 @@
       "bondAmount": "مبلغ الـ Bond",
       "rebondAmount": "مبلغ إعادة الـ Bond",
       "nodeAddress": "عنوان الـ Node",
+      "bondAddress": "عنوان الـ Bond",
       "newAddress": "عنوان المحفظة الجديد",
       "enterNodeAddress": "اكتب عنوان الـ Node",
       "invalidNodeAddress": "عنوان Node غير صالح",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "الـ Node مش موجود أو غير متاح.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "تتبّع"
       },
-      "node": {
-        "version": "الإصدار",
-        "ipAddress": "عنوان الـ IP",
-        "status": "الحالة",
-        "providers": "المزوّدين",
-        "yourShare": "حصتك",
-        "slashPoints": "Slash Points",
-        "operatorFee": "رسوم المشغّل",
-        "information": "معلومات الـ Node",
+      "track": {
         "bond": "Bond",
-        "nextReward": "المكافأة التالية"
+        "nextReward": "المكافأة الجاية",
+        "effectiveApr": "الـ APR الفعلي",
+        "perYear": "{amount}/سنة",
+        "totalRewards": "إجمالي المكافآت",
+        "totalRewardsHint": "المكافآت اللي العنوان ده كسبها من كل نود عمل عليه bond، متحسبة من تاريخ الـ bond بتاعه. الـ bond اللي بيترجع لما النود يخرج من الدورة مابيسيبش أي أثر، فعشان كده الرقم ده ممكن يكون أقل من الإجمالي الحقيقي، بس عمره ما هيكون أكتر.",
+        "node": "النود",
+        "apr": "APR",
+        "fee": "الرسوم",
+        "netApr": "صافي الـ APR",
+        "noBonds": "العنوان ده مفيش عنده RUNE معمولها bond لأي نود.",
+        "nodeAddress": "ده عنوان نود. اكتب عنوان الـ bond اللي عمل bond بـ RUNE ليه عشان تشوف مركزك.",
+        "trackOperator": "تتبّع bond مشغّل النود",
+        "unavailable": "مركز الـ bond مش متاح. من فضلك جرّب تاني."
       }
     },
     "stake": {

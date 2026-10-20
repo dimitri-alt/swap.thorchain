@@ -352,6 +352,7 @@
       "bondAmount": "مقدار Bond",
       "rebondAmount": "مقدار Rebond",
       "nodeAddress": "آدرس نود",
+      "bondAddress": "آدرس بوند",
       "newAddress": "آدرس جدید کیف پول",
       "enterNodeAddress": "آدرس نود را وارد کنید",
       "invalidNodeAddress": "آدرس نود نامعتبر",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "نود یافت نشد یا در دسترس نیست.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "پیگیری"
       },
-      "node": {
-        "version": "نسخه",
-        "ipAddress": "آدرس IP",
-        "status": "وضعیت",
-        "providers": "تأمین‌کنندگان",
-        "yourShare": "سهم شما",
-        "slashPoints": "امتیازهای جریمه",
-        "operatorFee": "کارمزد اپراتور",
-        "information": "اطلاعات نود",
-        "bond": "Bond",
-        "nextReward": "پاداش بعدی"
+      "track": {
+        "bond": "بوند",
+        "nextReward": "پاداش بعدی",
+        "effectiveApr": "APR مؤثر",
+        "perYear": "{amount}/سال",
+        "totalRewards": "مجموع پاداش‌ها",
+        "totalRewardsHint": "پاداش‌های کسب‌شده از هر نودی که این آدرس به آن باند کرده است، بر اساس تاریخچهٔ باند آن محاسبه می‌شود. باندی که هنگام خروج نود از چرخش (churn) بازپرداخت شده باشد هیچ ردی باقی نمی‌گذارد؛ بنابراین این مقدار ممکن است کمتر از مجموع واقعی باشد، اما هرگز بیشتر نیست.",
+        "node": "نود",
+        "apr": "APR",
+        "fee": "کارمزد",
+        "netApr": "APR خالص",
+        "noBonds": "این آدرس هیچ RUNE بوندشده‌ای روی هیچ نودی ندارد.",
+        "nodeAddress": "این یک آدرس نود است. برای دیدن موقعیت خود، آدرس بوندی را وارد کنید که RUNE را به آن بوند کرده است.",
+        "trackOperator": "پیگیری بوند اپراتور نود",
+        "unavailable": "موقعیت بوند در دسترس نیست. لطفاً دوباره تلاش کنید."
       }
     },
     "stake": {

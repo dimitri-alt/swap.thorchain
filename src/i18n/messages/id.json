@@ -352,6 +352,7 @@
       "bondAmount": "Jumlah bond",
       "rebondAmount": "Jumlah rebond",
       "nodeAddress": "Alamat node",
+      "bondAddress": "Alamat Bond",
       "newAddress": "Alamat wallet baru",
       "enterNodeAddress": "Masukkan alamat node",
       "invalidNodeAddress": "Alamat node tidak valid",
@@ -362,24 +363,27 @@
       "bond": "Bond",
       "unbond": "Unbond",
       "rebond": "Rebond",
-      "nodeNotFoundOrUnavailable": "Node tidak ditemukan atau tidak tersedia.",
       "tab": {
         "bond": "Bond",
         "unbond": "Unbond",
         "rebond": "Rebond",
         "track": "Lacak"
       },
-      "node": {
-        "version": "Versi",
-        "ipAddress": "Alamat IP",
-        "status": "Status",
-        "providers": "Penyedia",
-        "yourShare": "Bagian Anda",
-        "slashPoints": "Slash Points",
-        "operatorFee": "Biaya operator",
-        "information": "Informasi node",
+      "track": {
         "bond": "Bond",
-        "nextReward": "Reward berikutnya"
+        "nextReward": "Imbalan Berikutnya",
+        "effectiveApr": "APR Efektif",
+        "perYear": "{amount}/tahun",
+        "totalRewards": "Total Imbalan",
+        "totalRewardsHint": "Imbalan yang diperoleh dari setiap node yang pernah di-bond oleh alamat ini, dihitung dari riwayat bond-nya. Bond yang dikembalikan saat node-nya churn out tidak meninggalkan catatan, sehingga angka ini bisa lebih rendah dari total sebenarnya, tetapi tidak pernah lebih tinggi.",
+        "node": "Node",
+        "apr": "APR",
+        "fee": "Biaya",
+        "netApr": "APR Bersih",
+        "noBonds": "Alamat ini tidak memiliki RUNE yang di-bond ke node mana pun.",
+        "nodeAddress": "Ini adalah alamat node. Masukkan alamat bond yang melakukan bond RUNE ke node tersebut untuk melihat posisi Anda.",
+        "trackOperator": "Lacak bond operator node",
+        "unavailable": "Posisi bond tidak tersedia. Silakan coba lagi."
       }
     },
     "stake": {
