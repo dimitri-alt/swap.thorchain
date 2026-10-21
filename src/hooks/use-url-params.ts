@@ -1,9 +1,10 @@
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Asset } from '@/components/swap/asset'
 import { useModeAssets } from '@/hooks/use-assets'
+import { useIsPrivateSwap, useSetIsPrivateSwap } from '@/store/private-swap-store'
 import { useSwapStore } from '@/store/swap-store'
 
 const DEFAULT_SELL = 'BTC.BTC'
@@ -48,7 +49,7 @@ const readPair = (pathname: string, params: Pick<URLSearchParams, 'get'>) =>
   pathname.startsWith('/widget') ? { sell: params.get('from'), buy: params.get('to') } : parsePath(pathname)
 
 // The buy asset the address bar names. It is never rewritten to a same-asset (private send) pair,
-// so it still holds the last real buy asset when the PRIVATE tab is left.
+// so it still holds the last real buy asset when Send mode or the PRIVATE tab is left.
 export const urlBuyAsset = (assets: Asset[]) =>
   resolveAsset(assets, readPair(window.location.pathname, new URLSearchParams(window.location.search)).buy, DEFAULT_BUY)
 
@@ -60,10 +61,21 @@ export const useUrlParams = () => {
   const isWidget = pathname.startsWith('/widget')
   const { assets } = useModeAssets()
   const { assetFrom, assetTo, hasHydrated, setAssetFrom, setAssetTo } = useSwapStore()
+  const isPrivateSwap = useIsPrivateSwap()
+  const setIsPrivateSwap = useSetIsPrivateSwap()
+  const isPrivateUrl = searchParams.get('private') === 'true'
+  // The store starts on SWAP (every visit is a full load), so only `?private=true` has a tab to apply
+  const [urlTabApplied, setUrlTabApplied] = useState(!isPrivateUrl)
 
   // Init store from URL (once)
   useEffect(() => {
-    if (!assets?.length || !hasHydrated || initialized.current) return
+    if (initialized.current) return
+    // `?private=true` opens the PRIVATE tab without waiting for the asset list; the pair is resolved on a later run, against that tab's list
+    if (!urlTabApplied) {
+      setUrlTabApplied(true)
+      return setIsPrivateSwap(true)
+    }
+    if (!assets?.length || !hasHydrated) return
 
     const { sell, buy } = readPair(pathname, searchParams)
     const sellAsset = resolveAsset(assets, sell, DEFAULT_SELL)
@@ -73,23 +85,41 @@ export const useUrlParams = () => {
     if (buyAsset && buyAsset.identifier !== sellAsset?.identifier) setAssetTo(buyAsset)
 
     initialized.current = true
-  }, [assets, hasHydrated, pathname, searchParams, isWidget, setAssetFrom, setAssetTo])
+  }, [
+    assets,
+    hasHydrated,
+    pathname,
+    searchParams,
+    isWidget,
+    urlTabApplied,
+    setAssetFrom,
+    setAssetTo,
+    setIsPrivateSwap
+  ])
 
-  // Sync URL on user-driven asset changes (skip the first sync after init so `/` stays clean)
+  // Sync URL on user-driven asset and tab changes (skip the first sync after init so `/` stays clean,
+  // unless the tab was changed before init and the URL's flag is now stale)
   useEffect(() => {
     if (isWidget) return
     if (!initialized.current || !assetFrom || !assetTo) return
-    if (skipNextSync.current) {
-      skipNextSync.current = false
-      return
-    }
-    // A same-asset pair exists only on the PRIVATE tab, which the URL does not carry: opened as a
-    // link it would land on the native tab as an invalid pair, so the address keeps the last real pair.
+    const skip = skipNextSync.current
+    skipNextSync.current = false
+    if (skip && isPrivateSwap === isPrivateUrl) return
+    // A same-asset pair exists only in the PRIVATE tab's Send mode, which the URL does not carry: opened
+    // as a link it would land on Swap mode as an invalid pair, so the address keeps the last real pair.
     if (assetFrom.identifier === assetTo.identifier) return
     const newPath = `/${SELL}${toSlug(assetFrom)}${BUY}${toSlug(assetTo)}`
-    const newUrl = `${newPath}${window.location.search}`
+    const params = new URLSearchParams(window.location.search)
+    if (isPrivateSwap) params.set('private', 'true')
+    else params.delete('private')
+    const search = params.toString()
+    const newUrl = search ? `${newPath}?${search}` : newPath
     if (window.location.pathname + window.location.search !== newUrl) {
       window.history.replaceState(window.history.state, '', newUrl)
     }
-  }, [assetFrom, assetTo, isWidget])
+  }, [assetFrom, assetTo, isPrivateSwap, isPrivateUrl, isWidget])
+
+  // The tab to render: the URL's until it is in the store, so the server and the first client
+  // render already show it instead of switching after load
+  return urlTabApplied ? isPrivateSwap : isPrivateUrl
 }

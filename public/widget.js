@@ -11,6 +11,7 @@
  *     verticalPosition: "bottom",   // floating only: top | bottom
  *     sellAsset: "BTC.BTC",
  *     buyAsset: "ETH.ETH",
+ *     private: true,                // open the PRIVATE tab (default: false)
  *     previewText: "Swap crypto",   // floating only: button label
  *     theme: "auto"                 // auto | light | dark | system (default: auto)
  *   });
@@ -89,6 +90,7 @@
     if (options.apiKey) params.set('apiKey', options.apiKey)
     if (options.sellAsset) params.set('from', options.sellAsset)
     if (options.buyAsset) params.set('to', options.buyAsset)
+    if (options.private === true) params.set('private', 'true')
     params.set('theme', theme)
     return origin + '/widget?' + params.toString()
   }

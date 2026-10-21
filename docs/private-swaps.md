@@ -63,7 +63,7 @@ PRIVATE tab ──quote──▶ api.thorchain.org/v1/quote  providers: ["HOUDIN
   in Send mode: in the tab's Swap mode picking the other side's asset switches Send on (a same-asset pair *is* a private send), on the
   other tabs it flips the pair, and leaving Send (or the tab) restores a distinct buy asset — the
   effect in `swap.tsx` also corrects a same-asset pair rehydrated from storage. The `/sell-<asset>-buy-<asset>` URL is never
-  rewritten to a same-asset pair (`useUrlParams`): the mode is not in the URL, so it keeps the last real pair, and leaving Send restores
+  rewritten to a same-asset pair (`useUrlParams`): Send mode is not in the URL (only the tab is, as `?private=true`), so it keeps the last real pair, and leaving Send restores
   that buy asset (`urlBuyAsset`).
   The aggregator quotes and orders such a pair through Houdini's dedicated private-send endpoints (`GET /quotes/private-send`,
   `POST /exchanges/private-send`) and marks the route `meta.houdini.type: "private-send"`; the app labels it _Send_ /

@@ -30,7 +30,7 @@ import { urlBuyAsset, useUrlParams } from '@/hooks/use-url-params'
 import { useSelectedAccount } from '@/hooks/use-wallets'
 import { resolvePriceImpact } from '@/lib/swap-helpers'
 import { cn } from '@/lib/utils'
-import { useIsLimitSwap, useIsPrivateSend, useIsPrivateSwap, useSetIsLimitSwap, useSetIsPrivateSwap } from '@/store/limit-swap-store'
+import { useIsLimitSwap, useIsPrivateSend, useSetIsLimitSwap, useSetIsPrivateSwap } from '@/store/limit-swap-store'
 import { useSwapStore } from '@/store/swap-store'
 
 type SwapMode = 'swap' | 'limit' | 'private'
@@ -46,7 +46,6 @@ export const Swap = () => {
   const selectedAccount = useSelectedAccount()
   const isLimitSwap = useIsLimitSwap()
   const setIsLimitSwap = useSetIsLimitSwap()
-  const isPrivateSwap = useIsPrivateSwap()
   const setIsPrivateSwap = useSetIsPrivateSwap()
   const isPrivateSend = useIsPrivateSend()
   const pairKey = useSwapStore(state => `${state.assetFrom?.identifier}|${state.assetTo?.identifier}`)
@@ -58,14 +57,14 @@ export const Swap = () => {
   const { rateFrom, rateTo } = useSwapRates()
   const { isHalted, chains: haltedChains } = useTradingHalt()
 
-  useUrlParams()
+  const isPrivateTab = useUrlParams()
   useResolveSource()
 
   useEffect(() => {
     AssetValue.loadStaticAssets()
   }, [])
 
-  const mode: SwapMode = isPrivateSwap ? 'private' : isLimitSwap ? 'limit' : 'swap'
+  const mode: SwapMode = isPrivateTab ? 'private' : isLimitSwap ? 'limit' : 'swap'
 
   // Each setter clears the other mode, so one call describes the tab.
   const setMode = (next: SwapMode) => {
@@ -85,7 +84,7 @@ export const Swap = () => {
     // the pair from the URL in this same commit, and the closure still holds the empty pair.
     const { assetFrom, assetTo } = useSwapStore.getState()
 
-    const inMode = (asset?: Asset) => !!asset && isAssetInMode(asset, isPrivateSwap)
+    const inMode = (asset?: Asset) => !!asset && isAssetInMode(asset, isPrivateTab)
     // Defaults before "any asset", so a fallback clashing with `other` doesn't land on the list's first entry.
     const replacement = (fallback: string, other?: Asset) => {
       const usable = (a: Asset) => inMode(a) && a.identifier !== other?.identifier
@@ -104,7 +103,7 @@ export const Swap = () => {
     if (nextTo && nextTo !== assetTo) setAssetTo(nextTo)
     // Also reruns on pair changes: a saved same-asset pair rehydrates after the first run.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPrivateSwap, isPrivateSend, assets, pairKey])
+  }, [isPrivateTab, isPrivateSend, assets, pairKey])
 
   const memolessAsset: MemolessAsset | undefined = useMemo(() => {
     if (!memolessAssets || !assetFrom || !quote || !(quote.providers[0] === 'THORCHAIN' || quote.providers[0] === 'THORCHAIN_STREAMING')) return
@@ -123,7 +122,7 @@ export const Swap = () => {
 
   // A private swap is paid into a deposit address Houdini hands out, so it needs no wallet on
   // any chain; a native swap without a wallet needs a memoless channel for the sell asset.
-  const instantSwapSupported = isPrivateSwap || (!!memolessAsset && !isMemolessHalted)
+  const instantSwapSupported = isPrivateTab || (!!memolessAsset && !isMemolessHalted)
 
   const priceImpact = useMemo(() => {
     return resolvePriceImpact(quote, rateFrom, rateTo)
@@ -151,16 +150,16 @@ export const Swap = () => {
         </div>
 
         <div className="bg-modal rounded-20 relative space-y-1.25 border p-2.5">
-          {isPrivateSwap && <SwapPrivateMode />}
+          {isPrivateTab && <SwapPrivateMode />}
           <SwapInputFrom />
           {!isPrivateSend && <SwapToggleAssets />}
           <SwapInputTo priceImpact={priceImpact} />
           {isLimitSwap && <SwapLimit quote={quote} />}
-          {isPrivateSwap && <SwapPrivateDisclaimer />}
+          {isPrivateTab && <SwapPrivateDisclaimer />}
           <SwapButton instantSwapSupported={instantSwapSupported} instantSwapAvailable={!memolessError} />
         </div>
 
-        {isHalted && !isPrivateSwap && (
+        {isHalted && !isPrivateTab && (
           <div className="pt-2">
             <SwapHaltBanner chains={haltedChains} />
           </div>
