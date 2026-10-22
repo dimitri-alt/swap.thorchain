@@ -153,7 +153,14 @@ export const getQuotes = async (
     retry: { maxRetries: 0 },
     // Merged with the SDK's own x-api-key header, not substituted for it.
     headers: referralHeaders()
-  }).then(res => res.routes)
+  }).then(res => res.routes.map(route => ({ ...route, sellAsset: requestCase(route.sellAsset, json.sellAsset), buyAsset: requestCase(route.buyAsset, json.buyAsset) })))
+}
+
+// The aggregator upper-cases the asset identifiers it echoes back, which breaks case-sensitive base58 contracts: the
+// SDK builds the transfer from `route.sellAsset`, and TronWeb rejects `TR7NHQJEKQXGTCI8Q8ZY4PL8OTSZGJLJ6T` as an
+// invalid contract (toolbox_tron_transaction_creation_failed). Hand back the identifier as we asked for it.
+function requestCase(returned: string, requested: string) {
+  return returned && requested && returned.toUpperCase() === requested.toUpperCase() ? requested : returned
 }
 
 export const getTrack = async (data: Record<string, any>) => {
