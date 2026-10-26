@@ -15,6 +15,9 @@ const ETH_RPC_URL = process.env.NEXT_PUBLIC_ALCHEMY_ETH_RPC_URL || 'https://eth.
 // any legitimate token that happens to share the symbol.
 const ETH_SCAM_TICKERS = new Set(['HEX', 'AICC', 'ETHG', 'PVC', 'PAP'])
 
+// Uncurated tokens (found via Alchemy/DexScreener) below this USD value are hidden as dust/spam.
+const MIN_UNCURATED_USD_VALUE = 1
+
 const SCAM_TOKEN_ADDRESSES = new Set([
   '0x6051c1354ccc51b4d561e43b02735deae64768b8' // ETH.YRISE
 ])
@@ -165,7 +168,10 @@ export const useWalletBalances = () => {
         })
         .filter(t => {
           const key = `${assetIdentifier(t.balance)}`.toLowerCase()
-          return curatedIdentifiers.has(key) || t.usdValue !== undefined || isThorNativeToken(t.balance)
+          if (curatedIdentifiers.has(key) || isThorNativeToken(t.balance)) return true
+          // Outside the curated list, a token is shown only when it is worth something: airdropped
+          // spam (1 DOG, 15 SEND…) is priced at dust, if at all.
+          return t.usdValue !== undefined && t.usdValue.gte(MIN_UNCURATED_USD_VALUE)
         })
 
       const pricedTokens = tokens.filter(t => t.usdValue !== undefined)

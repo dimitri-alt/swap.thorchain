@@ -11,6 +11,8 @@ const uSwap = axios.create({
   }
 })
 
+const DEXSCREENER_MIN_LIQUIDITY_USD = 10_000
+
 export const getDexScreenerTokens = async (
   tokenAddresses: string[],
   chainId: 'solana' | 'ethereum' | 'near' = 'solana'
@@ -20,18 +22,29 @@ export const getDexScreenerTokens = async (
   try {
     const res = await axios.get(`https://api.dexscreener.com/tokens/v1/${chainId}/${addresses}`)
     const result: Record<string, { price?: number; logo?: string }> = {}
+    const liquidity: Record<string, { total: number; best: number }> = {}
     for (const pair of res.data || []) {
       const addr = pair?.baseToken?.address
       if (!addr) continue
       const key = chainId === 'solana' ? addr : addr.toLowerCase()
       const existing = result[key] ?? {}
-      if (existing.price == null && pair?.priceUsd != null) {
+      const pairLiquidity = Number(pair?.liquidity?.usd) || 0
+      const seen = liquidity[key] ?? { total: 0, best: -1 }
+      seen.total += pairLiquidity
+      // Price from the deepest pool: spam tokens often have a shallow pair quoting a made-up price.
+      if (pair?.priceUsd != null && pairLiquidity > seen.best) {
         existing.price = parseFloat(pair.priceUsd)
+        seen.best = pairLiquidity
       }
+      liquidity[key] = seen
       if (!existing.logo && pair?.info?.imageUrl) {
         existing.logo = pair.info.imageUrl
       }
       result[key] = existing
+    }
+    // Airdropped spam tokens sit in near-empty pools; a price from one is not a real price.
+    for (const key of Object.keys(result)) {
+      if (liquidity[key].total < DEXSCREENER_MIN_LIQUIDITY_USD) delete result[key].price
     }
     return result
   } catch {
