@@ -29,7 +29,9 @@ Two-component architecture:
   subpath was an alias for Exodus's unrelated Passkeys wallet, which has always had its own `@tcswap/wallets/passkeys` export and still does; only
   4.3.27 onwards carries the extension connector, so `package.json` must ask for at least that. Brave Wallet is in the SDK too, as
   `@tcswap/wallets/brave` (`connectBrave`, 4.3.34 onwards): it reaches both of Brave's accounts, EVM and Solana, through Brave's own providers,
-  where `connectEVMWallet` with `WalletOption.BRAVE` gets the EVM account only, from whichever extension owns `window.ethereum`.
+  where `connectEVMWallet` with `WalletOption.BRAVE` gets the EVM account only, from whichever extension owns `window.ethereum`. Rabby is
+  `WalletOption.RABBY` (4.3.35 onwards) on the SDK's `connectEVMWallet`, which uses the provider Rabby announces over EIP-6963 (rdns `io.rabby`)
+  rather than `window.ethereum` — Rabby takes that from MetaMask only when set as the default wallet, and flags it `isMetaMask` too.
 - `isPrivateSwap` in `src/store/limit-swap-store.ts` — the PRIVATE tab: the swap is routed through Houdini Swap
   (`AppConfig.privateProvider`, `providers: ["HOUDINI"]` on the aggregator, `@tcswap/plugins/houdini` in the SDK) instead of the native protocols. Each
   tab has its own asset list (`useModeAssets` in `src/hooks/use-assets.ts`), and a private route is priced floating and tracked by its Houdini order

@@ -1,4 +1,4 @@
-import { Chain, okxMobileEnabled, WalletOption } from '@tcswap/core'
+import { Chain, getEIP6963Provider, getMetaMaskProvider, okxMobileEnabled, RABBY_RDNS, WalletOption } from '@tcswap/core'
 import { getChainConfig } from '@tcswap/helpers'
 import { getBraveEVMProvider, getBraveSolanaProvider } from '@tcswap/wallets/brave'
 import { supportedChains } from '@/lib/wallets'
@@ -81,6 +81,14 @@ export const WALLETS: WalletParams[] = [
     supportedChains: supportedChains[WalletOption.BRAVE]
   },
   {
+    key: 'rabby',
+    type: WalletType.browser,
+    label: 'Rabby Wallet',
+    option: WalletOption.RABBY,
+    link: 'https://rabby.io',
+    supportedChains: supportedChains[WalletOption.RABBY]
+  },
+  {
     key: 'exodus',
     type: WalletType.browser,
     label: 'Exodus',
@@ -145,13 +153,15 @@ export const wallet = (option: WalletOption) => {
 export const isWalletAvailable = (option: WalletOption) => {
   // prettier-ignore
   switch (option) {
-    case WalletOption.METAMASK: return window?.ethereum && !window.ethereum?.isBraveWallet
+    case WalletOption.METAMASK: return getMetaMaskProvider()
     case WalletOption.VULTISIG: return window?.vultisig
     case WalletOption.PHANTOM: return window?.phantom
     case WalletOption.KEPLR: return window?.keplr
     case WalletOption.OKX: return window?.okxwallet
     case WalletOption.TRONLINK: return window?.tronLink || window?.tronWeb
     case WalletOption.EXODUS: return window?.exodus || window?.ethereum?.isExodus
+    // Rabby's own announcement, since `window.ethereum` is MetaMask's unless Rabby is the default wallet.
+    case WalletOption.RABBY: return getEIP6963Provider(RABBY_RDNS) || window?.ethereum?.isRabby
     case WalletOption.LEDGER:
     case WalletOption.TREZOR:
     case WalletOption.KEYSTORE: return true

@@ -1,4 +1,4 @@
-import { Chain, getEIP6963Wallets, USwap, WalletOption } from '@tcswap/core'
+import { Chain, getEIP6963Wallets, getMetaMaskProvider, USwap, WalletOption } from '@tcswap/core'
 import { EVMPlugin } from '@tcswap/plugins/evm'
 import { HoudiniPlugin } from '@tcswap/plugins/houdini'
 import { SolanaPlugin } from '@tcswap/plugins/solana'
@@ -124,13 +124,16 @@ export async function connectWallet(option: WalletOption, chains: Chain[], confi
 
   switch (option) {
     case WalletOption.METAMASK:
-      const metamask = getEIP6963Wallets().providers.find(p => p.info.name === 'MetaMask')
-      return connectEach(c => uSwap.connectEVMWallet(c, WalletOption.METAMASK, metamask?.provider))
+      const metamask = getMetaMaskProvider()
+      if (!metamask) throw new Error('MetaMask not found. Install or enable the MetaMask extension.')
+      return connectEach(c => uSwap.connectEVMWallet(c, WalletOption.METAMASK, metamask))
     case WalletOption.PHANTOM:
       return connectEach(c => uSwap.connectPhantom(c))
     case WalletOption.TRUSTWALLET_WEB:
       const trust = getEIP6963Wallets().providers.find(p => p.info.name === 'Trust Wallet')
       return connectEach(c => uSwap.connectEVMWallet(c, WalletOption.TRUSTWALLET_WEB, trust?.provider))
+    case WalletOption.RABBY:
+      return connectEach(c => uSwap.connectEVMWallet(c, WalletOption.RABBY))
     case WalletOption.BRAVE:
       assertBraveAccounts(chains)
       braveConnects++
@@ -264,6 +267,7 @@ export const supportedChains = {
   [WalletOption.LEDGER]: ledgerWallet.connectLedger.supportedChains,
   [WalletOption.LEDGER_LIVE]: ledgerWallet.connectLedger.supportedChains,
   [WalletOption.METAMASK]: evmWallet.connectEVMWallet.supportedChains,
+  [WalletOption.RABBY]: evmWallet.connectEVMWallet.supportedChains,
   [WalletOption.OKX]: okxWallet.connectOkx.supportedChains,
   [WalletOption.OKX_MOBILE]: evmWallet.connectEVMWallet.supportedChains,
   [WalletOption.PHANTOM]: phantomWallet.connectPhantom.supportedChains,
