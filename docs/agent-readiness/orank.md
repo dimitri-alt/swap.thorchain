@@ -1,5 +1,31 @@
 # orank Agent-Readiness (ora.ai)
 
+## Review: October 28, 2026
+
+The cached Ora scan dated October 26 reports **90/100, Grade A**. The official MCP Registry already lists
+`org.thorchain.swap/thorchain-swap` version `0.4.1` as active (published August 24). The Python package is still absent from PyPI.
+
+Production has a deployment mismatch: Cloudflare responds to `GET` and `POST https://swap.thorchain.org/mcp` with HTTP 307 pointing to
+`https://mcp.thorchain.org/mcp`. That destination is a different server with a larger tool set and an SSE response. The swap discovery documents
+still describe the three-tool implementation in this repository. The production contract suite passes 11 of 17 tests; all six failures concern
+MCP requests redirected at the edge. Do not hide these failures by following redirects in the contract tests.
+
+The deployment owner should confirm whether this redirect is intentional. To keep this repository's advertised tools and quote UI working,
+remove the edge redirect and let its `/mcp` route handle requests. If migration is intentional, coordinate the SDKs, tool names, resource/UI
+support, registry record, docs, and tests with the destination server before updating discovery claims.
+
+The Python SDK's `0.2.0` wheel and source archive build successfully and pass `twine check`. Hold publication until the advertised MCP endpoint
+and tool names work again; package validation does not verify live compatibility. Publication also requires a PyPI maintainer credential.
+
+This branch adds a JSON response schema for discovery status, reachable MCP branding, a focused `/developers/llms.txt` index, and an
+`/.well-known/ard.json` alias alongside the existing AI Catalog. These address concrete discovery gaps; a score increase requires deployment
+and a fresh scan. It does not add authentication to the public MCP server.
+
+Local validation: all seven changed TypeScript/TSX files pass TypeScript syntax transpilation, the contract-test file passes `node --check`,
+and `git diff --check` is clean. Full typechecking, a build, and the updated HTTP contracts are not yet verified locally: `npm ci` rejects the
+upstream lockfile for missing optional dependencies, and a lockfile-preserving install ran out of disk space. Run those checks in a complete
+checkout before merging. No lockfile or dependency versions were changed by this branch.
+
 orank (https://ora.ai) scores domains on how well they support AI-agent use across Discovery, Accessibility, Usability, and Payments. Scan history for
 swap.thorchain.org (July 2026): 46/100 grade D → 63/100 grade C → 68/100 grade C → 70/100 grade B → 72/100 grade B.
 
@@ -119,9 +145,9 @@ Score page: https://ora.ai/score/swap.thorchain.org Rescan: `POST https://ora.ai
   declares `homepage: https://github.com/thorchain/TCSwap`; naming the product domain in its npm metadata would help the same check, but that is a
   change for the TCSwap repo, not this one.
 
-- **MCP Registry listing** — the server works but is not listed at `registry.modelcontextprotocol.io`, which is what most clients search.
+- **MCP Registry listing** — already published as `org.thorchain.swap/thorchain-swap` version `0.4.1`; verified October 28, 2026.
   `server.json` and the `/.well-known/mcp-registry-auth` route are in the repo; publishing needs an Ed25519 key, the `MCP_REGISTRY_AUTH` env var
-  deployed, and one `mcp-publisher publish` run. Full steps: `docs/agent-readiness/mcp-registry.md`.
+  deployed, and one `mcp-publisher publish` run for future releases. Full steps: `docs/agent-readiness/mcp-registry.md`.
 
 ## Gaps deliberately not addressed
 
