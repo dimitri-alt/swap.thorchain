@@ -111,6 +111,8 @@ async function testHomepageMetadataAndStructure() {
   assert.ok(application.sameAs?.includes('https://github.com/thorchain/swap.thorchain'))
   assert.deepEqual(application.subjectOf, { '@id': `${CANONICAL_ORIGIN}/developers#webpage` })
   assert.ok(body.includes('rel="ai-catalog"'), 'homepage should advertise the ARD catalog in HTML discovery')
+  assert.ok(body.includes('rel="ard"') && body.includes('/.well-known/ard.json'), 'homepage should advertise the canonical ARD catalog')
+  assert.match(response.headers.get('link') || '', /<\/\.well-known\/ard\.json>; rel="ard"/)
   assert.ok(
     body.includes('rel="mcp-server-card" type="application/mcp-server-card+json"'),
     'homepage should advertise the canonical MCP card with its protocol media type'
