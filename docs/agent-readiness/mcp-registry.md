@@ -1,7 +1,7 @@
 # Publishing the MCP server to the official registry
 
-The server is already published in the official registry as `org.thorchain.swap/thorchain-swap`, version `0.4.1` (published August 24, 2026;
-verified October 28). These instructions are for subsequent releases. Reuse the existing namespace and ownership credentials.
+The server is already published in the official registry as `org.thorchain.swap/thorchain-swap`, version `0.4.1` (published August 24, 2026; verified
+October 28). These instructions are for subsequent releases. Reuse the existing namespace and ownership credentials.
 
 Publishing is metadata-only (the registry hosts no artifacts) and needs one deploy plus one CLI run.
 

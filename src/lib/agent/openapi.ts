@@ -99,7 +99,7 @@ export function buildOpenApiDocument() {
       schemas: {
         DiscoveryStatus: {
           type: 'object',
-          description: 'Availability of this site\'s discovery documents, not the health of upstream swap services.',
+          description: "Availability of this site's discovery documents, not the health of upstream swap services.",
           properties: {
             status: { type: 'string', const: 'ok', description: 'The discovery endpoint is available.' },
             service: { type: 'string', const: 'thorchain-swap', description: 'Service publishing these discovery documents.' },
